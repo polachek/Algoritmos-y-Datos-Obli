@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package obligatorio;
+package oblm3a;
 
-/**
- *
- * @author User
- */
 public interface ISistema {
-    Retorno crearSistemaReservas(int cantCiudades);
+
+	Retorno crearSistemaReservas(int cantCiudades);
 	Retorno destruirSistemaReservas();
 	Retorno registrarCiudad(String ciudad);
 	Retorno registrarCrucero(String ciudad, String nombre, int estrellas,int capacidad);
@@ -27,4 +19,6 @@ public interface ISistema {
 	Retorno listarComentarios(String ciudad, String crucero);
 	Retorno cargarDistancias(int[][] ciudades);
 	Retorno buscarCamino(int [][] m, String origen, String destino);
+	
 }
+

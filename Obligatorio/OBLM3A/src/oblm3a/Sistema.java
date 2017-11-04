@@ -1,17 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package obligatorio;
+package oblm3a;
 
-/**
- *
- * @author User
- */
-public class Sistema implements ISistema{
-    @Override
+import oblm3a.Retorno.Resultado;
+
+public class Sistema implements ISistema {
+    public ListaCiudad LC;
+
+	@Override
 	public Retorno crearSistemaReservas(int cantCiudades) {
+                LC= new ListaCiudad();
+                LC.setTope(cantCiudades);
+                
 		Retorno ret = new Retorno();
 		
 		ret.resultado = Resultado.NO_IMPLEMENTADA;
@@ -30,9 +28,20 @@ public class Sistema implements ISistema{
 
 	@Override
 	public Retorno registrarCiudad(String ciudad) {
-		Retorno ret = new Retorno();
+               Retorno ret = new Retorno();
+               
+               if (LC.getCantelementos()< LC.getTope() || LC.getTope()==0){
+                  if (LC.obtenerElemento(ciudad)==null) 
+                      ret.resultado= LC.agregarInicio(ciudad);
+                  else 
+                      ret.resultado=Retorno.Resultado.ERROR_1;
+               }
+               else{
+                     ret.resultado=Retorno.Resultado.ERROR_2;
+                   }
 		
-		ret.resultado = Resultado.NO_IMPLEMENTADA;
+		
+		//ret.resultado = Resultado.NO_IMPLEMENTADA;
 		
 		return ret;
 	}
@@ -41,8 +50,12 @@ public class Sistema implements ISistema{
 	public Retorno registrarCrucero(String ciudad, String nombre, int estrellas, int capacidad) {
 		Retorno ret = new Retorno();
 		
-		ret.resultado = Resultado.NO_IMPLEMENTADA;
-		
+                if (LC.obtenerElemento(ciudad)!= null){
+                    LC.obtenerElemento(ciudad).getLcrucero().agregarInicio(nombre);                 
+		    ret.resultado = Resultado.OK;
+                }
+                else
+                    ret.resultado = Resultado.ERROR_3;
 		return ret;
 	}
 
@@ -162,4 +175,5 @@ public class Sistema implements ISistema{
 		
 		return ret;
 	}
+
 }
