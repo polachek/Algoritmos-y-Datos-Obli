@@ -1,7 +1,6 @@
 package oblm3a;
 
 public interface ISistema {
-
 	Retorno crearSistemaReservas(int cantCiudades);
 	Retorno destruirSistemaReservas();
 	Retorno registrarCiudad(String ciudad);
@@ -18,7 +17,6 @@ public interface ISistema {
 	Retorno listarCrucerosRanking();
 	Retorno listarComentarios(String ciudad, String crucero);
 	Retorno cargarDistancias(int[][] ciudades);
-	Retorno buscarCamino(int [][] m, String origen, String destino);
-	
+	Retorno buscarCamino(int [][] m, String origen, String destino);	
 }
 

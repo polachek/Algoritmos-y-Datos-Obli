@@ -30,7 +30,7 @@ public class Sistema implements ISistema {
 	public Retorno registrarCiudad(String ciudad) {
                Retorno ret = new Retorno();
                
-               if (LC.getCantelementos()< LC.getTope() || LC.getTope()==0){
+               if (LC.getCantElementos()< LC.getTope() || LC.getTope()==0){
                   if (LC.obtenerElemento(ciudad)==null) 
                       ret.resultado= LC.agregarInicio(ciudad);
                   else 

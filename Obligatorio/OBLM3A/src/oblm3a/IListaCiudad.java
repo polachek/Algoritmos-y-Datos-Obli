@@ -12,5 +12,4 @@ interface IListaCiudad {
     public void mostrar();
     public void agregarOrd(Object dato);
     public NodoListaCiudad obtenerElemento(Object dato);
-    
 }

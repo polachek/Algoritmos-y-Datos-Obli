@@ -3,14 +3,14 @@ package oblm3a;
 public class ListaCiudad implements IListaCiudad {
     private NodoListaCiudad inicio;
     private NodoListaCiudad fin;
-    private int cantelementos;
+    private int cantElementos;
     private int tope;
 
     //Constructor
     public void Lista(){
         this.inicio=null;
         this.fin=null;
-        this.cantelementos=0;
+        this.cantElementos=0;
         this.tope=0;
     }
 
@@ -26,6 +26,7 @@ public class ListaCiudad implements IListaCiudad {
     public void setInicio(NodoListaCiudad i){
         inicio=i;
     }
+    
     public NodoListaCiudad getInicio(){
         return inicio;
     }
@@ -34,62 +35,61 @@ public class ListaCiudad implements IListaCiudad {
     public void setFin(NodoListaCiudad f){
         fin=f;
     }
+    
     public NodoListaCiudad getFin(){
         return fin;
     }
 
-    public int getCantelementos() {
-        return cantelementos;
+    public int getCantElementos() {
+        return cantElementos;
     }
 
-    public void setCantelementos(int cantelementos) {
-        this.cantelementos = cantelementos;
+    public void setCantElementos(int cantElementos) {
+        this.cantElementos = cantElementos;
     }
 
-    
-    
-
- /**************Métodos Básicos*******************/
+/**************Métodos Básicos*******************/
 /***********************************************/
     //PRE:
     //POS: Retorna true si la lista no tiene nodos
     public boolean esVacia(){
         return (this.inicio==null);       
-      }
+    }
 
     //PRE: ciudad no existe
     //POS: Agrega un nuevo Nodo al principio de la lista
     public Retorno.Resultado agregarInicio(Object dato){
-        NodoListaCiudad nuevo= new NodoListaCiudad(dato);
+        NodoListaCiudad nuevo = new NodoListaCiudad(dato);
         nuevo.setSig(inicio);
         this.inicio=nuevo;
         if(this.fin==null)//estoy insertando el primer nodo
             this.fin=nuevo;
         
-        this.cantelementos=this.cantelementos+1;
+        this.cantElementos=this.cantElementos+1;
         
         return Retorno.Resultado.OK;
-        }
+    }
     
-     //PRE:
+    //PRE:
     //POS: Borra el primer nodo
      public void borrarInicio(){
         if (!this.esVacia()){
             this.inicio=this.inicio.getSig();
-            this.cantelementos=this.cantelementos-1;
+            this.cantElementos=this.cantElementos-1;
         }
     }
- //PRE:
+     
+    //PRE:
     //POS: elimina todos los nodos de una lista dada
      public void vaciar(){
              this.inicio=null;
              this.fin=null;
-             this.cantelementos=0;
+             this.cantElementos=0;
     }
    
-         //PRE:
+    //PRE:
     //POS: Recorre y muestra los datos de lista
-   public void mostrar(){
+    public void mostrar(){
         if (this.esVacia())
             System.out.println("Lista es vacía");
         else  {
@@ -106,17 +106,17 @@ public class ListaCiudad implements IListaCiudad {
    
     //PRE:
     //POS: Agrega un nuevo Nodo al final de la lista
- public void agregarFinal(Object dato){
+    public void agregarFinal(Object dato){
         //NodoLista nuevo= new NodoLista(n);
         if (this.esVacia())
-            this.agregarInicio(dato); // el agregar inicio suma 1 a cantelementos
+            this.agregarInicio(dato); // el agregar inicio suma 1 a cantElementos
         
         else
         {
            NodoListaCiudad nuevo= new NodoListaCiudad(dato); 
            fin.setSig(nuevo);
            fin =nuevo;
-           this.cantelementos=this.cantelementos+1;  
+           this.cantElementos=this.cantElementos+1;  
         }
         
     }
@@ -133,7 +133,7 @@ public class ListaCiudad implements IListaCiudad {
                     aux=aux.getSig();
                 this.fin=aux;
                 this.fin.setSig(null);
-                this.cantelementos=this.cantelementos-1;
+                this.cantElementos=this.cantElementos-1;
             }
         }
     }
@@ -170,7 +170,7 @@ public class ListaCiudad implements IListaCiudad {
     //PRE: 
     //POS: Retorna la cantidad de nodos que tiene la lista
     public int cantElementos(){    
-        return this.cantelementos;
+        return this.cantElementos;
     }
 
     //PRE: //POS:

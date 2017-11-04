@@ -11,6 +11,5 @@ interface IListaCrucero {
     public void vaciar();
     public void mostrar();
     public void agregarOrd(Object dato);
-    public NodoListaCrucero obtenerElemento(Object dato);
-    
+    public NodoListaCrucero obtenerElemento(Object dato);   
 }
