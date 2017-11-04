@@ -1,6 +1,5 @@
 package oblm3a;
 
-
 public class ListaCrucero implements IListaCrucero {
     private NodoListaCrucero inicio;
     private NodoListaCrucero fin;
