@@ -6,13 +6,15 @@ public class OBLM3A {
     public static void main(String[] args) {
         // TODO code application logic here
         Sistema S = new Sistema();
-        S.crearSistemaReservas(4);
+        //S.crearSistemaReservas(-4);
         prueba P = new prueba();
         prueba1(S,P);
         
     }
     
     static void prueba1(Sistema s, prueba p){
+           p.ver(s.crearSistemaReservas(-4).resultado, Retorno.Resultado.ERROR_1, "Se intento crear Sistema de Reserva con < 0");
+           p.ver(s.crearSistemaReservas(20).resultado, Retorno.Resultado.OK, "Se intento crear Sistema de Reserva con 20 Ciudades");
            p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se agrego Montevideo");
            p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Se intentoagregar Montevideo que ya existe");
            p.ver(s.registrarCiudad("Punta del Este").resultado, Retorno.Resultado.OK, "Se agrego Punta del Este");

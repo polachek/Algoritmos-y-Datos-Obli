@@ -11,8 +11,12 @@ public class Sistema implements ISistema {
                 LC.setTope(cantCiudades);
                 
 		Retorno ret = new Retorno();
+                
+                if(cantCiudades<0)
+                    ret.resultado = Resultado.ERROR_1;
+		 else
+                    ret.resultado = Resultado.OK;
 		
-		ret.resultado = Resultado.NO_IMPLEMENTADA;
 		
 		return ret;
 	}
