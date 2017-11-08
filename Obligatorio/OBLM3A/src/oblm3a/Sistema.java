@@ -25,8 +25,10 @@ public class Sistema implements ISistema {
 	@Override
 	public Retorno destruirSistemaReservas() {
 		Retorno ret = new Retorno();
-		
-		ret.resultado = Resultado.NO_IMPLEMENTADA;
+		LC.setTope(0);
+                LC.vaciar();
+                
+		ret.resultado = Resultado.OK;
 		
 		return ret;
 	}

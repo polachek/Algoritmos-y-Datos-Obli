@@ -46,6 +46,12 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.OK, s.crearSistemaReservas(20).resultado);
     }
     
+    @Test
+    public void testCrearSistemaReservasNegativo() {
+        Sistema s = new Sistema();
+        assertEquals(Retorno.Resultado.ERROR_1, s.crearSistemaReservas(-4).resultado);
+    }
+    
     
 
     /**
