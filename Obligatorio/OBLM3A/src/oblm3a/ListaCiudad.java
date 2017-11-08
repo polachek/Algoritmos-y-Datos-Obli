@@ -102,8 +102,7 @@ public class ListaCiudad implements IListaCiudad {
     }
      
      
- /*Variantes agregadas a los metodos basicos.*/
-   
+    /*Variantes agregadas a los metodos basicos.*/   
     //PRE:
     //POS: Agrega un nuevo Nodo al final de la lista
     public void agregarFinal(Object dato){
@@ -113,15 +112,15 @@ public class ListaCiudad implements IListaCiudad {
         
         else
         {
-           NodoListaCiudad nuevo= new NodoListaCiudad(dato); 
+           NodoListaCiudad nuevo = new NodoListaCiudad(dato); 
            fin.setSig(nuevo);
-           fin =nuevo;
+           fin = nuevo;
            this.cantElementos=this.cantElementos+1;  
         }
         
     }
 
-      //PRE:
+    //PRE:
     //POS: Borra el último nodo
     public void borrarFin(){
         if (!this.esVacia()){
@@ -182,12 +181,10 @@ public class ListaCiudad implements IListaCiudad {
         //encontrÃ© dato o lleguÃ© al final
         return aux;
     }
-
-
     
     /*****  para resolver en forma recursiva Métodos RECURSIVOS  *****/
 
- //PRE:
+    //PRE:
     //POS: muestra los datos de la lista en orden de enlace
     public void mostrarREC(NodoListaCiudad l){
         if(l!=null){
@@ -197,6 +194,4 @@ public class ListaCiudad implements IListaCiudad {
             
         }
     }
-
-
 }
