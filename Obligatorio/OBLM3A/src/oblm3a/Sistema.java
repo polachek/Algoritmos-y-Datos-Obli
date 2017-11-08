@@ -25,9 +25,10 @@ public class Sistema implements ISistema {
 	@Override
 	public Retorno destruirSistemaReservas() {
 		Retorno ret = new Retorno();
-		LC.setTope(0);
-                LC.vaciar();
-                
+                if(LC != null){
+                    LC.setTope(0);
+                    LC.vaciar();
+                }                
 		ret.resultado = Resultado.OK;
 		
 		return ret;
@@ -56,13 +57,21 @@ public class Sistema implements ISistema {
 	@Override
 	public Retorno registrarCrucero(String ciudad, String nombre, int estrellas, int capacidad) {
 		Retorno ret = new Retorno();
-		
-                if (LC.obtenerElemento(ciudad)!= null){
+                
+                if(estrellas <= 0 || estrellas > 5){
+                    ret.resultado = Resultado.ERROR_3;
+                }
+                else if(capacidad < 0){
+                    ret.resultado = Resultado.ERROR_3;
+                }
+                else if(LC.obtenerElemento(ciudad).getLcrucero().obtenerElemento(nombre) != null){
+                    ret.resultado = Resultado.ERROR_3;
+                }
+                else if (LC.obtenerElemento(ciudad)!= null){
                     LC.obtenerElemento(ciudad).getLcrucero().agregarInicio(nombre);                 
 		    ret.resultado = Resultado.OK;
                 }
-                else
-                    ret.resultado = Resultado.ERROR_3;
+                
 		return ret;
 	}
 

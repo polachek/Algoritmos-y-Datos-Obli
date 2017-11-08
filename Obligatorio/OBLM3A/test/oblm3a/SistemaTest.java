@@ -59,13 +59,8 @@ public class SistemaTest {
      */
     @Test
     public void testDestruirSistemaReservas() {
-        /*System.out.println("destruirSistemaReservas");
-        Sistema instance = new Sistema();
-        Retorno expResult = null;
-        Retorno result = instance.destruirSistemaReservas();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");*/
+        Sistema s = new Sistema();
+        assertEquals(Retorno.Resultado.OK, s.destruirSistemaReservas().resultado);
     }
 
     /**
@@ -77,23 +72,59 @@ public class SistemaTest {
         s.crearSistemaReservas(20);
         assertEquals(Retorno.Resultado.OK, s.registrarCiudad("Montevideoerer").resultado);
     }
+    
+    @Test
+    public void testRegistrarCiudadYaExistente() {
+        Sistema s = new Sistema();
+        s.crearSistemaReservas(20);
+        s.registrarCiudad("Montevideo");
+        assertEquals(Retorno.Resultado.ERROR_1, s.registrarCiudad("Montevideo").resultado);
+    }
+    
+    @Test
+    public void testRegistrarCiudadNoTope() {
+        Sistema s = new Sistema();
+        s.crearSistemaReservas(2);
+        s.registrarCiudad("Montevideo");
+        s.registrarCiudad("Maldonado");
+        assertEquals(Retorno.Resultado.ERROR_2, s.registrarCiudad("Rocha").resultado);
+    }
+    
 
     /**
      * Test of registrarCrucero method, of class Sistema.
      */
     @Test
-    public void testRegistrarCrucero() {
-        System.out.println("registrarCrucero");
-        String ciudad = "";
-        String nombre = "";
-        int estrellas = 0;
-        int capacidad = 0;
-        Sistema instance = new Sistema();
-        Retorno expResult = null;
-        Retorno result = instance.registrarCrucero(ciudad, nombre, estrellas, capacidad);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testRegistrarCruceroOK() {
+        Sistema s = new Sistema();
+        s.crearSistemaReservas(20);
+        s.registrarCiudad("Montevideo");
+        assertEquals(Retorno.Resultado.OK, s.registrarCrucero("Montevideo","Love Crucer",1,50).resultado);
+    }
+    
+    @Test
+    public void testRegistrarCruceroEstrella0() {
+        Sistema s = new Sistema();
+        s.crearSistemaReservas(20);
+        s.registrarCiudad("Montevideo");
+        assertEquals(Retorno.Resultado.ERROR_3, s.registrarCrucero("Montevideo","Love Crucer",0,50).resultado);
+    }
+    
+    @Test
+    public void testRegistrarCruceroCapacidad0() {
+        Sistema s = new Sistema();
+        s.crearSistemaReservas(20);
+        s.registrarCiudad("Montevideo");
+        assertEquals(Retorno.Resultado.ERROR_3, s.registrarCrucero("Montevideo","Love Crucer",5,-1).resultado);
+    }
+    
+    @Test
+    public void testRegistrarCruceroRepetido() {
+        Sistema s = new Sistema();
+        s.crearSistemaReservas(20);
+        s.registrarCiudad("Montevideo");
+        s.registrarCrucero("Montevideo","Love Crucer",50,1);
+        assertEquals(Retorno.Resultado.ERROR_3, s.registrarCrucero("Montevideo","Love Crucer",5,1).resultado);
     }
 
     /**
