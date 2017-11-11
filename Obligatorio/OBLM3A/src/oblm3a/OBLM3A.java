@@ -31,16 +31,16 @@ public class OBLM3A {
         */
         p.ver(s.crearSistemaReservas(20).resultado, Retorno.Resultado.OK, "Se intento crear Sistema de Reserva con 20 Ciudades");
         p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se agrego Montevideo");
-        p.ver(s.registrarCrucero("Montevideo", "Crucero X", 1, 20).resultado, Retorno.Resultado.OK, "Se agrego crucero 1 a Maldonado");
+        /*p.ver(s.registrarCrucero("Montevideo", "Crucero X", 1, 20).resultado, Retorno.Resultado.OK, "Se agrego crucero 1 a Maldonado");
         p.ver(s.registrarCrucero("Montevideo", "Crucero X", 2, 50).resultado, Retorno.Resultado.OK, "Se agrego crucero 1 a Maldonado");
+        */
         
-        
-        s.LC.mostrar();
-        listarcrucerociudad(s);
+        //s.LC.mostrar();
+        //listarcrucerociudad(s);
         p.imprimirResultadosPrueba();
     }
 
-static void listarcrucerociudad(Sistema s){
+/*static void listarcrucerociudad(Sistema s){
     NodoListaCiudad aux=s.LC.getInicio();
     while (aux !=null){
         System.out.println(aux.getNombreCiudad());
@@ -49,7 +49,7 @@ static void listarcrucerociudad(Sistema s){
         
     }
   
-}
+}*/
         
     
     

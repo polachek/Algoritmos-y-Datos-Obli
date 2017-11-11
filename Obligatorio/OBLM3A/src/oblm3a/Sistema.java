@@ -1,17 +1,15 @@
 package oblm3a;
 
 import oblm3a.Retorno.Resultado;
-import oblm3a.Crucero.*;
 
 public class Sistema implements ISistema {
-    public ListaCiudad LC;
+    public ArbolCiudades AC;
 
 
 	@Override
 	public Retorno crearSistemaReservas(int cantCiudades) {
-                LC= new ListaCiudad();
-                LC.setTope(cantCiudades);
-                
+                AC= new ArbolCiudades();
+               
 		Retorno ret = new Retorno();
                 
                 if(cantCiudades<0)
@@ -26,9 +24,8 @@ public class Sistema implements ISistema {
 	@Override
 	public Retorno destruirSistemaReservas() {
 		Retorno ret = new Retorno();
-                if(LC != null){
-                    LC.setTope(0);
-                    LC.vaciar();
+                if(AC != null){
+                    //AC.vaciar();
                 }                
 		ret.resultado = Resultado.OK;
 		
@@ -39,15 +36,10 @@ public class Sistema implements ISistema {
 	public Retorno registrarCiudad(String ciudad) {
                Retorno ret = new Retorno();
                
-               if (LC.getCantElementos()< LC.getTope() || LC.getTope()==0){
-                  if (LC.obtenerElemento(ciudad)==null) 
-                      ret.resultado= LC.agregarInicio(ciudad);
-                  else 
-                      ret.resultado=Retorno.Resultado.ERROR_1;
-               }
-               else{
-                     ret.resultado=Retorno.Resultado.ERROR_2;
-                   }
+               if (!AC.existe(ciudad)) 
+                    ret.resultado= AC.insertar(ciudad);
+               else 
+                    ret.resultado=Retorno.Resultado.ERROR_1;
 		
 		
 		//ret.resultado = Resultado.NO_IMPLEMENTADA;
@@ -60,7 +52,7 @@ public class Sistema implements ISistema {
 		Retorno ret = new Retorno();
                 Crucero miCrucero = new Crucero(nombre, estrellas, capacidad);
                 
-                if(LC.obtenerElemento(ciudad) == null){
+                if(!AC.existe(ciudad)){
                     ret.resultado = Resultado.ERROR_4;
                 } else if(estrellas <= 0 || estrellas > 5){
                     ret.resultado = Resultado.ERROR_1;
@@ -68,11 +60,11 @@ public class Sistema implements ISistema {
                 else if(capacidad < 0){
                     ret.resultado = Resultado.ERROR_2;
                 }
-                else if(LC.obtenerElemento(ciudad).getLcrucero().buscarCrucero(nombre)){
+                else if(AC.buscar(ciudad).getLcrucero().buscarCrucero(nombre)){
                     ret.resultado = Resultado.ERROR_3;
                 }
-                else if (LC.obtenerElemento(ciudad)!= null){
-                    LC.obtenerElemento(ciudad).getLcrucero().agregarInicio(miCrucero);                 
+                else if (AC.buscar(ciudad)!= null){
+                    AC.buscar(ciudad).getLcrucero().agregarInicio(miCrucero);                 
 		    ret.resultado = Resultado.OK;
                 }else{
                     ret.resultado = Resultado.ERROR_4;
@@ -85,13 +77,13 @@ public class Sistema implements ISistema {
 	public Retorno ingresarServicio(String ciudad, String crucero, String servicio) {
 		Retorno ret = new Retorno();
                 
-		/*if(LC.obtenerElemento(ciudad) == null){
+		/*if(AC.obtenerElemento(ciudad) == null){
                     ret.resultado = Resultado.ERROR_2;
-                }else if(LC.obtenerElemento(ciudad).getLcrucero().buscarCrucero(nombre)){
+                }else if(AC.obtenerElemento(ciudad).getLcrucero().buscarCrucero(nombre)){
                     ret.resultado = Resultado.ERROR_3;
                 }
-                else if (LC.obtenerElemento(ciudad)!= null){
-                    LC.obtenerElemento(ciudad).getLcrucero().agregarInicio(miCrucero);                 
+                else if (AC.obtenerElemento(ciudad)!= null){
+                    AC.obtenerElemento(ciudad).getLcrucero().agregarInicio(miCrucero);                 
 		    ret.resultado = Resultado.OK;
                 }else{
                     ret.resultado = Resultado.ERROR_4;
