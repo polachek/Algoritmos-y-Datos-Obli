@@ -92,16 +92,16 @@ public class ArbolCiudades implements IArbolCiudades{
     }   
     
     public boolean existe(String ciudad){
-    if (!esVacio()) {
+    if (!this.esVacio()) {
             if (ciudad == raiz.nombre) {
             return true;
             }
             else {
-                if (ciudad.compareTo(raiz.nombre) < 0) {
-                    raiz.izq.existe(ciudad);
+                if (raiz.nombre != null && ciudad.compareTo(raiz.nombre) < 0) {
+                    //raiz.izq.existe(ciudad);
                 }
-                else {
-                    raiz.der.existe(ciudad);
+                else if(raiz.nombre != null && ciudad.compareTo(raiz.nombre) > 0){
+                    //raiz.der.existe(ciudad);
                 }
             }
         }

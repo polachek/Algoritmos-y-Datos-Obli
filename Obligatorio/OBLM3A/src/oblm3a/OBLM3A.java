@@ -30,7 +30,17 @@ public class OBLM3A {
            p.imprimirResultadosPrueba();
         */
         p.ver(s.crearSistemaReservas(20).resultado, Retorno.Resultado.OK, "Se intento crear Sistema de Reserva con 20 Ciudades");
-        p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se agrego Montevideo");
+        
+        ArbolCiudades AC= new ArbolCiudades();
+        
+        if(!AC.esVacio()){
+            System.out.println("AC es Vacio");
+        }
+        if(!AC.existe("Montevideo")){
+            System.out.println("No existe Montevideo");
+        }
+        
+        //p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se agrego Montevideo");
         /*p.ver(s.registrarCrucero("Montevideo", "Crucero X", 1, 20).resultado, Retorno.Resultado.OK, "Se agrego crucero 1 a Maldonado");
         p.ver(s.registrarCrucero("Montevideo", "Crucero X", 2, 50).resultado, Retorno.Resultado.OK, "Se agrego crucero 1 a Maldonado");
         */
