@@ -70,7 +70,7 @@ public class Sistema implements ISistema {
                 }else{
                     ret.resultado = Resultado.ERROR_4;
                 }
-                
+
 		return ret;
 	}
 

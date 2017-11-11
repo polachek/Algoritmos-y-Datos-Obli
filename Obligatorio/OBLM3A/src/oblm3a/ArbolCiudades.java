@@ -51,7 +51,8 @@ public class ArbolCiudades implements IArbolCiudades{
             NodoArbolCiudad nuevo = new NodoArbolCiudad();
             nuevo.nombre = unaCiudad;
             nuevo.izq = new ArbolCiudades();
-            nuevo.der = new ArbolCiudades();            
+            nuevo.der = new ArbolCiudades();   
+            nuevo.LCrucero = new ListaCrucero();
             raiz = nuevo;
             ret = Retorno.Resultado.OK;
         }

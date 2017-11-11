@@ -35,7 +35,8 @@ public class OBLM3A {
         p.ver(s.registrarCiudad("Rocha").resultado, Retorno.Resultado.OK, "Se agrego Rocha");
         p.ver(s.registrarCrucero("Montevideo", "Crucero X", 1, 20).resultado, Retorno.Resultado.OK, "Se agrego crucero 1 a Maldonado");
         //p.ver(s.registrarCrucero("Montevideo", "Crucero X", 2, 50).resultado, Retorno.Resultado.OK, "Se agrego crucero 1 a Maldonado");
-        
+        /*ArbolCiudades AC= new ArbolCiudades();
+        AC.buscar("Montevideo").getLcrucero();*/
         
         //s.LC.mostrar();
         //listarcrucerociudad(s);
