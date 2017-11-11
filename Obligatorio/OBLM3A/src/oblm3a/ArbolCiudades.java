@@ -8,7 +8,7 @@ package oblm3a;
  *
  * @author sebastianvillar
  */
-public class ArbolCiudades {
+public class ArbolCiudades implements IArbolCiudades{
     
     private class NodoArbolCiudad {
 
@@ -43,20 +43,27 @@ public class ArbolCiudades {
         return (raiz == null);
     }
 
-    public void insertar(String unaCiudad){        
+    public Retorno.Resultado insertar(String unaCiudad){
+        Retorno.Resultado ret;
         if (esVacio()) {
             NodoArbolCiudad nuevo = new NodoArbolCiudad();
             nuevo.nombre = unaCiudad;
             nuevo.izq = new ArbolCiudades();
             nuevo.der = new ArbolCiudades();            
             raiz = nuevo;
+            ret = Retorno.Resultado.OK;
         }
         else {
-            if (unaCiudad.compareTo(raiz.nombre) > 0) 
+            if (unaCiudad.compareTo(raiz.nombre) > 0){
                 (raiz.izq).insertar(unaCiudad);
-            else
+                ret = Retorno.Resultado.OK;      
+            } 
+            else{
                 (raiz.der).insertar(unaCiudad);
+                ret = Retorno.Resultado.OK;                
+            }                
         }
+        return ret;
     }
 
     public void preOrder(){
