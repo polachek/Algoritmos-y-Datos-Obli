@@ -18,7 +18,7 @@ public class ArbolCiudades implements IArbolCiudades{
         private ArbolCiudades der;
 
         private void NodoArbolCiudad() {
-            this.nombre = nombre;
+            this.nombre = null;
             this.izq = null;
             this.der = null;
             this.LCrucero = new ListaCrucero();
@@ -28,8 +28,10 @@ public class ArbolCiudades implements IArbolCiudades{
     public NodoArbolCiudad raiz;
 
     public ArbolCiudades(){
-        raiz = new NodoArbolCiudad();
+        NodoArbolCiudad raiz = new NodoArbolCiudad();
     }
+    
+    
     
     public ListaCrucero getLcrucero() {
         return raiz.LCrucero;
@@ -94,14 +96,14 @@ public class ArbolCiudades implements IArbolCiudades{
     public boolean existe(String ciudad){
     if (!this.esVacio()) {
             if (ciudad == raiz.nombre) {
-            return true;
+                return true;
             }
             else {
                 if (raiz.nombre != null && ciudad.compareTo(raiz.nombre) < 0) {
-                    //raiz.izq.existe(ciudad);
+                    raiz.izq.existe(ciudad);
                 }
                 else if(raiz.nombre != null && ciudad.compareTo(raiz.nombre) > 0){
-                    //raiz.der.existe(ciudad);
+                    raiz.der.existe(ciudad);
                 }
             }
         }

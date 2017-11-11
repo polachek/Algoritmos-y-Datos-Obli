@@ -36,8 +36,9 @@ public class Sistema implements ISistema {
 	public Retorno registrarCiudad(String ciudad) {
                Retorno ret = new Retorno();
                
-               if (!AC.existe(ciudad)) 
+               if (!AC.existe(ciudad)) {
                     ret.resultado= AC.insertar(ciudad);
+               }
                else 
                     ret.resultado=Retorno.Resultado.ERROR_1;
 		
