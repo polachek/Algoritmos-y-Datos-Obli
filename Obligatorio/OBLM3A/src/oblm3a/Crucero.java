@@ -14,11 +14,13 @@ public class Crucero {
     private int estrellas;
     private int capacidad;
     private int ranking;
+    private ListaReservas LReservas;
     
     public Crucero(String nombre, int estrellas, int capacidad) {
         this.nombre = nombre;
         this.estrellas = estrellas;
         this.capacidad = capacidad;
+        this.LReservas = new ListaReservas();
     }
     
     public String getNombre(){

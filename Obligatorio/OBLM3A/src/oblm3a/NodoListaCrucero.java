@@ -2,9 +2,9 @@
 package oblm3a;
 
 public class NodoListaCrucero{
-	private Crucero miCrucero;
-	private NodoListaCrucero sig;
-        private ListaServicio Lservicio;
+    private Crucero miCrucero;
+    private NodoListaCrucero sig;
+    private ListaServicio Lservicio;
 
     public NodoListaCrucero(Crucero miCrucero) {
         this.miCrucero = miCrucero;
