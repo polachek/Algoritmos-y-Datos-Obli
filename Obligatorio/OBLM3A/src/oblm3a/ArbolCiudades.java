@@ -54,6 +54,7 @@ public class ArbolCiudades implements IArbolCiudades {
             nuevo.LCrucero = new ListaCrucero();
             raiz = nuevo;
             ret = Retorno.Resultado.OK;
+<<<<<<< HEAD
         } else {
             if (unaCiudad.compareTo(raiz.nombre) < 0) {
                 raiz.izq.insertar(unaCiudad);
@@ -62,6 +63,22 @@ public class ArbolCiudades implements IArbolCiudades {
                 raiz.der.insertar(unaCiudad);
                 ret = Retorno.Resultado.OK;
             }
+=======
+        }
+        else {
+            if (unaCiudad.compareTo(raiz.nombre) > 0){
+                raiz.izq.insertar(unaCiudad);
+                ret = Retorno.Resultado.OK;      
+            } 
+            else{
+                raiz.der.insertar(unaCiudad);
+                ret = Retorno.Resultado.OK;
+
+
+
+
+            }                
+>>>>>>> ea0851ce88a96422022016addd25323843d16b75
         }
         return ret;
     }
@@ -89,6 +106,7 @@ public class ArbolCiudades implements IArbolCiudades {
             System.out.print(raiz.nombre + ", ");
 
         }
+<<<<<<< HEAD
     }
 
     public boolean existe(String ciudad) {
@@ -98,6 +116,16 @@ public class ArbolCiudades implements IArbolCiudades {
             if (ciudad.compareTo(raiz.nombre) == 0) {
                 ret = true;
             } else {
+=======
+    }   
+    
+    public boolean existe(String ciudad){
+        if (!this.esVacio()) {
+            if (ciudad == raiz.nombre) {
+                return true;
+            }
+            else {
+>>>>>>> ea0851ce88a96422022016addd25323843d16b75
                 if (raiz.nombre != null && ciudad.compareTo(raiz.nombre) < 0) {
                     raiz.izq.existe(ciudad);
                 } else if (raiz.nombre != null && ciudad.compareTo(raiz.nombre) > 0) {
