@@ -11,21 +11,6 @@ package oblm3a;
  */
 public class ArbolCiudades implements IArbolCiudades {
 
-    public class NodoArbolCiudad {
-
-        public String nombre;
-        private ListaCrucero LCrucero;
-        public ArbolCiudades izq;
-        public ArbolCiudades der;
-
-        public void NodoArbolCiudad() {
-            this.nombre = null;
-            this.izq = null;
-            this.der = null;
-            this.LCrucero = new ListaCrucero();
-        }
-    }
-
     public NodoArbolCiudad raiz;
 
     public ArbolCiudades() {
@@ -63,10 +48,6 @@ public class ArbolCiudades implements IArbolCiudades {
             else{
                 raiz.der.insertar(unaCiudad);
                 ret = Retorno.Resultado.OK;
-
-
-
-
             }                
         }
         return ret;
@@ -193,4 +174,5 @@ public class ArbolCiudades implements IArbolCiudades {
             }
         }
     }
+    
 }
