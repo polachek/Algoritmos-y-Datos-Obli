@@ -138,17 +138,22 @@ public class SistemaTest {
      * Test of ingresarServicio method, of class Sistema.
      */
     @Test
-    public void testIngresarServicio() {
-        System.out.println("ingresarServicio");
-        String ciudad = "";
-        String crucero = "";
-        String servicio = "";
-        Sistema instance = new Sistema();
-        Retorno expResult = null;
-        Retorno result = instance.ingresarServicio(ciudad, crucero, servicio);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testIngresarServicioOK() {
+        Sistema sis = new Sistema();
+        sis.crearSistemaReservas(20);
+        sis.registrarCiudad("Montevideo");
+        sis.registrarCrucero("Montevideo","Love Crucer",1,50);
+        assertEquals(Retorno.Resultado.OK, sis.ingresarServicio("Montevideo","Love Crucer", "Spa").resultado);
+    }
+    
+    @Test
+    public void testIngresarServicioCruceroNoenCiudad() {
+        Sistema sis = new Sistema();
+        sis.crearSistemaReservas(20);
+        sis.registrarCiudad("Montevideo");
+        sis.registrarCiudad("Rocha");
+        sis.registrarCrucero("Montevideo","Love Crucer",1,50);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.ingresarServicio("Rocha","Love Crucer", "Spa").resultado);
     }
 
     /**

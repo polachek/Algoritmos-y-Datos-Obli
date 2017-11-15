@@ -6,7 +6,7 @@ public class ListaCrucero implements IListaCrucero {
     private int cantelementos;
 
     //Constructor
-    public void Lista(){
+    public ListaCrucero(){
         this.inicio=null;
         this.fin=null;
         this.cantelementos=0;
@@ -181,6 +181,18 @@ public class ListaCrucero implements IListaCrucero {
              aux=aux.getSig();
          }
         return retorno;
+    }
+    
+    public Crucero buscarCruceroXNombre(String Nombre){
+       NodoListaCrucero aux= this.inicio;
+       Crucero elCrucero = null;
+         while (aux!=null){
+             if (aux.getNombre().equals(Nombre))
+                  elCrucero = aux.getCrucero();
+             
+             aux=aux.getSig();
+         }
+        return elCrucero;
     }
 
 

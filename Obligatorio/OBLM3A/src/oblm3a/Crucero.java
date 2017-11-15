@@ -14,15 +14,25 @@ public class Crucero {
     private int estrellas;
     private int capacidad;
     private int ranking;
+    private ListaServicio Lservicio;
     
     public Crucero(String nombre, int estrellas, int capacidad) {
         this.nombre = nombre;
         this.estrellas = estrellas;
         this.capacidad = capacidad;
+        this.Lservicio=new ListaServicio();
     }
     
     public String getNombre(){
         return this.nombre;
+    }
+    
+    public ListaServicio getLservicio() {
+        return Lservicio;
+    }
+
+    public void setListaServicio(ListaServicio Lservicio) {
+        this.Lservicio = Lservicio;
     }
 
    

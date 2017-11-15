@@ -64,11 +64,9 @@ public class Sistema implements ISistema {
                 else if(AC.buscar(ciudad).getLcrucero().buscarCrucero(nombre)){
                     ret.resultado = Resultado.ERROR_3;
                 }
-                else if (AC.buscar(ciudad)!= null){
+                else{
                     AC.buscar(ciudad).getLcrucero().agregarInicio(miCrucero);                 
 		    ret.resultado = Resultado.OK;
-                }else{
-                    ret.resultado = Resultado.ERROR_4;
                 }
 
 		return ret;
@@ -78,21 +76,19 @@ public class Sistema implements ISistema {
 	public Retorno ingresarServicio(String ciudad, String crucero, String servicio) {
 		Retorno ret = new Retorno();
                 
-		/*if(AC.obtenerElemento(ciudad) == null){
+                if(!AC.existe(ciudad)){
                     ret.resultado = Resultado.ERROR_2;
-                }else if(AC.obtenerElemento(ciudad).getLcrucero().buscarCrucero(nombre)){
-                    ret.resultado = Resultado.ERROR_3;
+                } 
+                else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
+                    ret.resultado = Resultado.ERROR_1;
                 }
-                else if (AC.obtenerElemento(ciudad)!= null){
-                    AC.obtenerElemento(ciudad).getLcrucero().agregarInicio(miCrucero);                 
+                else{
+                    Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero); 
+                    miCrucero.getLservicio().agregarInicio(servicio);
 		    ret.resultado = Resultado.OK;
-                }else{
-                    ret.resultado = Resultado.ERROR_4;
-                }*/
+                }
                 
-                ret.resultado = Resultado.NO_IMPLEMENTADA;
-                
-		return ret;
+                return ret;
 	}
 
 	@Override
