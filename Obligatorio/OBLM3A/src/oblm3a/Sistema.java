@@ -107,6 +107,7 @@ public class Sistema implements ISistema {
 	@Override
 	public Retorno realizarReserva(int cliente, String ciudad, String crucero) {
             Retorno ret = new Retorno();
+            if(AC.obtenerElemento(ciudad).getLcrucero().)
             ret.resultado = Resultado.NO_IMPLEMENTADA;
             return ret;
 	}

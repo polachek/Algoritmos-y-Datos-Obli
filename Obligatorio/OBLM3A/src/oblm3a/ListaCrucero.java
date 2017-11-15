@@ -45,19 +45,19 @@ public class ListaCrucero implements IListaCrucero {
     //POS: Retorna true si la lista no tiene nodos
     public boolean esVacia(){
         return (this.inicio==null);       
-      }
+    }
 
     //PRE: 
     //POS: Agrega un nuevo Nodo al principio de la lista
     public void agregarInicio(Crucero dato){
-        NodoListaCrucero nuevo= new NodoListaCrucero(dato);
+        NodoListaCrucero nuevo = new NodoListaCrucero(dato);
         nuevo.setSig(inicio);
         this.inicio=nuevo;
         if(this.fin==null)//estoy insertando el primer nodo
             this.fin=nuevo;
         
         this.cantelementos=this.cantelementos+1;
-        }
+    }
     
      //PRE:
     //POS: Borra el primer nodo
@@ -67,19 +67,20 @@ public class ListaCrucero implements IListaCrucero {
             this.cantelementos=this.cantelementos-1;
         }
     }
- //PRE:
+     
+    //PRE:
     //POS: elimina todos los nodos de una lista dada
-     public void vaciar(){
-             this.inicio=null;
-             this.fin=null;
-             this.cantelementos=0;
+    public void vaciar(){
+        this.inicio=null;
+        this.fin=null;
+        this.cantelementos=0;
     }
    
-         //PRE:
+    //PRE:
     //POS: Recorre y muestra los datos de lista
-   public void mostrar(){
+    public void mostrar(){
         if (this.esVacia())
-            System.out.println("Lista es vacía");
+            System.out.println("La lista está vacía");
         else  {
             NodoListaCrucero aux=this.inicio;
             while (aux!=null)  {
@@ -165,14 +166,14 @@ public class ListaCrucero implements IListaCrucero {
    //PRE: //POS:
     public NodoListaCrucero obtenerElemento(Crucero dato){
         NodoListaCrucero aux=this.inicio;
-        while (aux!=null && aux.getCrucero()!=dato)
+        while (aux != null && aux.getCrucero()!=dato)
             aux=aux.getSig();
         //encontrÃ© dato o lleguÃ© al final
         return aux;
     }
     
     public boolean buscarCrucero(String Nombre){
-       NodoListaCrucero aux= this.inicio;
+       NodoListaCrucero aux = this.inicio;
        boolean retorno= false;
          while (aux!=null){
              if (aux.getNombre().equals(Nombre))

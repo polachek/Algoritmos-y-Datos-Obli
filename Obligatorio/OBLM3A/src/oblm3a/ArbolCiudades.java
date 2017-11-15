@@ -58,12 +58,16 @@ public class ArbolCiudades implements IArbolCiudades{
         }
         else {
             if (unaCiudad.compareTo(raiz.nombre) > 0){
-                (raiz.izq).insertar(unaCiudad);
+                raiz.izq.insertar(unaCiudad);
                 ret = Retorno.Resultado.OK;      
             } 
             else{
-                (raiz.der).insertar(unaCiudad);
-                ret = Retorno.Resultado.OK;                
+                raiz.der.insertar(unaCiudad);
+                ret = Retorno.Resultado.OK;
+
+
+
+
             }                
         }
         return ret;
@@ -95,7 +99,7 @@ public class ArbolCiudades implements IArbolCiudades{
     }   
     
     public boolean existe(String ciudad){
-    if (!this.esVacio()) {
+        if (!this.esVacio()) {
             if (ciudad == raiz.nombre) {
                 return true;
             }

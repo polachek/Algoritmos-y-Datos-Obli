@@ -10,50 +10,94 @@ package oblm3a;
  * @author sebastianvillar
  */
 public class ListaReservas implements IListaReservas {
-
-    @Override
-    public boolean esVacia() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private NodoListaReserva inicio;
+    private NodoListaReserva fin;
+    private int cantElementos;
+    
+    //Constructor
+    public ListaReservas() {
+        this.inicio = null;
     }
 
+    //Inicio
+    public void setInicio(NodoListaReserva i){
+        inicio=i;
+    }
+    public NodoListaReserva getInicio(){
+        return inicio;
+    }
+
+    //Fin
+    public void setFin(NodoListaReserva f){
+        fin=f;
+    }
+    public NodoListaReserva getFin(){
+        return fin;
+    }
+
+    public int getCantelementos() {
+        return cantElementos;
+    }
+
+    public void setCantElementos(int cantElementos) {
+        this.cantElementos = cantElementos;
+    }
+    
+    /**************Métodos Básicos*******************/
+    /***********************************************/
+    
     @Override
-    public void agregarInicio(Crucero dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean esVacia(){
+        return (this.inicio==null);       
+    }
+    
+    @Override
+    public void agregarInicio(Reserva dato) {
+        NodoListaReserva nuevo = new NodoListaReserva(dato);
+        nuevo.setSig(inicio);
+        this.inicio=nuevo;
+        if(this.fin==null)//estoy insertando el primer nodo
+            this.fin=nuevo;
+        
+        this.cantElementos=this.cantElementos+1;
     }
 
     @Override
     public void borrarInicio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!this.esVacia()){
+            this.inicio=this.inicio.getSig();
+            this.cantElementos=this.cantElementos-1;
+        }   
     }
-
-    @Override
-    public void agregarFinal(Crucero dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void borrarFin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public void vaciar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.inicio=null;
+        this.fin=null;
+        this.cantElementos=0;    
     }
 
     @Override
     public void mostrar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.esVacia())
+            System.out.println("La lista está vacía");
+        else  {
+            NodoListaReserva aux = this.inicio;
+            while (aux != null)  {
+                System.out.println(aux.getReserva());
+                aux=aux.getSig();
+            }
+        }
     }
 
     @Override
-    public void agregarOrd(Crucero dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public NodoListaReserva obtenerElemento(Reserva dato) {
+        NodoListaReserva aux = this.inicio;
+        while (aux!=null && aux.getReserva()!=dato)
+            aux=aux.getSig();
+        //encontró dato o llegó al final
+        return aux;
     }
 
-    @Override
-    public NodoListaCrucero obtenerElemento(Crucero dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+
 }
