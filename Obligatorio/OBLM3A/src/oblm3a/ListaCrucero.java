@@ -4,13 +4,13 @@ public class ListaCrucero implements IListaCrucero {
 
     private NodoListaCrucero inicio;
     private NodoListaCrucero fin;
-    private int cantelementos;
+    private int cantElementos;
 
     //Constructor
     public ListaCrucero(){
         this.inicio=null;
         this.fin=null;
-        this.cantelementos=0;
+        this.cantElementos=0;
     }
 
     //Inicio
@@ -30,11 +30,11 @@ public class ListaCrucero implements IListaCrucero {
     }
 
     public int getCantelementos() {
-        return cantelementos;
+        return cantElementos;
     }
 
     public void setCantelementos(int cantelementos) {
-        this.cantelementos = cantelementos;
+        this.cantElementos = cantelementos;
     }
     
     @Override
@@ -50,14 +50,14 @@ public class ListaCrucero implements IListaCrucero {
         if(this.fin==null)//estoy insertando el primer nodo
             this.fin=nuevo;
         
-        this.cantelementos=this.cantelementos+1;        
+        this.cantElementos=this.cantElementos+1;        
     }
 
     @Override
     public void borrarInicio() {
         if (!this.esVacia()){
             this.inicio=this.inicio.getSig();
-            this.cantelementos=this.cantelementos-1;
+            this.cantElementos=this.cantElementos-1;
         }        
     }
 
@@ -65,7 +65,7 @@ public class ListaCrucero implements IListaCrucero {
     public void vaciar() {
         this.inicio=null;
         this.fin=null;
-        this.cantelementos=0;        
+        this.cantElementos=0;        
     }
 
     @Override
@@ -129,7 +129,7 @@ public class ListaCrucero implements IListaCrucero {
 
     @Override
     public int cantElementos() {
-        return this.cantelementos;        
+        return this.cantElementos;        
     }
 
 }
