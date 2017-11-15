@@ -17,7 +17,7 @@ public class NodoArbolCiudad {
         public ArbolCiudades der;
 
         public NodoArbolCiudad() {
-            this.nombre = null;
+            this.ciudad = null;
             this.izq = null;
             this.der = null;
             this.LCrucero = new ListaCruceros();
