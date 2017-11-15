@@ -14,21 +14,16 @@ public class Crucero {
     private int estrellas;
     private int capacidad;
     private int ranking;
-<<<<<<< HEAD
     private ListaServicio Lservicio;
-=======
     private ListaReservas LReservas;
->>>>>>> ea0851ce88a96422022016addd25323843d16b75
+
     
     public Crucero(String nombre, int estrellas, int capacidad) {
         this.nombre = nombre;
         this.estrellas = estrellas;
         this.capacidad = capacidad;
-<<<<<<< HEAD
         this.Lservicio=new ListaServicio();
-=======
         this.LReservas = new ListaReservas();
->>>>>>> ea0851ce88a96422022016addd25323843d16b75
     }
     
     public String getNombre(){
@@ -41,6 +36,14 @@ public class Crucero {
 
     public void setListaServicio(ListaServicio Lservicio) {
         this.Lservicio = Lservicio;
+    }
+    
+    public ListaReservas getLReservas() {
+        return LReservas;
+    }
+
+    public void setListaReservas(ListaReservas LReservas) {
+        this.LReservas = LReservas;
     }
 
    
