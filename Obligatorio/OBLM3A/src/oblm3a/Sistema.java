@@ -103,7 +103,8 @@ public class Sistema implements ISistema {
 	@Override
 	public Retorno realizarReserva(int cliente, String ciudad, String crucero) {
             Retorno ret = new Retorno();
-            ListaCrucero LCrucero = AC.buscar(ciudad).getLcrucero();
+            ListaCruceros LCrucero = AC.buscar(ciudad).getLcrucero();
+            Crucero cru = LCrucero.buscarCruceroXNombre(crucero);
             
             ret.resultado = Resultado.NO_IMPLEMENTADA;
             return ret;

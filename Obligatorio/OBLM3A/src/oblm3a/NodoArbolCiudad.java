@@ -11,8 +11,8 @@ package oblm3a;
  */
 public class NodoArbolCiudad {
     
-        public String nombre;
-        public ListaCrucero LCrucero;
+        public Ciudad ciudad;
+        public ListaCruceros LCrucero;
         public ArbolCiudades izq;
         public ArbolCiudades der;
 
@@ -20,7 +20,7 @@ public class NodoArbolCiudad {
             this.nombre = null;
             this.izq = null;
             this.der = null;
-            this.LCrucero = new ListaCrucero();
+            this.LCrucero = new ListaCruceros();
         }    
     
 }

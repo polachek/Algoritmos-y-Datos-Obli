@@ -9,13 +9,13 @@ package oblm3a;
  * @author Sebastián Villar - 177751
  * @author Guillermo Polachek - 153924
  */
-public class ListaServicio implements IListaServicio{
+public class ListaServicios implements IListaServicio{
     private NodoListaServicio inicio;
     private NodoListaServicio fin;
     private int cantelementos;
 
     //Constructor
-    public ListaServicio(){
+    public ListaServicios(){
         this.inicio=null;
         this.fin=null;
         this.cantelementos=0;

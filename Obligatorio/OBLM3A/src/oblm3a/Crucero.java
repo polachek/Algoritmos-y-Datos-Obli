@@ -14,7 +14,7 @@ public class Crucero {
     private int estrellas;
     private int capacidad;
     private int ranking;
-    private ListaServicio Lservicio;
+    private ListaServicios Lservicio;
     private ListaReservas LReservas;
 
     
@@ -22,7 +22,7 @@ public class Crucero {
         this.nombre = nombre;
         this.estrellas = estrellas;
         this.capacidad = capacidad;
-        this.Lservicio=new ListaServicio();
+        this.Lservicio=new ListaServicios();
         this.LReservas = new ListaReservas();
     }
     
@@ -30,11 +30,11 @@ public class Crucero {
         return this.nombre;
     }
     
-    public ListaServicio getLservicio() {
+    public ListaServicios getLservicio() {
         return Lservicio;
     }
 
-    public void setListaServicio(ListaServicio Lservicio) {
+    public void setListaServicio(ListaServicios Lservicio) {
         this.Lservicio = Lservicio;
     }
     
@@ -45,6 +45,5 @@ public class Crucero {
     public void setListaReservas(ListaReservas LReservas) {
         this.LReservas = LReservas;
     }
-
-   
+  
 }

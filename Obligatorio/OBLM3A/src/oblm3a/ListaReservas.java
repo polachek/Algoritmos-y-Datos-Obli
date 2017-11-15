@@ -17,6 +17,8 @@ public class ListaReservas implements IListaReservas {
     //Constructor
     public ListaReservas() {
         this.inicio = null;
+        this.fin = null;
+        this.cantElementos = 0;
     }
 
     //Inicio

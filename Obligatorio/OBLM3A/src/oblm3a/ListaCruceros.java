@@ -1,13 +1,13 @@
 package oblm3a;
 
-public class ListaCrucero implements IListaCrucero {
+public class ListaCruceros implements IListaCrucero {
 
     private NodoListaCrucero inicio;
     private NodoListaCrucero fin;
     private int cantElementos;
 
     //Constructor
-    public ListaCrucero(){
+    public ListaCruceros(){
         this.inicio=null;
         this.fin=null;
         this.cantElementos=0;

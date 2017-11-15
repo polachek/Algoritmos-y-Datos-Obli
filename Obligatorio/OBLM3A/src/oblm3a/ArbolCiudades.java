@@ -17,11 +17,11 @@ public class ArbolCiudades implements IArbolCiudades {
         NodoArbolCiudad raiz = new NodoArbolCiudad();
     }
 
-    public ListaCrucero getLcrucero() {
+    public ListaCruceros getLcrucero() {
         return raiz.LCrucero;
     }
 
-    public void setLcrucero(ListaCrucero Lcrucero) {
+    public void setLcrucero(ListaCruceros Lcrucero) {
         this.raiz.LCrucero = Lcrucero;
     }
 
@@ -33,15 +33,15 @@ public class ArbolCiudades implements IArbolCiudades {
         Retorno.Resultado ret;
         if (esVacio()) {
             NodoArbolCiudad nuevo = new NodoArbolCiudad();
-            nuevo.nombre = unaCiudad;
+            nuevo.ciudad.nombre = unaCiudad;
             nuevo.izq = new ArbolCiudades();
             nuevo.der = new ArbolCiudades();
-            nuevo.LCrucero = new ListaCrucero();
+            nuevo.LCrucero = new ListaCruceros();
             raiz = nuevo;
             ret = Retorno.Resultado.OK;
         }
         else {
-            if (unaCiudad.compareTo(raiz.nombre) > 0){
+            if (unaCiudad.compareTo(raiz.ciudad.nombre) > 0){
                 raiz.izq.insertar(unaCiudad);
                 ret = Retorno.Resultado.OK;      
             } 
@@ -55,7 +55,7 @@ public class ArbolCiudades implements IArbolCiudades {
 
     public void preOrder() {
         if (!esVacio()) {
-            System.out.print(raiz.nombre + ", ");
+            System.out.print(raiz.ciudad.nombre + ", ");
             raiz.izq.preOrder();
             raiz.izq.preOrder();
         }
@@ -64,7 +64,7 @@ public class ArbolCiudades implements IArbolCiudades {
     public void inOrder() {
         if (!esVacio()) {
             raiz.izq.inOrder();
-            System.out.print(raiz.nombre + ", ");
+            System.out.print(raiz.ciudad.nombre + ", ");
             raiz.der.inOrder();
         }
     }
@@ -73,7 +73,7 @@ public class ArbolCiudades implements IArbolCiudades {
         if (!esVacio()) {
             raiz.der.posOrder();
             raiz.izq.posOrder();
-            System.out.print(raiz.nombre + ", ");
+            System.out.print(raiz.ciudad.nombre + ", ");
 
         }
     }
@@ -81,18 +81,17 @@ public class ArbolCiudades implements IArbolCiudades {
     public boolean existe(String ciudad){
         boolean ret = false;
         if (!this.esVacio()) {
-            if (ciudad == raiz.nombre) {
+            if (ciudad == raiz.ciudad.nombre) {
                 ret = true;
             }
             else {
-                if (raiz.nombre != null && ciudad.compareTo(raiz.nombre) < 0) {
+                if (raiz.ciudad.nombre != null && ciudad.compareTo(raiz.ciudad.nombre) < 0) {
                     raiz.izq.existe(ciudad);
-                } else if (raiz.nombre != null && ciudad.compareTo(raiz.nombre) > 0) {
+                } else if (raiz.ciudad.nombre != null && ciudad.compareTo(raiz.ciudad.nombre) > 0) {
                     raiz.der.existe(ciudad);
                 }
             }
         }
-        
         return ret;
     }
 
@@ -115,10 +114,10 @@ public class ArbolCiudades implements IArbolCiudades {
     public ArbolCiudades buscar(String ciudad) {
         ArbolCiudades arbolito = null;
         if (!esVacio()) {
-            if (ciudad.compareTo(raiz.nombre) == 0) {
+            if (ciudad.compareTo(raiz.ciudad.nombre) == 0) {
                 return this;
             } else {
-                if (ciudad.compareTo(raiz.nombre) < 0) {
+                if (ciudad.compareTo(raiz.ciudad.nombre) < 0) {
                     arbolito = raiz.izq.buscar(ciudad);
                 } else {
                     arbolito = raiz.der.buscar(ciudad);
@@ -133,7 +132,7 @@ public class ArbolCiudades implements IArbolCiudades {
         while (!arbolActual.raiz.izq.esVacio()) {
             arbolActual = arbolActual.raiz.izq;
         }
-        String devuelvo = arbolActual.raiz.nombre;
+        String devuelvo = arbolActual.raiz.ciudad.nombre;
         arbolActual.raiz = null;
         return devuelvo;
     }
@@ -143,7 +142,7 @@ public class ArbolCiudades implements IArbolCiudades {
         while (!arbolActual.raiz.der.esVacio()) {
             arbolActual = arbolActual.raiz.der;
         }
-        String devuelvo = arbolActual.raiz.nombre;
+        String devuelvo = arbolActual.raiz.ciudad.nombre;
         arbolActual.raiz = null;
         return devuelvo;
     }
@@ -163,7 +162,7 @@ public class ArbolCiudades implements IArbolCiudades {
                 paraEliminar.raiz = null;
             } else {
                 if (!paraEliminar.raiz.izq.esVacio() && !paraEliminar.raiz.der.esVacio()) {
-                    paraEliminar.raiz.nombre = paraEliminar.raiz.der.buscarMin();
+                    paraEliminar.raiz.ciudad.nombre = paraEliminar.raiz.der.buscarMin();
                 } else {
                     if (paraEliminar.raiz.izq.esVacio()) {
                         paraEliminar.raiz = paraEliminar.raiz.der.raiz;

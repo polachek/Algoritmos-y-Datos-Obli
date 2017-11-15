@@ -11,6 +11,5 @@ interface IListaCrucero {
     public void agregarOrd(Crucero dato);
     public Crucero buscarCruceroXNombre(String Nombre);
     public boolean buscarCrucero(String Nombre);
-    public int cantElementos();
-    
+    public int cantElementos();    
 }

@@ -9,12 +9,12 @@ package oblm3a;
  *
  * @author sebastianvillar
  */
-public class Cliente {
-    private String nombre;
-    private int clienteId;
+public class Ciudad {
     
-    public Cliente(int clienteId) {
-        this.clienteId = clienteId;
+    public String nombre;
+    
+    public Ciudad(String nombre) {
+        this.nombre = nombre;
     }
     
     public String getNombre(){
@@ -23,13 +23,6 @@ public class Cliente {
     
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }    
-    
-    public int getId(){
-        return this.clienteId;
     }
     
-    public void setId(int id) {
-        this.clienteId = id;
-    }        
 }
