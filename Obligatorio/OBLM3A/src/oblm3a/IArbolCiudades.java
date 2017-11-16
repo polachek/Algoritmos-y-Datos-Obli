@@ -12,15 +12,6 @@ package oblm3a;
 public interface IArbolCiudades {
     public boolean esVacio();
     public Retorno.Resultado insertar(String unaCiudad);
-    public void preOrder();
-    public void inOrder();
-    public void posOrder();
-    public boolean existe(String ciudad);
-    public int cantidad();
-    public int altura();    
-    public ArbolCiudades buscar(String ciudad);
-    public String buscarMin();
-    public String buscarMax();
-    public boolean esHoja();
-    //public void eliminar(String ciudad);
+    public boolean existe(String ciudad); 
+    //public ArbolCiudades buscar(String ciudad);
 }

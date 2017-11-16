@@ -13,14 +13,38 @@ public class NodoArbolCiudad {
     
         public Ciudad ciudad;
         public ListaCruceros LCrucero;
-        public ArbolCiudades izq;
-        public ArbolCiudades der;
+        public NodoArbolCiudad izq;
+        public NodoArbolCiudad der;
 
         public NodoArbolCiudad() {
             this.ciudad = null;
             this.izq = null;
             this.der = null;
             this.LCrucero = new ListaCruceros();
-        }    
+        }
+        
+        public NodoArbolCiudad getIzq() {
+            return izq;
+        }
+        
+        public void setIzq(NodoArbolCiudad izq) {
+            this.izq = izq;
+        }
+        
+        public NodoArbolCiudad getDer() {
+            return der;
+        }
+        
+        public void setDer(NodoArbolCiudad der) {
+            this.der = der;
+        }
+        
+        public ListaCruceros getLcrucero() {
+            return this.LCrucero;
+        }
+        
+        public void setLcrucero(ListaCruceros Lcrucero) {
+            this.LCrucero = Lcrucero;
+        }
     
 }

@@ -9,27 +9,23 @@ package oblm3a;
  *
  * @author sebastianvillar
  */
-public class ArbolCiudades implements IArbolCiudades {
+public class ArbolCiudades implements IArbolCiudades{
 
-    public NodoArbolCiudad raiz;
+    NodoArbolCiudad raiz;
 
     public ArbolCiudades() {
-        NodoArbolCiudad raiz = new NodoArbolCiudad();
-    }
-
-    public ListaCruceros getLcrucero() {
-        return raiz.LCrucero;
-    }
-
-    public void setLcrucero(ListaCruceros Lcrucero) {
-        this.raiz.LCrucero = Lcrucero;
+        raiz = null;
     }
 
     public boolean esVacio() {
         return (raiz == null);
     }
+    
+    public void vaciar(){
+        raiz = null;
+    }
 
-    public Retorno.Resultado insertar(String unaCiudad) {
+    /*public Retorno.Resultado insertar(String unaCiudad) {
         Retorno.Resultado ret;
         if (esVacio()) {
             NodoArbolCiudad nuevo = new NodoArbolCiudad();
@@ -51,33 +47,38 @@ public class ArbolCiudades implements IArbolCiudades {
             }                
         }
         return ret;
-    }
-
-    public void preOrder() {
-        if (!esVacio()) {
-            System.out.print(raiz.ciudad.getNombre() + ", ");
-            raiz.izq.preOrder();
-            raiz.izq.preOrder();
-        }
-    }
-
-    public void inOrder() {
-        if (!esVacio()) {
-            raiz.izq.inOrder();
-            System.out.print(raiz.ciudad.getNombre() + ", ");
-            raiz.der.inOrder();
-        }
-    }
-
-    public void posOrder() {
-        if (!esVacio()) {
-            raiz.der.posOrder();
-            raiz.izq.posOrder();
-            System.out.print(raiz.ciudad.getNombre() + ", ");
-
-        }
-    }
+    }*/
     
+    public Retorno.Resultado insertar(String unaCiudad){
+        Retorno.Resultado ret = null;
+        if(this.esVacio()){
+            NodoArbolCiudad nuevo = new NodoArbolCiudad();
+            this.raiz = nuevo;
+            Ciudad miCiudad = new Ciudad(unaCiudad);
+            nuevo.ciudad = miCiudad;
+            nuevo.LCrucero = new ListaCruceros();
+            ret = Retorno.Resultado.OK;
+            
+        }else{
+            ArbolCiudades aux = new ArbolCiudades();
+            if (unaCiudad.compareTo(this.raiz.ciudad.getNombre()) < 0){
+                aux.raiz = this.raiz.getIzq();
+                aux.insertar(unaCiudad);
+                this.raiz.setIzq(aux.raiz);
+                ret = Retorno.Resultado.OK;
+            }
+            if (unaCiudad.compareTo(this.raiz.ciudad.getNombre()) > 0){
+                aux.raiz = this.raiz.getDer();
+                aux.insertar(unaCiudad);
+                this.raiz.setDer(aux.raiz);
+                ret = Retorno.Resultado.OK;
+            }
+        }
+        
+        return ret;
+    }
+
+/*    
     public boolean existe(String ciudad){
         boolean ret = false;
         
@@ -95,22 +96,8 @@ public class ArbolCiudades implements IArbolCiudades {
         }
         return ret;
     }
-
-    public int cantidad() {
-        if (esVacio()) {
-            return 0;
-        } else {
-            return (1 + raiz.der.cantidad() + raiz.izq.cantidad());
-        }
-    }
-
-    public int altura() {
-        if (esVacio()) {
-            return 0;
-        } else {
-            return (1 + Math.max(((raiz.izq).altura()), ((raiz.der).altura())));
-        }
-    }
+*/
+/*
 
     public ArbolCiudades buscar(String ciudad) {
         ArbolCiudades arbolito = null;
@@ -127,8 +114,55 @@ public class ArbolCiudades implements IArbolCiudades {
         }
         return arbolito;
     }
+*/
+    public NodoArbolCiudad buscar(String ciudad){
+        NodoArbolCiudad ret = null;
+        if(!this.esVacio()){
+            ArbolCiudades aux = new ArbolCiudades();
+            if (ciudad.compareTo(this.raiz.ciudad.getNombre()) == 0){
+                ret =  this.raiz;
+            }
+            if (ciudad.compareTo(this.raiz.ciudad.getNombre())<0){
+                aux.raiz = this.raiz.getIzq();
+            }
+            if (ciudad.compareTo(this.raiz.ciudad.getNombre())>0){
+                aux.raiz = this.raiz.getDer();
+            }
+            
+        }else{
+            ret =  null;
+        }     
+        return ret;
+    }
+    
+    //Obtiene el nodo del menor elemento del árbol
+    public NodoArbolCiudad Minimo( ) {
+        return Minimo( raiz ) ;
+    }
 
-    public String buscarMin() {
+    //Obtiene el nodo del mayor elemento del árbol
+    public NodoArbolCiudad Maximo( ) {
+        return Maximo( raiz ) ;
+    }
+    
+    //retorna nodo del mínimo elemento
+    private NodoArbolCiudad Minimo( NodoArbolCiudad nodo )
+    {
+        if(nodo != null )
+            while( nodo.izq != null )
+                nodo = nodo.izq;
+        return nodo;
+    }
+    //retorna nodo del máximo elemento
+    private NodoArbolCiudad Maximo( NodoArbolCiudad nodo )
+    {
+        if(nodo != null )
+            while( nodo.der != null )
+                nodo = nodo.der;
+        return nodo;
+    }
+    
+    /*public String buscarMin() {
         ArbolCiudades arbolActual = this;
         while (!arbolActual.raiz.izq.esVacio()) {
             arbolActual = arbolActual.raiz.izq;
@@ -148,6 +182,7 @@ public class ArbolCiudades implements IArbolCiudades {
         return devuelvo;
     }
 
+
     public boolean esHoja() {
         boolean hoja = false;
         if ((raiz.izq).esVacio() && (raiz.der).esVacio()) {
@@ -155,26 +190,25 @@ public class ArbolCiudades implements IArbolCiudades {
         }
         return hoja;
     }
-    
-    /*
-    public void eliminar(String ciudad) {
-        ArbolCiudades paraEliminar = buscar(ciudad);
-        if (!paraEliminar.esVacio()) {
-            if (paraEliminar.esHoja()) {
-                paraEliminar.raiz = null;
-            } else {
-                if (!paraEliminar.raiz.izq.esVacio() && !paraEliminar.raiz.der.esVacio()) {
-                    paraEliminar.raiz.ciudad.getNombre() = paraEliminar.raiz.der.buscarMin();
-                } else {
-                    if (paraEliminar.raiz.izq.esVacio()) {
-                        paraEliminar.raiz = paraEliminar.raiz.der.raiz;
-                    } else {
-                        paraEliminar.raiz = paraEliminar.raiz.izq.raiz;
-                    }
-                }
-            }
-        }
-    }
     */
-    
+       
+    public boolean existe(String ciudad){
+        if(!this.esVacio()){
+            ArbolCiudades aux = new ArbolCiudades();
+            if (ciudad.compareTo(this.raiz.ciudad.getNombre()) == 0){
+                return true;
+            }
+            if (ciudad.compareTo(this.raiz.ciudad.getNombre())<0){
+                aux.raiz = this.raiz.getIzq();
+            }
+            if (ciudad.compareTo(this.raiz.ciudad.getNombre())>0){
+                aux.raiz = this.raiz.getDer();
+            }
+          return aux.existe(ciudad);
+        }
+        return false;
+    }
+
+
+
 }
