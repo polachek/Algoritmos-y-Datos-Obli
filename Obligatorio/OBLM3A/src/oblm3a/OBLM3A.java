@@ -39,44 +39,11 @@ public class OBLM3A {
         System.out.println(s.AC.existe("Montevideo"));
         System.out.println(s.AC.existe("Rocha"));
         System.out.println(s.AC.cantidad());*/
-        
-        s.crearSistemaReservas(20);
-        s.registrarCiudad("C");
-        s.registrarCiudad("A");
-        s.registrarCiudad("D");
-        
-        System.out.println("Cantidad en Arbol: " + s.AC.cantidad());
-        System.out.println("Existe A: " + s.AC.existe("A"));
-        System.out.println("Existe D: " + s.AC.existe("D"));
-        System.out.println("Existe C: " + s.AC.existe("C"));
-        
-        System.out.println();
-        System.out.println();
-        
-        System.out.println("Raiz Arbol: " + s.AC.raiz.nombre);
-        System.out.println("Raiz IZQ: " + s.AC.raiz.izq.raiz.nombre);
-        System.out.println("Raiz DER: " + s.AC.raiz.der.raiz.nombre);
-        
-        String ciudad = "A";
-        
-        if (ciudad.compareTo(s.AC.raiz.nombre) == 0) {
-                System.out.println("es == 0");
-        }
-        else {
-                if (s.AC.raiz.nombre != null && ciudad.compareTo(s.AC.raiz.nombre) < 0) {
-                    System.out.println("Entra en < 0 -- Raiz es : " + s.AC.raiz.nombre + "  ------- Raiz IZQ es : " + s.AC.raiz.izq.raiz.nombre);
-                    //s.AC.raiz.izq.existe(ciudad);
-                } else if (s.AC.raiz.nombre != null && ciudad.compareTo(s.AC.raiz.nombre) > 0) {
-                    //raiz.der.existe(ciudad);
-                    System.out.println("Entra en > 0 -- Raiz es : " + s.AC.raiz.nombre + " ------   Raiz DER es : " + s.AC.raiz.der.raiz.nombre);
-                }
-            }
-        
 
-
-        
-
-        
+        p.ver(s.crearSistemaReservas(20).resultado, Retorno.Resultado.OK, "Se intento crear Sistema de Reserva con 20 Ciudades");
+        p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se agrego Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Crucero X", 1, 20).resultado, Retorno.Resultado.OK, "Se agrego crucero 1 a Maldonado");        
+        p.ver(s.realizarReserva(1, "Montevideo", "Crucero X").resultado, Retorno.Resultado.OK, "Se agrego la reserva");
         
         //s.LC.mostrar();
         //listarcrucerociudad(s);

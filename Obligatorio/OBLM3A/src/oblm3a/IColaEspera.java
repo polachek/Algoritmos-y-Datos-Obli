@@ -9,7 +9,11 @@ package oblm3a;
  *
  * @author sebastianvillar
  */
-public interface IListaClientes {
-    public Cliente buscarClienteXId(int id);
-    public boolean existe(int id);
+public interface IColaEspera {
+    public void encolar(Reserva dato);
+    public void desencolar();
+    public Object frente();
+    public boolean estaVacia();
+    public int elementos();    
+    
 }

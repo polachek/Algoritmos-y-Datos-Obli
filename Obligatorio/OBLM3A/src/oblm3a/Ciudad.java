@@ -11,7 +11,7 @@ package oblm3a;
  */
 public class Ciudad {
     
-    public String nombre;
+    private String nombre;
     
     public Ciudad(String nombre) {
         this.nombre = nombre;

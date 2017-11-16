@@ -16,14 +16,16 @@ public class Crucero {
     private int ranking;
     private ListaServicios Lservicio;
     private ListaReservas LReservas;
+    private ColaEspera CEspera;
 
     
     public Crucero(String nombre, int estrellas, int capacidad) {
         this.nombre = nombre;
         this.estrellas = estrellas;
         this.capacidad = capacidad;
-        this.Lservicio=new ListaServicios();
+        this.Lservicio = new ListaServicios();
         this.LReservas = new ListaReservas();
+        this.CEspera = new ColaEspera();
     }
     
     public String getNombre(){
@@ -33,17 +35,16 @@ public class Crucero {
     public ListaServicios getLservicio() {
         return Lservicio;
     }
-
-    public void setListaServicio(ListaServicios Lservicio) {
-        this.Lservicio = Lservicio;
-    }
     
     public ListaReservas getLReservas() {
         return LReservas;
     }
-
-    public void setListaReservas(ListaReservas LReservas) {
-        this.LReservas = LReservas;
-    }
+    
+    public ColaEspera getCEspera() {
+        return CEspera;
+    }    
   
+    public int getCapacidad(){
+        return this.capacidad;
+    }
 }

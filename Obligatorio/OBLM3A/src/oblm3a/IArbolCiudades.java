@@ -22,5 +22,5 @@ public interface IArbolCiudades {
     public String buscarMin();
     public String buscarMax();
     public boolean esHoja();
-    public void eliminar(String ciudad);
+    //public void eliminar(String ciudad);
 }

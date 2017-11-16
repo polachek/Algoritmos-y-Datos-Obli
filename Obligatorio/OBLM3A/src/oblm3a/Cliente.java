@@ -13,7 +13,7 @@ public class Cliente {
     private String nombre;
     private int clienteId;
     
-    public Cliente(int clienteId) {
+    public Cliente() {
         this.clienteId = clienteId;
     }
     
@@ -31,5 +31,9 @@ public class Cliente {
     
     public void setId(int id) {
         this.clienteId = id;
-    }        
+    } 
+    
+    public void agregarCliente(int id) {
+        this.clienteId = id;
+    }     
 }

@@ -25,10 +25,23 @@ public class ListaClientes implements IListaClientes{
         Cliente elCliente = null;
          while (aux != null){
              if (aux.miCliente.getId() == id)
-                  elCliente = aux.getCliente();             
+                elCliente = aux.getCliente();             
              aux=aux.getSig();
          }
         return elCliente; 
     }
+    
+
+    @Override
+    public boolean existe(int id) {
+        NodoListaCliente aux = this.inicio;
+        boolean retorno = false;
+        while (aux != null){
+            if (aux.miCliente.getId() == id)
+                 retorno = true;
+            aux=aux.getSig();
+        }
+        return retorno;        
+    }    
     
 }

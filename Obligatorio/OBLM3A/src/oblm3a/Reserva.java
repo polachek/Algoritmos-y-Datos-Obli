@@ -15,10 +15,18 @@ public class Reserva {
     private Cliente cli;
     private Boolean espera;
     
-    public Reserva(Crucero cru, Cliente cli, Boolean espera) {
+    public Reserva(Crucero cru, Cliente cli, Boolean espera) 
+    {
         this.cru = cru;
         this.cli = cli;
         this.espera = espera;
+    }
+    
+    public void agregarReserva(Crucero c, Cliente cli, Boolean e)
+    {
+        this.cru = c;
+        this.cli = cli;
+        this.espera = e;            
     }
     
 }
