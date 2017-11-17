@@ -123,10 +123,20 @@ public class ArbolCiudades implements IArbolCiudades{
                 ret =  this.raiz;
             }
             if (ciudad.compareTo(this.raiz.ciudad.getNombre())<0){
-                aux.raiz = this.raiz.getIzq();
+                if(this.raiz.getIzq() == null){
+                    ret = null;                    
+                }else{
+                    aux.raiz = this.raiz.getIzq();
+                    ret = aux.buscar(ciudad);
+                } 
             }
             if (ciudad.compareTo(this.raiz.ciudad.getNombre())>0){
-                aux.raiz = this.raiz.getDer();
+                if(this.raiz.getDer() == null){
+                    ret = null;                    
+                }else{
+                    aux.raiz = this.raiz.getDer();
+                    ret = aux.buscar(ciudad);
+                }                
             }
             
         }else{
