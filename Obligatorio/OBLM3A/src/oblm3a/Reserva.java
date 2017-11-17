@@ -15,7 +15,7 @@ public class Reserva {
     private Cliente cli;
     private Boolean espera;
     
-    public Reserva(Crucero cru, Cliente cli, Boolean espera) 
+    public Reserva() 
     {
         this.cru = cru;
         this.cli = cli;

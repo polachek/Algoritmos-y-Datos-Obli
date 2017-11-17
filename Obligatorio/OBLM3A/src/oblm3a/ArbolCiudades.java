@@ -25,30 +25,6 @@ public class ArbolCiudades implements IArbolCiudades{
         raiz = null;
     }
 
-    /*public Retorno.Resultado insertar(String unaCiudad) {
-        Retorno.Resultado ret;
-        if (esVacio()) {
-            NodoArbolCiudad nuevo = new NodoArbolCiudad();
-            nuevo.ciudad.setNombre(unaCiudad);
-            nuevo.izq = new ArbolCiudades();
-            nuevo.der = new ArbolCiudades();
-            nuevo.LCrucero = new ListaCruceros();
-            raiz = nuevo;
-            ret = Retorno.Resultado.OK;
-        }
-        else {
-            if (unaCiudad.compareTo(raiz.ciudad.getNombre()) > 0){
-                raiz.izq.insertar(unaCiudad);
-                ret = Retorno.Resultado.OK;      
-            } 
-            else{
-                raiz.der.insertar(unaCiudad);
-                ret = Retorno.Resultado.OK;
-            }                
-        }
-        return ret;
-    }*/
-    
     public Retorno.Resultado insertar(String unaCiudad){
         Retorno.Resultado ret = null;
         if(this.esVacio()){
@@ -78,43 +54,6 @@ public class ArbolCiudades implements IArbolCiudades{
         return ret;
     }
 
-/*    
-    public boolean existe(String ciudad){
-        boolean ret = false;
-        
-        if (!this.esVacio()) {
-            if (ciudad == raiz.ciudad.getNombre()) {
-                ret = true;
-            }
-            else {
-                if (raiz.ciudad.getNombre() != null && ciudad.compareTo(raiz.ciudad.getNombre()) < 0) {
-                    raiz.izq.existe(ciudad);
-                } else if (raiz.ciudad.getNombre() != null && ciudad.compareTo(raiz.ciudad.getNombre()) > 0) {
-                    raiz.der.existe(ciudad);
-                }
-            }
-        }
-        return ret;
-    }
-*/
-/*
-
-    public ArbolCiudades buscar(String ciudad) {
-        ArbolCiudades arbolito = null;
-        if (!esVacio()) {
-            if (ciudad.compareTo(raiz.ciudad.getNombre()) == 0) {
-                return this;
-            } else {
-                if (ciudad.compareTo(raiz.ciudad.getNombre()) < 0) {
-                    arbolito = raiz.izq.buscar(ciudad);
-                } else {
-                    arbolito = raiz.der.buscar(ciudad);
-                }
-            }
-        }
-        return arbolito;
-    }
-*/
     public NodoArbolCiudad buscar(String ciudad){
         NodoArbolCiudad ret = null;
         if(!this.esVacio()){

@@ -42,10 +42,6 @@ public class Sistema implements ISistema {
            }
            else 
                 ret.resultado=Retorno.Resultado.ERROR_1;
-
-
-            //ret.resultado = Resultado.NO_IMPLEMENTADA;
-
             return ret;
     }
 
@@ -108,10 +104,52 @@ public class Sistema implements ISistema {
     public Retorno realizarReserva(int cliente, String ciudad, String crucero) {
         Retorno ret = new Retorno();
         
-        if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero))
-            ret.resultado = Resultado.ERROR_1;
-        else if(!AC.existe(ciudad))
+        if(!AC.existe(ciudad))
             ret.resultado = Resultado.ERROR_2;
+        else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero))
+            ret.resultado = Resultado.ERROR_1;
+        else
+        {
+
+            //Reserva
+            Reserva unaReserva = new Reserva();
+            //Crucero
+            ListaCruceros LCrucero = AC.buscar(ciudad).getLcrucero();            
+            Crucero cru = LCrucero.buscarCruceroXNombre(crucero);
+            int cantReservas = cru.getLReservas().getCantelementos();
+            int cantHabitaciones = cru.getCapacidad();
+            //Cliente
+            Cliente cli = new Cliente();
+            //Espera
+            Boolean espera = false;
+            //controlo si existe el cliente
+            if(LClientes.existe(cliente))
+                cli = LClientes.buscarClienteXId(cliente);        
+            else{
+                cli.agregarCliente(cliente);
+            }
+            
+            //controlo si la reserva queda en espera
+            if(cantReservas <= cantHabitaciones)
+            {
+                unaReserva.agregarReserva(cru, cli, espera);
+                cru.getLReservas().agregarInicio(unaReserva);
+                ret.resultado = Resultado.OK;                            
+            }
+            else
+            {
+                unaReserva.agregarReserva(cru, cli, espera);
+                cru.getCEspera().encolar(unaReserva);
+                ret.resultado = Resultado.OK;                                        
+            }   
+            
+        }
+        
+        /*
+        if(!AC.existe(ciudad))
+            ret.resultado = Resultado.ERROR_2;
+        else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero))
+            ret.resultado = Resultado.ERROR_1;
         else
         {
             //Reserva
@@ -143,7 +181,9 @@ public class Sistema implements ISistema {
                 cru.getCEspera().encolar(unaReserva);
                 ret.resultado = Resultado.OK;                                            
             }                                               
-        }            
+        }    
+*/
+
         return ret;
     }
 
@@ -178,7 +218,20 @@ public class Sistema implements ISistema {
     public Retorno listarCrucerosCiudad(String ciudad) {
             Retorno ret = new Retorno();
 
-            ret.resultado = Resultado.NO_IMPLEMENTADA;
+            if(!AC.existe(ciudad)){
+                ret.resultado = Resultado.ERROR_1;
+            }else{
+                ListaCruceros misCruceros = AC.buscar(ciudad).getLcrucero();
+                if(misCruceros.esVacia()){
+                    ret.resultado = Resultado.ERROR_1;
+                    //ret.valorString = "No existen Cruceros registrados en " + ciudad;
+                    
+                }else{
+                    ret.resultado = Resultado.OK;
+                }
+                
+            }
+            
 
             return ret;
     }
