@@ -16,5 +16,6 @@ interface IListaServicio {
     public void borrarInicio();
     public void vaciar();
     public void mostrar();
-    public NodoListaServicio obtenerElemento(String Servicio);   
+    public NodoListaServicio obtenerElemento(String Servicio);
+    public boolean existeServicio(String Servicio);
 }

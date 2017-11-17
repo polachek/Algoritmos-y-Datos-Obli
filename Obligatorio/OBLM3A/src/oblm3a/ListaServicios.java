@@ -121,4 +121,17 @@ public class ListaServicios implements IListaServicio{
         return aux;
     }
     
+    @Override
+    public boolean existeServicio(String Servicio) {
+       NodoListaServicio aux = this.inicio;
+       boolean retorno= false;
+         while (aux!=null){
+             if (aux.getServicio().equals(Servicio))
+                  retorno =true;
+             
+             aux=aux.getSig();
+         }
+        return retorno;        
+    }
+    
 }

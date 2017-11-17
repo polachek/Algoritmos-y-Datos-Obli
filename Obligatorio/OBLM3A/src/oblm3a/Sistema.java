@@ -83,6 +83,9 @@ public class Sistema implements ISistema {
             else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
                 ret.resultado = Resultado.ERROR_1;
             }
+            else if(AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero).getLservicio().existeServicio(servicio)){
+                ret.resultado = Resultado.ERROR_1;
+            }
             else{
                 Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero); 
                 miCrucero.getLservicio().agregarInicio(servicio);
