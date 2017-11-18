@@ -18,6 +18,14 @@ public class NodoListaCrucero{
     public String getNombre() {
         return this.miCrucero.getNombre();
     }
+    
+    public int getEstrellas() {
+        return this.miCrucero.getEstrellas();
+    }
+    
+    public int getRanking() {
+        return this.miCrucero.getRanking();
+    }
 
     public void setCrucero(Crucero miCrucero) {
         this.miCrucero = miCrucero;

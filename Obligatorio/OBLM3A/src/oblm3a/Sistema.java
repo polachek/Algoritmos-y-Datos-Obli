@@ -236,11 +236,17 @@ public class Sistema implements ISistema {
             }else{
                 ListaCruceros misCruceros = AC.buscar(ciudad).getLcrucero();
                 if(misCruceros.esVacia()){
-                    ret.resultado = Resultado.ERROR_1;
-                    //ret.valorString = "No existen Cruceros registrados en " + ciudad;
+                    ret.resultado = Resultado.OK;
+                    System.out.println("No existen Cruceros registrados en " + ciudad);
                     
                 }else{
                     ret.resultado = Resultado.OK;
+                    NodoListaCrucero aux = misCruceros.getInicio();
+                    System.out.println("Cruceros en " + ciudad);
+                    while (aux !=null){
+                        System.out.println(aux.getNombre() + " " + aux.getEstrellas() + " " +aux.getRanking());
+                        aux=aux.getSig();
+                    }
                 }
                 
             }
@@ -279,9 +285,31 @@ public class Sistema implements ISistema {
     @Override
     public Retorno listarComentarios(String ciudad, String crucero) {
             Retorno ret = new Retorno();
-
-            ret.resultado = Resultado.NO_IMPLEMENTADA;
-
+            
+            if(!AC.existe(ciudad)){
+                ret.resultado = Resultado.ERROR_2;
+            } 
+            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
+                ret.resultado = Resultado.ERROR_1;
+            }
+            else{
+                Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero);
+                ListaComentarios listaCom = miCrucero.getLComentarios();
+                if(listaCom.esVacia()){
+                    System.out.println("No se han agregado comentarios al Crucero " + crucero + " " + ciudad);
+                }else{
+                    NodoListaComentario aux = listaCom.getInicio();
+                    System.out.println("Comentarios del Crucero " + crucero + " " + ciudad);
+                    int cont = 1;
+                    while (aux !=null){
+                        System.out.println(cont + " - " + aux.getComentario()+ " - " + aux.getRanking());
+                        cont ++;
+                        aux=aux.getSig();
+                    }
+                }
+                ret.resultado = Resultado.OK;
+            }
+            
             return ret;
     }
 

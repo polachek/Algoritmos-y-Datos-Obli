@@ -18,12 +18,19 @@ public class NodoListaComentario {
 
 
     public NodoListaComentario(String ciudad, Crucero miCrucero, String Comentario, int Ranking) {
+        this.ciudad = ciudad;
         this.miCrucero = miCrucero;
+        this.Comentario = Comentario;
+        this.Ranking = Ranking;
         this.sig = null;
     }
     
     public int getRanking() {
         return Ranking;
+    }
+    
+    public String getComentario() {
+        return Comentario;
     }
 
 

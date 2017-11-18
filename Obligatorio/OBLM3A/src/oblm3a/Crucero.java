@@ -34,6 +34,29 @@ public class Crucero {
         return this.nombre;
     }
     
+    public int getEstrellas(){
+        return this.estrellas;
+    }
+    
+    public int getRanking(){
+        int ret = 0;
+        if(!LComentarios.esVacia()){
+            int cant = LComentarios.getCantelementos();
+            int rank = 0;
+            NodoListaComentario aux = LComentarios.getInicio();
+            
+            while (aux !=null){
+                rank = rank + aux.getRanking();
+                aux=aux.getSig();
+            }
+            
+            int rankCru = rank / cant;
+            ret = rankCru;
+        }
+        
+        return ret;
+    }
+    
     public ListaServicios getLservicio() {
         return Lservicio;
     }
