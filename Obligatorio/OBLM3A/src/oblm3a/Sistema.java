@@ -79,15 +79,17 @@ public class Sistema implements ISistema {
             else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
                 ret.resultado = Resultado.ERROR_1;
             }
-            else if(AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero).getLservicio().existeServicio(servicio)){
-                ret.resultado = Resultado.ERROR_1;
-            }
             else{
                 Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero); 
-                miCrucero.getLservicio().agregarInicio(servicio);
-                ret.resultado = Resultado.OK;
+                if(miCrucero.getLservicio().existeServicio(servicio)){
+                    ret.resultado = Resultado.ERROR_1;
+                }
+                else{
+                    miCrucero.getLservicio().agregarInicio(servicio);
+                    ret.resultado = Resultado.OK;
+                }
             }
-
+            
             return ret;
     }
 
@@ -95,7 +97,22 @@ public class Sistema implements ISistema {
     public Retorno borrarServicio(String ciudad, String crucero, String servicio) {
             Retorno ret = new Retorno();
 
-            ret.resultado = Resultado.NO_IMPLEMENTADA;
+            if(!AC.existe(ciudad)){
+                ret.resultado = Resultado.ERROR_3;
+            } 
+            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
+                ret.resultado = Resultado.ERROR_1;
+            }
+            else if(AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero).getLservicio().existeServicio(servicio)){
+                ret.resultado = Resultado.ERROR_2;
+            }
+            else{
+                /*Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero); 
+                miCrucero.getLservicio().agregarInicio(servicio);
+                ret.resultado = Resultado.OK;
+                */
+                ret.resultado = Resultado.NO_IMPLEMENTADA;
+            }
 
             return ret;
     }
@@ -145,45 +162,6 @@ public class Sistema implements ISistema {
             
         }
         
-        /*
-        if(!AC.existe(ciudad))
-            ret.resultado = Resultado.ERROR_2;
-        else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero))
-            ret.resultado = Resultado.ERROR_1;
-        else
-        {
-            //Reserva
-            Reserva unaReserva = null;
-            //Crucero
-            ListaCruceros LCrucero = AC.buscar(ciudad).getLcrucero();            
-            Crucero cru = LCrucero.buscarCruceroXNombre(crucero);
-            int cantReservas = cru.getLReservas().getCantelementos();
-            int cantHabitaciones = cru.getCapacidad();
-            //Cliente
-            Cliente cli = new Cliente();
-            //Espera
-            Boolean espera = false;
-            //controlo si existe el cliente
-            if(LClientes.existe(cliente))
-                cli = LClientes.buscarClienteXId(cliente);        
-            else        
-                cli.agregarCliente(cliente);
-            //controlo si la reserva queda en espera
-            if(cantReservas <= cantHabitaciones)
-            {
-                unaReserva.agregarReserva(cru, cli, espera);
-                cru.getLReservas().agregarInicio(unaReserva);
-                ret.resultado = Resultado.OK;                            
-            }
-            else
-            {
-                unaReserva.agregarReserva(cru, cli, espera);
-                cru.getCEspera().encolar(unaReserva);
-                ret.resultado = Resultado.OK;                                            
-            }                                               
-        }    
-*/
-
         return ret;
     }
 
@@ -200,7 +178,20 @@ public class Sistema implements ISistema {
     public Retorno ingresarComentario(String ciudad, String crucero, String comentario, int ranking) {
             Retorno ret = new Retorno();
 
-            ret.resultado = Resultado.NO_IMPLEMENTADA;
+            if(ranking <0 || ranking >5){
+                ret.resultado = Resultado.ERROR_1;
+            }
+            else if(!AC.existe(ciudad)){
+                ret.resultado = Resultado.ERROR_3;
+            } 
+            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
+                ret.resultado = Resultado.ERROR_2;
+            }
+            else{
+                Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero); 
+                miCrucero.getLComentarios().agregarInicio(ciudad,miCrucero,comentario,ranking);
+                ret.resultado = Resultado.OK;
+            }
 
             return ret;
     }
@@ -208,8 +199,30 @@ public class Sistema implements ISistema {
     @Override
     public Retorno listarServicios(String ciudad, String crucero) {
             Retorno ret = new Retorno();
-
-            ret.resultado = Resultado.NO_IMPLEMENTADA;
+            
+            if(!AC.existe(ciudad)){
+                ret.resultado = Resultado.ERROR_2;
+            } 
+            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
+                ret.resultado = Resultado.ERROR_1;
+            }
+            else{
+                Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero);
+                ListaServicios listaServ = miCrucero.getLservicio();
+                if(listaServ.esVacia()){
+                    System.out.println("No existen servicios registrados en el Crucero " + crucero + " " + ciudad);
+                }else{
+                    NodoListaServicio aux=listaServ.getInicio();
+                    System.out.println("Servicios del Crucero " + crucero + " " + ciudad);
+                    int cont = 1;
+                    while (aux !=null){
+                        System.out.println(cont + " - Servicio " + aux.getServicio());
+                        cont ++;
+                        aux=aux.getSig();
+                    }
+                }
+                ret.resultado = Resultado.OK;
+            }
 
             return ret;
     }

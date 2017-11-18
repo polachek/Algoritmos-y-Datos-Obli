@@ -16,6 +16,7 @@ public class Crucero {
     private int ranking;
     private ListaServicios Lservicio;
     private ListaReservas LReservas;
+    private ListaComentarios LComentarios;
     private ColaEspera CEspera;
 
     
@@ -25,6 +26,7 @@ public class Crucero {
         this.capacidad = capacidad;
         this.Lservicio = new ListaServicios();
         this.LReservas = new ListaReservas();
+        this.LComentarios = new ListaComentarios();
         this.CEspera = new ColaEspera();
     }
     
@@ -38,6 +40,10 @@ public class Crucero {
     
     public ListaReservas getLReservas() {
         return LReservas;
+    }
+    
+    public ListaComentarios getLComentarios() {
+        return LComentarios;
     }
     
     public ColaEspera getCEspera() {
