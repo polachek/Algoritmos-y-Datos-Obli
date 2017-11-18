@@ -8,8 +8,8 @@ public class OBLM3A {
         Sistema S = new Sistema();
         //S.crearSistemaReservas(-4);
         prueba P = new prueba();
-        prueba1(S,P);
-        
+        //prueba1(S,P);
+        prueba2(S,P);        
     }
     
     static void prueba1(Sistema s, prueba p){
@@ -120,4 +120,16 @@ public class OBLM3A {
         p.imprimirResultadosPrueba();
     }
        
+    
+    static void prueba2(Sistema s, prueba p){
+        s.crearSistemaReservas(5);
+        s.registrarCiudad("BBB");
+        s.registrarCrucero("BBB", "F", 5, 3000);
+        s.registrarCrucero("BBB", "T", 5, 3000);
+        s.registrarCrucero("BBB", "A", 5, 3000);        
+        s.registrarCrucero("BBB", "L", 5, 3000);    
+        s.listarCrucerosCiudad("BBB");
+        
+        p.imprimirResultadosPrueba();        
+    }
 }
