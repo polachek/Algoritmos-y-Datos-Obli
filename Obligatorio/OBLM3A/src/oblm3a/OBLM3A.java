@@ -13,11 +13,15 @@ public class OBLM3A {
     }
     
     static void prueba1(Sistema s, prueba p){
-        System.out.println("###### SISTEMA DE SERVAS ######");
+        System.out.println("#################################");
+        System.out.println("####### SISTEMA DE SERVAS #######");
+        System.out.println("#################################");
         p.ver(s.crearSistemaReservas(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
         System.out.println();
         
+        System.out.println("#######################################");
         System.out.println("###### TEST REGISTRO DE CIUDADES ######");
+        System.out.println("#######################################");
         p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se ingresa Montevideo");
         p.ver(s.registrarCiudad("Rocha").resultado, Retorno.Resultado.OK, "Se ingresa Rocha");
         p.ver(s.registrarCiudad("Santiago").resultado, Retorno.Resultado.OK, "Se ingresa Santiago");
@@ -27,7 +31,9 @@ public class OBLM3A {
         //p.ver(s.registrarCiudad("Buenos Aires").resultado, Retorno.Resultado.ERROR_2, "Se sobrepasa el límite de ciudades gestionados por el sistema");
         System.out.println();
         
+        System.out.println("#######################################");
         System.out.println("###### TEST REGISTRO DE CRUCEROS ######");
+        System.out.println("#######################################");
         p.ver(s.registrarCrucero("New York", "Royal Caribbean Int.", 5, 3000).resultado, Retorno.Resultado.OK, "Se agrego curcero Royal Caribbean a nueva york");
         p.ver(s.registrarCrucero("Santiago", "Carnival Cruise Lines", 6, 2800).resultado, Retorno.Resultado.ERROR_1, "La cantidad de estrellas no está entre 1 y 5");
         p.ver(s.registrarCrucero("Santiago", "Royal Caribbean Int.", 5, -1).resultado, Retorno.Resultado.ERROR_2, "La capacidad es menor a 0");
@@ -38,7 +44,9 @@ public class OBLM3A {
         p.ver(s.registrarCrucero("Montevideo", "Papa Mobil", 4, 500).resultado, Retorno.Resultado.OK, "Se agrego curcero Papa Mobil a Montevideo");
         System.out.println();
         
+        System.out.println("#######################################");
         System.out.println("###### TEST INGRESO DE SERVICIOS ######");
+        System.out.println("#######################################");
         p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi").resultado, Retorno.Resultado.OK, "Servicio wifi");
         p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Discoteca").resultado, Retorno.Resultado.OK, "Servicio de Discoteca");
         p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi").resultado, Retorno.Resultado.ERROR_1, "Servicio repetido");
@@ -47,16 +55,19 @@ public class OBLM3A {
         //borrarServicio(String ciudad, String crucero, String servicio);
         System.out.println();
         
+        System.out.println("#####################################");
         System.out.println("###### TEST LISTA DE SERVICIOS ######");
+        System.out.println("#####################################");
         p.ver(s.listarServicios("NO CIUDAD", "Royal Caribbean Int.").resultado, Retorno.Resultado.ERROR_2, "No existe la ciudad");
         p.ver(s.listarServicios("Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.ERROR_1, "El Crucero no está registrado en la Ciudad");
         p.ver(s.listarServicios("Montevideo", "Crucer").resultado, Retorno.Resultado.OK, "Listado OK de Crucero sin servicios registrados");
         p.ver(s.listarServicios("New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Listado de Servicios OK");
         System.out.println();
-        System.out.println();
 
-        
+
+        System.out.println("####################################");
         System.out.println("###### TEST REALIZAR RESERVAS ######");
+        System.out.println("####################################");
         p.ver(s.realizarReserva(1, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realizó la reserva del cliente 1 para el Royal Caribbean Int. de New york");
         p.ver(s.realizarReserva(2, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realizó la reserva del cliente 2 para el Royal Caribbean Int. de New York");
         p.ver(s.realizarReserva(3, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realizó la reserva del cliente 3 para el Royal Caribbean Int. New York");
@@ -66,7 +77,9 @@ public class OBLM3A {
  //       p.ver(s.cancelarReserva(1, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se canceló la reserva del cliente 1 para el Royal Caribbean Int. de New York, pasa el cliente 4 de a lista de espera");
         System.out.println();
         
+        System.out.println("######################################");
         System.out.println("###### TEST INGRESAR COMENTARIO ######");
+        System.out.println("######################################");
         p.ver(s.ingresarComentario("New York", "Royal Caribbean Int.", "Muy lindo el crucero", 5).resultado,Retorno.Resultado.OK, "Comentario OK");
         p.ver(s.ingresarComentario("New York", "Royal Caribbean Int.", "No estuvo mal", 3).resultado,Retorno.Resultado.OK, "Comentario OK");
         p.ver(s.ingresarComentario("New York", "Royal Caribbean Int.", "Bonitazo el crucero", 10).resultado,Retorno.Resultado.ERROR_1, "Ranking > 5");
@@ -77,15 +90,18 @@ public class OBLM3A {
         System.out.println();
         
         
+        System.out.println("#################################################");
         System.out.println("###### TEST LISTADO DE CRUCEROS POR CIUDAD ######");
+        System.out.println("#################################################");
         p.ver(s.listarCrucerosCiudad("NO CIUDAD").resultado, Retorno.Resultado.ERROR_1, "No existe ciudad");
         p.ver(s.listarCrucerosCiudad("Santiago").resultado, Retorno.Resultado.OK, "Listado OK de Ciudad sin Cruceros");
         p.ver(s.listarCrucerosCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Listado de cruceros de Montevideo");
         p.ver(s.listarCrucerosCiudad("New York").resultado, Retorno.Resultado.OK, "Listado de cruceros de New York");
         System.out.println();
         
-        
+        System.out.println("####################################################");
         System.out.println("###### TEST LISTADO DE COMENTARIOS POR CIUDAD ######");
+        System.out.println("####################################################");
         p.ver(s.listarComentarios("NO CIUDAD", "Royal Caribbean Int.").resultado, Retorno.Resultado.ERROR_2, "No existe ciudad");
         p.ver(s.listarComentarios("Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.ERROR_1, "El crucero es de otra ciudad");
         p.ver(s.listarComentarios("New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Listado de comentarios OK para el crucero Royal Caribbean Int. en New York");
@@ -94,16 +110,5 @@ public class OBLM3A {
         
         p.imprimirResultadosPrueba();
     }
-
-/*static void listarcrucerociudad(Sistema s){
-    NodoListaCiudad aux=s.LC.getInicio();
-    while (aux !=null){
-        System.out.println(aux.getNombreCiudad());
-        aux.getLcrucero().mostrar();
-        aux=aux.getSig();
-        
-    }
-  
-}*/
        
 }

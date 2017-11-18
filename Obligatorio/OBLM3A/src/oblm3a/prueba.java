@@ -13,11 +13,11 @@ public class prueba {
 	}
 
 	public void ver(Retorno.Resultado tr, Retorno.Resultado RetornoEsperado, String comentario){
-		System.out.println( "----------------------------- Testeo --------------------------------");
+		System.out.println( "---------------- Testeo ----------------");
 		imprimirComentario(comentario);
 		imprimirRetorno(tr,RetornoEsperado);
 		System.out.println("");
-		System.out.println("---------------------------------------------------------------------");
+		System.out.println("-----------------------------------------");
 	    System.out.println();
 
 	    if (tr.equals(RetornoEsperado))
