@@ -13,6 +13,7 @@ package oblm3a;
 public class NodoListaServicio {
     private String Servicio;
     private NodoListaServicio sig;
+    private NodoListaServicio ant;
 
     public String getServicio() {
         return Servicio;
@@ -25,6 +26,7 @@ public class NodoListaServicio {
     public NodoListaServicio(String Servicio) {
         this.Servicio = Servicio;
         this.sig = null;
+        this.ant = null;
     }
 
     public NodoListaServicio getSig() {
@@ -33,5 +35,13 @@ public class NodoListaServicio {
 
     public void setSig(NodoListaServicio sig) {
         this.sig = sig;
+    }
+    
+    public NodoListaServicio getAnt() {
+        return ant;
+    }
+
+    public void setAnt(NodoListaServicio ant) {
+        this.ant = ant;
     }
 }

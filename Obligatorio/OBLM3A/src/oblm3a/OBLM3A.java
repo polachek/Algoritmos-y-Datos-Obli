@@ -48,11 +48,20 @@ public class OBLM3A {
         System.out.println("###### TEST INGRESO DE SERVICIOS ######");
         System.out.println("#######################################");
         p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi").resultado, Retorno.Resultado.OK, "Servicio wifi");
+        p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Spa").resultado, Retorno.Resultado.OK, "Servicio Spa");
         p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Discoteca").resultado, Retorno.Resultado.OK, "Servicio de Discoteca");
         p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi").resultado, Retorno.Resultado.ERROR_1, "Servicio repetido");
         p.ver(s.ingresarServicio("New York", "No Crucero", "Discoteca").resultado, Retorno.Resultado.ERROR_1, "No existe el Crucero para la Ciudad");
         p.ver(s.ingresarServicio("No Ciudad", "Royal Caribbean Int.", "Servicio de cuarto").resultado, Retorno.Resultado.ERROR_2, "No existe la Ciudad");
-        //borrarServicio(String ciudad, String crucero, String servicio);
+        System.out.println();
+        
+        System.out.println("#######################################");
+        System.out.println("###### TEST BORRAR SERVICIO ######");
+        System.out.println("#######################################");
+        p.ver(s.borrarServicio("New York", "Royal Caribbean Int.", "Spa").resultado, Retorno.Resultado.OK, "Borramos Servicio Spa");
+        p.ver(s.borrarServicio("New York", "No Crucero", "Discoteca").resultado, Retorno.Resultado.ERROR_1, "No existe el Crucero para la Ciudad");
+        p.ver(s.borrarServicio("No Ciudad", "Royal Caribbean Int.", "Discoteca").resultado, Retorno.Resultado.ERROR_3, "No existe la Ciudad");
+        p.ver(s.borrarServicio("New York", "Royal Caribbean Int.", "Choripan").resultado, Retorno.Resultado.ERROR_2, "No existe el Servicio");
         System.out.println();
         
         System.out.println("#####################################");
@@ -107,7 +116,7 @@ public class OBLM3A {
         p.ver(s.listarComentarios("New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Listado de comentarios OK para el crucero Royal Caribbean Int. en New York");
         p.ver(s.listarComentarios("Montevideo", "Papa Mobil").resultado, Retorno.Resultado.OK, "Listado de comentarios OK el crucero aún no tiene comentarios");
         
-        
+       
         p.imprimirResultadosPrueba();
     }
        

@@ -23,7 +23,7 @@ public class ListaServicios implements IListaServicio{
 
     //Inicio
     public void setInicio(NodoListaServicio i){
-        inicio=i;
+        this.inicio=i;
     }
     public NodoListaServicio getInicio(){
         return inicio;
@@ -31,7 +31,7 @@ public class ListaServicios implements IListaServicio{
 
     //Fin
     public void setFin(NodoListaServicio f){
-        fin=f;
+        this.fin=f;
     }
     public NodoListaServicio getFin(){
         return fin;
@@ -60,21 +60,40 @@ public class ListaServicios implements IListaServicio{
     //POS: Agrega un nuevo Nodo al principio de la lista
     public void agregarInicio(String servicio){
         NodoListaServicio nuevo= new NodoListaServicio(servicio);
-        nuevo.setSig(inicio);
-        this.inicio=nuevo;
-        if(this.fin==null)//estoy insertando el primer nodo
-            this.fin=nuevo;
-        
-        this.cantelementos=this.cantelementos+1;
+        if (this.esVacia()){
+            this.setInicio(nuevo);
+            this.setFin(nuevo);
         }
+        else{
+            nuevo.setSig(inicio);
+            this.inicio.setAnt(nuevo);
+            this.setInicio(nuevo);
+        }
+        this.cantelementos=this.cantelementos+1;
+    }
     
      //PRE:
     //POS: Borra el primer nodo
      public void borrarInicio(){
-        if (!this.esVacia()){
-            this.inicio=this.inicio.getSig();
-            this.cantelementos=this.cantelementos-1;
+         if (!this.esVacia()){
+            if (inicio==fin){
+                this.inicio=null;
+                this.fin=null;
+                this.cantelementos = 0;
+            }  
+            else{
+                this.setInicio(this.inicio.getSig());
+                this.inicio.setAnt(null);
+                this.cantelementos=this.cantelementos-1;
+            }
+            
         }
+    }
+     
+    @Override
+    public void borrarFin() {
+          this.fin=this.fin.getAnt();
+          this.fin.setSig(null);
     }
  //PRE:
     //POS: elimina todos los nodos de una lista dada
@@ -101,8 +120,19 @@ public class ListaServicios implements IListaServicio{
 
     //PRE: lista ordenada
     //POS: Borra la primer ocurrencia de un elemento dado
-    public void borrarElemento(int n){
-        // implementar el metodo
+    public void borrarElemento(String Servicio){
+        NodoListaServicio aux = this.obtenerElemento(Servicio);
+        
+        if (aux== inicio)
+            this.borrarInicio();
+        if (aux==fin)
+            this.borrarFin();
+        
+        if (aux!=null){
+            aux.getAnt().setSig(aux.getSig());
+            aux.getSig().setAnt(aux.getAnt());
+            this.cantelementos=this.cantelementos-1;
+        }
     }
     
     //PRE: 

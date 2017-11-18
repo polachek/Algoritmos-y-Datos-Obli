@@ -41,7 +41,7 @@ public class SistemaTest {
      * Test of crearSistemaReservas method, of class Sistema.
      */
     @Test
-    public void testCrearSistemaReservas() {
+    public void testCrearSistemaReservasOK() {
         Sistema s = new Sistema();
         assertEquals(Retorno.Resultado.OK, s.crearSistemaReservas(20).resultado);
     }
@@ -154,6 +154,25 @@ public class SistemaTest {
         sis.registrarCiudad("Rocha");
         sis.registrarCrucero("Montevideo","Love Crucer",1,50);
         assertEquals(Retorno.Resultado.ERROR_1, sis.ingresarServicio("Rocha","Love Crucer", "Spa").resultado);
+    }
+    
+    @Test
+    public void testIngresarServicioNoExistCiudad() {
+        Sistema sis = new Sistema();
+        sis.crearSistemaReservas(20);
+        sis.registrarCiudad("Montevideo");
+        sis.registrarCrucero("Montevideo","Love Crucer",1,50);
+        assertEquals(Retorno.Resultado.ERROR_2, sis.ingresarServicio("NO CIUDAD","Love Crucer", "Spa").resultado);
+    }
+    
+    @Test
+    public void testIngresarServicioRepetido() {
+        Sistema sis = new Sistema();
+        sis.crearSistemaReservas(20);
+        sis.registrarCiudad("Montevideo");
+        sis.registrarCrucero("Montevideo","Love Crucer",1,50);
+        sis.ingresarServicio("Montevideo","Love Crucer", "Spa");
+        assertEquals(Retorno.Resultado.ERROR_3, sis.ingresarServicio("Montevideo","Love Crucer", "Spa").resultado);
     }
 
     /**
