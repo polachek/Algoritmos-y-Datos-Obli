@@ -11,12 +11,28 @@ package oblm3a;
  */
 public class ArbolCiudades implements IArbolCiudades{
 
-    NodoArbolCiudad raiz;
+    private NodoArbolCiudad raiz;
+    private Integer cantNodosMax;
 
     public ArbolCiudades() {
         raiz = null;
     }
+    
+    
+   public NodoArbolCiudad getRaiz() {
+        return raiz;
+    }    
+   
+    @Override
+    public Integer getMaximo() {
+        return this.cantNodosMax;
+    }   
 
+    @Override
+    public void setMaximo(Integer maximo) {
+        this.cantNodosMax = maximo;
+    }
+    
     public boolean esVacio() {
         return (raiz == null);
     }
@@ -25,32 +41,32 @@ public class ArbolCiudades implements IArbolCiudades{
         raiz = null;
     }
 
-    public Retorno.Resultado insertar(String unaCiudad){
-        Retorno.Resultado ret = null;
+    public Boolean insertar(String unaCiudad){
+        Boolean ret = false;
         if(this.esVacio()){
             NodoArbolCiudad nuevo = new NodoArbolCiudad();
             this.raiz = nuevo;
             Ciudad miCiudad = new Ciudad(unaCiudad);
             nuevo.ciudad = miCiudad;
-            nuevo.LCrucero = new ListaCruceros();
-            ret = Retorno.Resultado.OK;
-            
+            nuevo.LCrucero = new ListaCruceros(); 
+            ret = true;
         }else{
             ArbolCiudades aux = new ArbolCiudades();
             if (unaCiudad.compareTo(this.raiz.ciudad.getNombre()) < 0){
                 aux.raiz = this.raiz.getIzq();
                 aux.insertar(unaCiudad);
+                
                 this.raiz.setIzq(aux.raiz);
-                ret = Retorno.Resultado.OK;
+                ret = true;
+                
             }
-            if (unaCiudad.compareTo(this.raiz.ciudad.getNombre()) > 0){
+            else if (unaCiudad.compareTo(this.raiz.ciudad.getNombre()) > 0){
                 aux.raiz = this.raiz.getDer();
                 aux.insertar(unaCiudad);
                 this.raiz.setDer(aux.raiz);
-                ret = Retorno.Resultado.OK;
+                ret = true;
             }
-        }
-        
+        }        
         return ret;
     }
 
@@ -156,6 +172,15 @@ public class ArbolCiudades implements IArbolCiudades{
           return aux.existe(ciudad);
         }
         return false;
+    }
+
+    @Override
+    public int cantidadNodos(NodoArbolCiudad raiz) {
+        if(raiz != null)
+        {
+            return 1 + cantidadNodos(raiz.izq) + cantidadNodos(raiz.der); 
+        }
+        return 0;
     }
     
 }

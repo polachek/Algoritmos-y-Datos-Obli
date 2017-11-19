@@ -8,15 +8,24 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno crearSistemaReservas(int cantCiudades) {
-            AC= new ArbolCiudades();
-            LClientes = new ListaClientes();            
-            
+            AC = new ArbolCiudades();
+            LClientes = new ListaClientes();
             Retorno ret = new Retorno();
 
-            if(cantCiudades<0)
+            if(cantCiudades < 0)
                 ret.resultado = Resultado.ERROR_1;
-             else
+            else if(cantCiudades > 0)
+            {
+                AC.setMaximo(cantCiudades); 
                 ret.resultado = Resultado.OK;
+            }else
+            {
+                Integer maximo = null;
+                AC.setMaximo(maximo);       
+                ret.resultado = Resultado.OK;                
+            } 
+
+                
 
 
             return ret;
@@ -36,13 +45,30 @@ public class Sistema implements ISistema {
     @Override
     public Retorno registrarCiudad(String ciudad) {
            Retorno ret = new Retorno();
-
-           if (!AC.existe(ciudad)) {
-                ret.resultado= AC.insertar(ciudad);
+           Boolean existeCiudad = AC.existe(ciudad);
+           NodoArbolCiudad r = AC.getRaiz();
+           int cantCiudades = AC.cantidadNodos(r);
+           Integer maxCiudades = AC.getMaximo();
+           
+           if(maxCiudades != null)
+           {
+                if (!existeCiudad && cantCiudades < maxCiudades) {
+                     AC.insertar(ciudad);
+                     ret.resultado = Resultado.OK;                
+                }
+                else 
+                     ret.resultado=Retorno.Resultado.ERROR_1;               
            }
-           else 
-                ret.resultado=Retorno.Resultado.ERROR_1;
-            return ret;
+           else
+           {
+                if (!existeCiudad) {
+                     AC.insertar(ciudad);
+                     ret.resultado = Resultado.OK;                
+                }
+                else 
+                     ret.resultado=Retorno.Resultado.ERROR_1;                
+           }
+           return ret;
     }
 
     @Override

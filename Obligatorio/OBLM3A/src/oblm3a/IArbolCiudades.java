@@ -11,7 +11,11 @@ package oblm3a;
  */
 public interface IArbolCiudades {
     public boolean esVacio();
-    public Retorno.Resultado insertar(String unaCiudad);
+    public Boolean insertar(String unaCiudad);
     public boolean existe(String ciudad); 
     //public ArbolCiudades buscar(String ciudad);
+    public int cantidadNodos(NodoArbolCiudad raiz);
+    public Integer getMaximo();  
+    public void setMaximo(Integer maximo);        
+    
 }
