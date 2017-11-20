@@ -191,6 +191,7 @@ public class Sistema implements ISistema {
             Cliente cli = new Cliente();
             cli.setId(cliente);
             
+            
             if(!AC.existe(ciudad)){
                 ret.resultado = Resultado.ERROR_3;
             } 

@@ -61,10 +61,15 @@ public class ListaReservas implements IListaReservas {
     @Override
     public void agregarReserva(Reserva dato) {
         NodoListaReserva nuevo = new NodoListaReserva(dato);
-        nuevo.setSig(inicio);
-        this.inicio=nuevo;
-        if(this.fin==null)//estoy insertando el primer nodo
-            this.fin=nuevo;
+        if (this.esVacia()){
+            this.setInicio(nuevo);
+            this.setFin(nuevo);
+        }
+        else{
+            nuevo.setSig(inicio);
+            this.inicio.setAnterior(nuevo);
+            this.setInicio(nuevo);
+        }
         this.cantElementos=this.cantElementos+1;        
     }
 
@@ -121,9 +126,9 @@ public class ListaReservas implements IListaReservas {
     public void borrarReserva(int id)
     {
         NodoListaReserva aux = this.inicio;
-        int clienteId = aux.getReserva().getCliente().getId();
         while (aux != null){
-            if (clienteId == id){
+            
+            if (aux.getReserva().getCliente().getId() == id){
                 if(aux == this.getInicio()){
                     this.setInicio(aux.getSig());
                     aux = aux.getSig();
