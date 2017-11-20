@@ -8,22 +8,23 @@ public class ListaCruceros implements IListaCrucero {
 
     //Constructor
     public ListaCruceros(){
-        this.inicio=null;
-        this.fin=null;
-        this.cantElementos=0;
+        this.inicio = null;
+        this.fin = null;
+        this.cantElementos = 0;
     }
 
     //Inicio
     public void setInicio(NodoListaCrucero i){
-        inicio=i;
+        inicio = i;
     }
+    
     public NodoListaCrucero getInicio(){
         return inicio;
     }
 
     //Fin
     public void setFin(NodoListaCrucero f){
-        fin=f;
+        fin = f;
     }
     public NodoListaCrucero getFin(){
         return fin;
@@ -135,20 +136,41 @@ public class ListaCruceros implements IListaCrucero {
     @Override
     public void ordenarPorNombre()
     {
-        int cantCruceros = this.cantElementos();
-        NodoListaCrucero inicio = this.getInicio();
-        NodoListaCrucero siguiente = inicio.getSig();
+        int cantElementos = cantElementos();
+        NodoListaCrucero inicio = getInicio();
+        NodoListaCrucero siguiente = getInicio().getSig();
         NodoListaCrucero aux = null;
         
-        for(int i = 0; i <= cantCruceros; i++)        
-        {
-            if(siguiente.getCrucero().getNombre().compareTo(inicio.getCrucero().getNombre()) < 0)
+        for(int i=0;i<cantElementos-1;i++)
+        {   
+            System.out.println("la i vale "+i);
+            
+            for(int j=i+1;j<cantElementos;j++)
             {
-                aux = inicio;
-                this.setInicio(siguiente);
-                siguiente = aux;
-            }
+                System.out.println("la j vale "+j);
                 
+                int compara = siguiente.getNombre().compareTo(inicio.getNombre());
+                
+                if (compara < 0){
+                    System.out.println("entra");
+                    
+                    aux = inicio;
+                    NodoListaCrucero aux2 = siguiente.getSig();
+                    this.setInicio(inicio.getSig());
+                    getInicio().setSig(aux);
+                    siguiente = aux;                        
+                    siguiente.setSig(aux2);
+                } 
+                System.out.println("inicio vale "+inicio.getNombre());
+                
+            }
+            
+            inicio = inicio.getSig();
+            siguiente = siguiente.getSig();
+            System.out.println("inicio vale "+inicio.getNombre());           
         }
-    }    
+             
+    }
+    
+          
 }
