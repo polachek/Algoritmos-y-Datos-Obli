@@ -11,40 +11,48 @@ package oblm3a;
  */
 public class NodoArbolCiudad {
     
-        public Ciudad ciudad;
-        public ListaCruceros LCrucero;
-        public NodoArbolCiudad izq;
-        public NodoArbolCiudad der;
+    private Ciudad ciudad;
+    private ListaCruceros LCrucero;
+    private NodoArbolCiudad izq;
+    private NodoArbolCiudad der;
 
-        public NodoArbolCiudad() {
-            this.ciudad = null;
-            this.izq = null;
-            this.der = null;
-            this.LCrucero = new ListaCruceros();
-        }
-        
-        public NodoArbolCiudad getIzq() {
-            return izq;
-        }
-        
-        public void setIzq(NodoArbolCiudad izq) {
-            this.izq = izq;
-        }
-        
-        public NodoArbolCiudad getDer() {
-            return der;
-        }
-        
-        public void setDer(NodoArbolCiudad der) {
-            this.der = der;
-        }
-        
-        public ListaCruceros getLcrucero() {
-            return this.LCrucero;
-        }
-        
-        public void setLcrucero(ListaCruceros Lcrucero) {
-            this.LCrucero = Lcrucero;
-        }
+    public NodoArbolCiudad() {
+        this.ciudad = null;
+        this.izq = null;
+        this.der = null;
+        this.LCrucero = new ListaCruceros();
+    }
+
+    public Ciudad getCiudad() {
+        return this.ciudad;
+    }
+    
+    public void setCiudad(Ciudad c) {
+        this.ciudad = c;
+    }    
+    
+    public NodoArbolCiudad getIzq() {
+        return this.izq;
+    }
+
+    public void setIzq(NodoArbolCiudad izq) {
+        this.izq = izq;
+    }
+
+    public NodoArbolCiudad getDer() {
+        return this.der;
+    }
+
+    public void setDer(NodoArbolCiudad der) {
+        this.der = der;
+    }
+
+    public ListaCruceros getLcrucero() {
+        return this.LCrucero;
+    }
+
+    public void setLcrucero(ListaCruceros Lcrucero) {
+        this.LCrucero = Lcrucero;
+    }
     
 }

@@ -10,11 +10,18 @@ package oblm3a;
  * @author sebastianvillar
  */
 public interface IListaReservas {
-    //metodos de la interfaz
+    public void setInicio(NodoListaReserva i);
+    public NodoListaReserva getInicio();
+    public void setFin(NodoListaReserva f);
+    public NodoListaReserva getFin();   
+    public int getCantelementos();    
+    public void setCantElementos(int cantElementos);    
     public boolean esVacia();
-    public void agregarInicio(Reserva dato);
+    public void vaciar();    
+    public void agregarReserva(Reserva dato);
     public void borrarInicio();
-    public void vaciar();
     public void mostrar();
-    public NodoListaReserva obtenerElemento(Reserva dato); 
+    public NodoListaReserva obtenerElemento(Reserva dato);
+    public boolean existeReserva(int id);
+    public void borrarReserva(int id);
 }

@@ -22,31 +22,36 @@ public class ListaReservas implements IListaReservas {
     }
 
     //Inicio
+    @Override
     public void setInicio(NodoListaReserva i){
-        inicio=i;
+        this.inicio = i;
     }
+    
+    @Override
     public NodoListaReserva getInicio(){
         return inicio;
     }
 
     //Fin
+    @Override
     public void setFin(NodoListaReserva f){
-        fin=f;
-    }
-    public NodoListaReserva getFin(){
-        return fin;
-    }
-
-    public int getCantelementos() {
-        return cantElementos;
-    }
-
-    public void setCantElementos(int cantElementos) {
-        this.cantElementos = cantElementos;
+        this.fin = f;
     }
     
-    /**************Métodos Básicos*******************/
-    /***********************************************/
+    @Override
+    public NodoListaReserva getFin(){
+        return this.fin;
+    }
+
+    @Override
+    public int getCantelementos(){
+        return this.cantElementos;
+    }
+
+    @Override
+    public void setCantElementos(int cantElementos){
+        this.cantElementos = cantElementos;
+    }
     
     @Override
     public boolean esVacia(){
@@ -54,29 +59,28 @@ public class ListaReservas implements IListaReservas {
     }
     
     @Override
-    public void agregarInicio(Reserva dato) {
+    public void agregarReserva(Reserva dato) {
         NodoListaReserva nuevo = new NodoListaReserva(dato);
         nuevo.setSig(inicio);
         this.inicio=nuevo;
         if(this.fin==null)//estoy insertando el primer nodo
             this.fin=nuevo;
-        
-        this.cantElementos=this.cantElementos+1;
+        this.cantElementos=this.cantElementos+1;        
     }
 
     @Override
     public void borrarInicio() {
         if (!this.esVacia()){
             this.inicio=this.inicio.getSig();
-            this.cantElementos=this.cantElementos-1;
+            this.cantElementos = this.cantElementos-1;
         }   
     }
     
     @Override
     public void vaciar() {
-        this.inicio=null;
-        this.fin=null;
-        this.cantElementos=0;    
+        this.inicio = null;
+        this.fin = null;
+        this.cantElementos = 0;    
     }
 
     @Override
@@ -95,10 +99,53 @@ public class ListaReservas implements IListaReservas {
     @Override
     public NodoListaReserva obtenerElemento(Reserva dato) {
         NodoListaReserva aux = this.inicio;
-        while (aux!=null && aux.getReserva()!=dato)
+        while (aux != null && aux.getReserva() != dato)
             aux=aux.getSig();
         //encontró dato o llegó al final
         return aux;
+    }
+    
+    @Override
+    public boolean existeReserva(int id) {        
+        NodoListaReserva aux = this.inicio;
+        boolean retorno = false;
+        while (aux != null){
+            if (aux.getReserva().getCliente().getId() == id)
+                retorno = true;
+            aux = aux.getSig();
+         }
+        return retorno;        
+    }
+    
+    @Override
+    public void borrarReserva(int id)
+    {
+        NodoListaReserva aux = this.inicio;
+        int clienteId = aux.getReserva().getCliente().getId();
+        while (aux != null){
+            if (clienteId == id){
+                if(aux == this.getInicio()){
+                    this.setInicio(aux.getSig());
+                    aux = aux.getSig();
+                    aux.setAnterior(null);
+                    this.cantElementos=this.cantElementos-1;                     
+                }
+                else if(aux == this.getFin())
+                {
+                    this.setFin(aux.getAnterior());
+                    aux = aux.getAnterior();
+                    aux.setSig(null);
+                    this.cantElementos=this.cantElementos-1;                                         
+                }
+                else
+                {
+                    aux.getAnterior().setSig(aux.getSig());
+                    aux.getSig().setAnterior(aux.getAnterior());
+                    this.cantElementos=this.cantElementos-1;                      
+                }
+            }
+            aux = aux.getSig();
+         }        
     }
 
 

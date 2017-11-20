@@ -15,5 +15,6 @@ public interface IColaEspera {
     public Object frente();
     public boolean estaVacia();
     public int elementos();    
-    
+    public boolean existeEspera(int id);
+    public void borrarEspera(int id);    
 }

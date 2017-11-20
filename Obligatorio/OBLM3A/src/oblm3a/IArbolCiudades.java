@@ -10,10 +10,12 @@ package oblm3a;
  * @author sebastianvillar
  */
 public interface IArbolCiudades {
+    public NodoArbolCiudad getRaiz();     
     public boolean esVacio();
-    public Boolean insertar(String unaCiudad);
-    public boolean existe(String ciudad); 
-    //public ArbolCiudades buscar(String ciudad);
+    public void vaciar();    
+    public boolean insertar(String unaCiudad);
+    public NodoArbolCiudad buscar(String ciudad);    
+    public boolean existe(String ciudad);
     public int cantidadNodos(NodoArbolCiudad raiz);
     public Integer getMaximo();  
     public void setMaximo(Integer maximo);        

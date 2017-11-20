@@ -20,7 +20,7 @@ public class Crucero {
     private ColaEspera CEspera;
 
     
-    public Crucero(String nombre, int estrellas, int capacidad) {
+    public Crucero(String nombre) {
         this.nombre = nombre;
         this.estrellas = estrellas;
         this.capacidad = capacidad;
@@ -36,6 +36,10 @@ public class Crucero {
     
     public int getEstrellas(){
         return this.estrellas;
+    }
+    
+    public void setEstrellas(int stars){
+        this.estrellas = stars;
     }
     
     public int getRanking(){
@@ -76,4 +80,8 @@ public class Crucero {
     public int getCapacidad(){
         return this.capacidad;
     }
+    
+    public void setCapacidad(int cantidadHabitaciones){
+        this.capacidad = cantidadHabitaciones;
+    }    
 }

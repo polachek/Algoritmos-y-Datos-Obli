@@ -90,4 +90,50 @@ public class ColaEspera implements IColaEspera {
         return this.cantElementos;
     }
     
+    @Override
+    public boolean existeEspera(int id) {
+        boolean retorno = false;        
+        if(!this.estaVacia()){
+            NodoColaEspera aux = this.primero;
+            while (aux != null){
+                if (aux.getReservaEnEspera().getCliente().getId() == id)
+                    retorno = true;
+                aux = aux.getSiguiente();
+             }
+            
+        }
+        return retorno;        
+    }   
+    
+    @Override
+    public void borrarEspera(int id)
+    {
+        NodoColaEspera aux = this.primero;
+        int clienteId = aux.getReservaEnEspera().getCliente().getId();
+        while (aux != null){
+            if (clienteId == id){
+                if(aux == this.getPrimero()){
+                    this.setPrimero(aux.getSiguiente()); 
+                    aux = aux.getSiguiente();
+                    aux.setAnterior(null);
+                    this.setCantelementos(this.getCantElementos() - 1 );                    
+                }
+                else if(aux == this.getUltimo())
+                {
+                    this.setUltimo(aux.getAnterior()); 
+                    aux = aux.getAnterior();
+                    aux.setSiguiente(null);
+                    this.setCantelementos(this.getCantElementos() - 1 );                    
+                }
+                else
+                {
+                    aux.getAnterior().setSiguiente(aux.getSiguiente());
+                    aux.getSiguiente().setAnterior(aux.getAnterior());
+                    this.setCantelementos(this.getCantElementos() - 1);                    
+                }
+            }
+            aux = aux.getSiguiente();
+         }        
+    }
+    
 }

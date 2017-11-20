@@ -13,7 +13,7 @@ public class Reserva {
     
     private Crucero cru;
     private Cliente cli;
-    private Boolean espera;
+    private boolean espera;
     
     public Reserva() 
     {
@@ -27,6 +27,10 @@ public class Reserva {
         this.cru = c;
         this.cli = cli;
         this.espera = e;            
+    }
+    
+    public Cliente getCliente (){
+        return cli;
     }
     
 }

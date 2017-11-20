@@ -12,6 +12,7 @@ package oblm3a;
 public class NodoColaEspera {
     Reserva reserva;
     NodoColaEspera siguiente;
+    NodoColaEspera anterior;    
 
     public NodoColaEspera(Object dato) {
         this.reserva = reserva;
@@ -32,5 +33,13 @@ public class NodoColaEspera {
 
     public void setSiguiente(NodoColaEspera siguiente) {
         this.siguiente = siguiente;
-    }    
+    }  
+    
+    public NodoColaEspera getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(NodoColaEspera ant) {
+        this.anterior = ant;
+    }      
 }

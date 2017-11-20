@@ -8,44 +8,40 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno crearSistemaReservas(int cantCiudades) {
-            AC = new ArbolCiudades();
-            LClientes = new ListaClientes();
-            Retorno ret = new Retorno();
-
-            if(cantCiudades < 0)
-                ret.resultado = Resultado.ERROR_1;
-            else if(cantCiudades > 0)
-            {
-                AC.setMaximo(cantCiudades); 
-                ret.resultado = Resultado.OK;
-            }else
-            {
-                Integer maximo = null;
-                AC.setMaximo(maximo);       
-                ret.resultado = Resultado.OK;                
-            } 
-
+        AC = new ArbolCiudades();
+        LClientes = new ListaClientes();
+        Retorno ret = new Retorno();       
+        
+        if(cantCiudades < 0)
+            ret.resultado = Resultado.ERROR_1;
+        else if(cantCiudades > 0)
+        {
+            AC.setMaximo(cantCiudades); 
+            ret.resultado = Resultado.OK;
+        }else
+        {
+            Integer maximo = null;
+            AC.setMaximo(maximo);       
+            ret.resultado = Resultado.OK;                
+        } 
                 
-
-
-            return ret;
+        return ret;
     }
 
     @Override
     public Retorno destruirSistemaReservas() {
-            Retorno ret = new Retorno();
-            if(AC != null){
-                //AC.vaciar();
-            }                
-            ret.resultado = Resultado.OK;
-
-            return ret;
+        Retorno ret = new Retorno();
+        if(AC != null){
+            AC.vaciar();
+        }                
+        ret.resultado = Resultado.OK;
+        return ret;
     }
 
     @Override
     public Retorno registrarCiudad(String ciudad) {
            Retorno ret = new Retorno();
-           Boolean existeCiudad = AC.existe(ciudad);
+           boolean existeCiudad = AC.existe(ciudad);
            NodoArbolCiudad r = AC.getRaiz();
            int cantCiudades = AC.cantidadNodos(r);
            Integer maxCiudades = AC.getMaximo();
@@ -74,7 +70,9 @@ public class Sistema implements ISistema {
     @Override
     public Retorno registrarCrucero(String ciudad, String nombre, int estrellas, int capacidad) {
             Retorno ret = new Retorno();
-            Crucero miCrucero = new Crucero(nombre, estrellas, capacidad);
+            Crucero miCrucero = new Crucero(nombre);
+            miCrucero.setCapacidad(capacidad);
+            miCrucero.setEstrellas(estrellas);
 
             if(!AC.existe(ciudad)){
                 ret.resultado = Resultado.ERROR_4;
@@ -144,14 +142,15 @@ public class Sistema implements ISistema {
     @Override
     public Retorno realizarReserva(int cliente, String ciudad, String crucero) {
         Retorno ret = new Retorno();
+        boolean existeCiudad = AC.existe(ciudad);
+        boolean existeCrucero = AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero);
         
-        if(!AC.existe(ciudad))
+        if(!existeCiudad)
             ret.resultado = Resultado.ERROR_2;
-        else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero))
+        else if(!existeCrucero)
             ret.resultado = Resultado.ERROR_1;
         else
         {
-
             //Reserva
             Reserva unaReserva = new Reserva();
             //Crucero
@@ -166,15 +165,14 @@ public class Sistema implements ISistema {
             //controlo si existe el cliente
             if(LClientes.existe(cliente))
                 cli = LClientes.buscarClienteXId(cliente);        
-            else{
+            else
                 cli.agregarCliente(cliente);
-            }
             
             //controlo si la reserva queda en espera
             if(cantReservas <= cantHabitaciones)
             {
                 unaReserva.agregarReserva(cru, cli, espera);
-                cru.getLReservas().agregarInicio(unaReserva);
+                cru.getLReservas().agregarReserva(unaReserva);
                 ret.resultado = Resultado.OK;                            
             }
             else
@@ -183,17 +181,48 @@ public class Sistema implements ISistema {
                 cru.getCEspera().encolar(unaReserva);
                 ret.resultado = Resultado.OK;                                        
             }   
-            
         }
-        
         return ret;
     }
 
     @Override
     public Retorno cancelarReserva(int cliente, String ciudad, String crucero) {
             Retorno ret = new Retorno();
-
-            ret.resultado = Resultado.NO_IMPLEMENTADA;
+            Cliente cli = new Cliente();
+            cli.setId(cliente);
+            
+            if(!AC.existe(ciudad)){
+                ret.resultado = Resultado.ERROR_3;
+            } 
+            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
+                ret.resultado = Resultado.ERROR_1;
+            }
+            else
+            {
+                Crucero cru = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero);
+                ListaReservas reservas = cru.getLReservas();
+                ColaEspera esperas = cru.getCEspera();
+                boolean existeEnReservas = reservas.existeReserva(cliente);
+                boolean existeEnEspera = esperas.existeEspera(cliente);                
+                if(existeEnReservas)
+                {
+                    reservas.borrarReserva(cliente);
+                    if(reservas.getCantelementos() <= cru.getCapacidad() && !esperas.estaVacia())
+                    {
+                        Reserva miReserva = esperas.getUltimo().getReservaEnEspera();
+                        reservas.agregarReserva(miReserva);
+                        esperas.desencolar();
+                    }
+                    ret.resultado = Resultado.OK;
+                }
+                else if(existeEnEspera){
+                    esperas.borrarEspera(cliente);                    
+                    ret.resultado = Resultado.OK;
+                }
+                else
+                    ret.resultado = Resultado.ERROR_2;
+                    
+            }
 
             return ret;
     }
@@ -253,31 +282,29 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno listarCrucerosCiudad(String ciudad) {
-            Retorno ret = new Retorno();
+        Retorno ret = new Retorno();
 
-            if(!AC.existe(ciudad)){
-                ret.resultado = Resultado.ERROR_1;
+        if(!AC.existe(ciudad)){
+            ret.resultado = Resultado.ERROR_1;
+        }else{
+            ListaCruceros misCruceros = AC.buscar(ciudad).getLcrucero();
+            if(misCruceros.esVacia()){
+                ret.resultado = Resultado.OK;
+                System.out.println("No existen Cruceros registrados en " + ciudad);
+
             }else{
-                ListaCruceros misCruceros = AC.buscar(ciudad).getLcrucero();
-                if(misCruceros.esVacia()){
-                    ret.resultado = Resultado.OK;
-                    System.out.println("No existen Cruceros registrados en " + ciudad);
-                    
-                }else{
-                    misCruceros.ordenarPorNombre();
-                    ret.resultado = Resultado.OK;
-                    NodoListaCrucero aux = misCruceros.getInicio();
-                    System.out.println("Cruceros en " + ciudad);
-                    while (aux !=null){
-                        System.out.println(aux.getNombre() + " " + aux.getEstrellas() + " " +aux.getRanking());
-                        aux=aux.getSig();
-                    }
+                misCruceros.ordenarPorNombre();
+                ret.resultado = Resultado.OK;
+                NodoListaCrucero aux = misCruceros.getInicio();
+                System.out.println("Cruceros en " + ciudad);
+                while (aux !=null){
+                    System.out.println(aux.getNombre() + " " + aux.getEstrellas() + " " +aux.getRanking());
+                    aux=aux.getSig();
                 }
-                
             }
-            
 
-            return ret;
+        }
+        return ret;
     }
 
     @Override
