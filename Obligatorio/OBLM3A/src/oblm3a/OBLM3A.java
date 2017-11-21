@@ -151,10 +151,12 @@ public class OBLM3A {
         p.ver(s.registrarCrucero("Santiago", "Carnival Cruise Lines", 6, 2800).resultado, Retorno.Resultado.ERROR_1, "La cantidad de estrellas no está entre 1 y 5");
         p.ver(s.registrarCrucero("Santiago", "Royal Caribbean Int.", 5, -1).resultado, Retorno.Resultado.ERROR_2, "La capacidad es menor a 0");
         p.ver(s.registrarCrucero("New York", "Royal Caribbean Int.", 4, 3100).resultado, Retorno.Resultado.ERROR_3, "Ya existe un crucero con ese nombre para Montevideo");
-        p.ver(s.registrarCrucero("Lima", "Disney Cruise Line", 5, 2200).resultado, Retorno.Resultado.ERROR_4, "La ciudad no existe");
+        p.ver(s.registrarCrucero("NO CIUDAD", "Disney Cruise Line", 5, 2200).resultado, Retorno.Resultado.ERROR_4, "La ciudad no existe");
         p.ver(s.registrarCrucero("Montevideo", "Crucer", 3, 2800).resultado, Retorno.Resultado.OK, "Se agrego curcero Crucer a Montevideo");
         p.ver(s.registrarCrucero("Montevideo", "Carnival", 2, 2800).resultado, Retorno.Resultado.OK, "Se agrego curcero Carnival a Montevideo");
-        p.ver(s.registrarCrucero("Montevideo", "Papa Mobil", 4, 500).resultado, Retorno.Resultado.OK, "Se agrego curcero Papa Mobil a Montevideo");        
+        p.ver(s.registrarCrucero("Montevideo", "Artigas", 2, 2800).resultado, Retorno.Resultado.OK, "Se agrego curcero Carnival a Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Papa Mobil", 4, 500).resultado, Retorno.Resultado.OK, "Se agrego curcero Papa Mobil a Montevideo");   
+        p.ver(s.registrarCrucero("Montevideo", "Bromato", 2, 2800).resultado, Retorno.Resultado.OK, "Se agrego curcero Carnival a Montevideo");
           
         System.out.println("####################################");
         System.out.println("###### TEST REALIZAR RESERVAS ######");
@@ -171,6 +173,12 @@ public class OBLM3A {
         p.ver(s.cancelarReserva(2, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se canceló la reserva del cliente 2 para el Royal Caribbean Int. New York");                
         System.out.println(s.AC.buscar("New York").getLcrucero().buscarCruceroXNombre("Royal Caribbean Int.").getLReservas().existeReserva(2));
         System.out.println("Cantidad de Reservas: " + s.AC.buscar("New York").getLcrucero().buscarCruceroXNombre("Royal Caribbean Int.").getLReservas().getCantelementos());
+        
+        System.out.println("#################################################");
+        System.out.println("###### TEST LISTADO DE CRUCEROS POR CIUDAD ######");
+        System.out.println("#################################################");
+        p.ver(s.listarCrucerosCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Listado de Cruceros para Montevideo");
+        
 
         /*
         System.out.println("#################################");

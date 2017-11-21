@@ -294,7 +294,7 @@ public class Sistema implements ISistema {
                 System.out.println("No existen Cruceros registrados en " + ciudad);
 
             }else{
-                misCruceros.ordenarPorNombre();
+                misCruceros = misCruceros.ordenarPorNombre();
                 ret.resultado = Resultado.OK;
                 NodoListaCrucero aux = misCruceros.getInicio();
                 System.out.println("Cruceros en " + ciudad);

@@ -4,6 +4,7 @@ package oblm3a;
 public class NodoListaCrucero{
     private Crucero miCrucero;
     private NodoListaCrucero sig;
+    private NodoListaCrucero ant;
 
 
     public NodoListaCrucero(Crucero miCrucero) {
@@ -37,6 +38,14 @@ public class NodoListaCrucero{
 
     public void setSig(NodoListaCrucero sig) {
         this.sig = sig;
+    }
+    
+    public NodoListaCrucero getAnt() {
+        return ant;
+    }
+
+    public void setAnt(NodoListaCrucero ant) {
+        this.ant = ant;
     }
 
  

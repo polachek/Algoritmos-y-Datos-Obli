@@ -46,11 +46,15 @@ public class ListaCruceros implements IListaCrucero {
     @Override
     public void agregarInicio(Crucero dato) {
         NodoListaCrucero nuevo = new NodoListaCrucero(dato);
-        nuevo.setSig(inicio);
-        this.inicio=nuevo;
-        if(this.fin==null)//estoy insertando el primer nodo
-            this.fin=nuevo;
-        
+        if (this.esVacia()){
+            this.setInicio(nuevo);
+            this.setFin(nuevo);
+        }
+        else{
+            nuevo.setSig(inicio);
+            this.inicio.setAnt(nuevo);
+            this.setInicio(nuevo);
+        }
         this.cantElementos=this.cantElementos+1;        
     }
 
@@ -134,41 +138,107 @@ public class ListaCruceros implements IListaCrucero {
     }
     
     @Override
-    public void ordenarPorNombre()
+    public ListaCruceros ordenarPorNombre()
     {
-        int cantElementos = cantElementos();
-        NodoListaCrucero inicio = getInicio();
-        NodoListaCrucero siguiente = getInicio().getSig();
+        ListaCruceros liCru = this;
+        ListaCruceros auxLiCru = new ListaCruceros();
+        int cantidad = liCru.getCantelementos();
+        int cantidadDina = liCru.getCantelementos();
+        NodoListaCrucero inicio = this.getInicio();
+        NodoListaCrucero siguiente = inicio.getSig();
         NodoListaCrucero aux = null;
+      
         
-        for(int i=0;i<cantElementos-1;i++)
-        {   
-            System.out.println("la i vale "+i);
-            
-            for(int j=i+1;j<cantElementos;j++)
-            {
-                System.out.println("la j vale "+j);
-                
-                int compara = siguiente.getNombre().compareTo(inicio.getNombre());
-                
-                if (compara < 0){
-                    System.out.println("entra");
-                    
-                    aux = inicio;
-                    NodoListaCrucero aux2 = siguiente.getSig();
-                    this.setInicio(inicio.getSig());
-                    getInicio().setSig(aux);
-                    siguiente = aux;                        
-                    siguiente.setSig(aux2);
+        for(int i=0;i<cantidad-1;i++){
+         
+            for(int j=i+1;j<cantidad;j++){
+           
+                if(inicio.getNombre().compareTo(siguiente.getNombre())>0){
+
+                   if(siguiente.getSig() == null){
+                        aux = inicio;
+                        
+                        if(inicio.getSig() == siguiente){
+                            inicio = siguiente;
+                            siguiente = aux;
+                            inicio.setSig(siguiente);
+                            siguiente.setSig(null);
+                            
+                        }else{
+                        inicio = siguiente;
+                        inicio.setSig(aux.getSig());
+                        siguiente.getAnt().setSig(aux);
+                        siguiente = aux;
+                        siguiente.setSig(null);
+                        }
+                   }
+                   else
+                   {
+
+                        aux = inicio;
+                        
+                        if(inicio.getSig() == siguiente){
+                            NodoListaCrucero auxDos = inicio.getSig().getSig();
+
+                        
+                        inicio = siguiente;
+                        inicio.setSig(aux);
+                        siguiente = aux;
+                        siguiente.setSig(auxDos);
+                        siguiente.setAnt(inicio);
+                        siguiente.getSig().setAnt(siguiente);
+                        
+                                                                       
+                        siguiente = siguiente.getSig();
+                        }
+                        else{
+                       
+                        NodoListaCrucero auxDos = siguiente.getSig();
+                        inicio = siguiente;
+                        siguiente = aux;
+                        inicio.setSig(aux.getSig());
+    
+                        inicio.getAnt().setSig(siguiente);
+                        siguiente.setAnt(inicio.getAnt());
+                        siguiente.setSig(auxDos);
+                        siguiente.getSig().setAnt(siguiente);
+
+                        
+                        siguiente = siguiente.getSig();
+                        }
+                        
+                    }
                 } 
-                System.out.println("inicio vale "+inicio.getNombre());
+                else{
+                        if(siguiente.getSig() != null){
+                            siguiente = siguiente.getSig();
+                        }
+                }
                 
             }
-            
-            inicio = inicio.getSig();
-            siguiente = siguiente.getSig();
-            System.out.println("inicio vale "+inicio.getNombre());           
+                auxLiCru.agregarInicio(inicio.getCrucero());
+                
+                inicio = inicio.getSig();
+                 if(inicio.getSig() == null){
+                      auxLiCru.agregarInicio(inicio.getCrucero());
+                      i = cantidad;
+                 }else{
+                     siguiente = inicio.getSig();
+                 }
+       
         }
+        
+        /*System.out.println("LA LISTA DE MIERDA:");
+        NodoListaCrucero auxR = auxLiCru.getInicio();
+                    System.out.println("Cruceros en Caca");
+                    while (auxR !=null){
+                        System.out.println(auxR.getNombre() + " " + auxR.getEstrellas() + " " +auxR.getRanking());
+                        auxR=auxR.getSig();
+        }*/
+        
+        return auxLiCru;
+                    
+                    
              
     }
     

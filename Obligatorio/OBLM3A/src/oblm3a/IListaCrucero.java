@@ -12,5 +12,5 @@ interface IListaCrucero {
     public Crucero buscarCruceroXNombre(String Nombre);
     public boolean buscarCrucero(String Nombre);
     public int cantElementos();  
-    public void ordenarPorNombre();
+    public ListaCruceros ordenarPorNombre();
 }
