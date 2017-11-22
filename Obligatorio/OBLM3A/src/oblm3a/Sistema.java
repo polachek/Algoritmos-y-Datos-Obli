@@ -5,11 +5,13 @@ import oblm3a.Retorno.Resultado;
 public class Sistema implements ISistema {
     public ArbolCiudades AC;
     public ListaClientes LClientes;
+    public ListaCruceros LGralCru;
 
     @Override
     public Retorno crearSistemaReservas(int cantCiudades) {
         AC = new ArbolCiudades();
         LClientes = new ListaClientes();
+        LGralCru = new ListaCruceros();
         Retorno ret = new Retorno();       
         
         if(cantCiudades < 0)
@@ -86,6 +88,7 @@ public class Sistema implements ISistema {
                 ret.resultado = Resultado.ERROR_3;
             }
             else{
+                LGralCru.agregarInicio(miCrucero);
                 AC.buscar(ciudad).getLcrucero().agregarInicio(miCrucero);                 
                 ret.resultado = Resultado.OK;
             }
@@ -285,18 +288,23 @@ public class Sistema implements ISistema {
     public Retorno listarCrucerosCiudad(String ciudad) {
         Retorno ret = new Retorno();
 
-        if(!AC.existe(ciudad)){
+        if(!AC.existe(ciudad))
             ret.resultado = Resultado.ERROR_1;
-        }else{
+        else
+        {
             ListaCruceros misCruceros = AC.buscar(ciudad).getLcrucero();
             if(misCruceros.esVacia()){
                 ret.resultado = Resultado.OK;
                 System.out.println("No existen Cruceros registrados en " + ciudad);
-
-            }else{
-                misCruceros = misCruceros.ordenarPorNombre();
+            }
+            else
+            {
+                ListaCruceros crucerosOrdenados = new ListaCruceros();
+                crucerosOrdenados = misCruceros.ordenarPorNombre();
+                AC.buscar(ciudad).setLcrucero(crucerosOrdenados);
                 ret.resultado = Resultado.OK;
-                NodoListaCrucero aux = misCruceros.getInicio();
+                NodoListaCrucero aux = crucerosOrdenados.getInicio();
+                System.out.println("Inicio es " + aux.getNombre());
                 System.out.println("Cruceros en " + ciudad);
                 while (aux !=null){
                     System.out.println(aux.getNombre() + " " + aux.getEstrellas() + " " +aux.getRanking());
@@ -310,29 +318,79 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno listarCrucerosRankingAsc(String ciudad) {
-            Retorno ret = new Retorno();
+        Retorno ret = new Retorno();
 
-            ret.resultado = Resultado.NO_IMPLEMENTADA;
+        if(!AC.existe(ciudad)){
+            ret.resultado = Resultado.ERROR_1;
+        }else{
+            ListaCruceros misCruceros = AC.buscar(ciudad).getLcrucero();
+            if(misCruceros.esVacia()){
+                ret.resultado = Resultado.OK;
+                System.out.println("No existen Cruceros registrados en " + ciudad);
 
-            return ret;
+            }else{
+                ListaCruceros crucerosOrdenados = new ListaCruceros();
+                crucerosOrdenados = misCruceros.ordenarPorRanking();
+                AC.buscar(ciudad).setLcrucero(crucerosOrdenados);
+                ret.resultado = Resultado.OK;
+                NodoListaCrucero aux = crucerosOrdenados.getFin();
+                System.out.println("Cruceros en " + ciudad);
+                while (aux !=null){
+                    System.out.println(aux.getNombre() + " " + aux.getEstrellas() + " " +aux.getRanking());
+                    aux=aux.getAnt();
+                }
+            }
+
+        }
+        return ret;
     }
 
     @Override
     public Retorno listarCrucerosRankingDesc(String ciudad) {
-            Retorno ret = new Retorno();
+        Retorno ret = new Retorno();
 
-            ret.resultado = Resultado.NO_IMPLEMENTADA;
+        if(!AC.existe(ciudad)){
+            ret.resultado = Resultado.ERROR_1;
+        }else{
+            ListaCruceros misCruceros = AC.buscar(ciudad).getLcrucero();
+            if(misCruceros.esVacia()){
+                ret.resultado = Resultado.OK;
+                System.out.println("No existen Cruceros registrados en " + ciudad);
 
-            return ret;
+            }else{
+                ListaCruceros crucerosOrdenados = new ListaCruceros();
+                crucerosOrdenados = misCruceros.ordenarPorRanking();
+                AC.buscar(ciudad).setLcrucero(crucerosOrdenados);
+                ret.resultado = Resultado.OK;
+                NodoListaCrucero aux = crucerosOrdenados.getInicio();
+                System.out.println("Cruceros en " + ciudad);
+                while (aux !=null){
+                    System.out.println(aux.getNombre() + " " + aux.getEstrellas() + " " +aux.getRanking());
+                    aux=aux.getSig();
+                }
+            }
+
+        }
+        return ret;
     }
 
     @Override
     public Retorno listarCrucerosRanking() {
-            Retorno ret = new Retorno();
-
-            ret.resultado = Resultado.NO_IMPLEMENTADA;
-
-            return ret;
+        Retorno ret = new Retorno();
+        
+        if(LGralCru.esVacia())
+        System.out.println("No existen Cruceros registrados en el Sistema");
+        else{
+            LGralCru = LGralCru.ordenarPorRanking();
+            ret.resultado = Resultado.OK;
+            NodoListaCrucero aux = LGralCru.getInicio();
+            System.out.println("Cruceros ordenados por Ranking Global");
+            while (aux !=null){
+                System.out.println(aux.getNombre() + " " + aux.getEstrellas() + " " +aux.getRanking());
+                aux=aux.getSig();
+            }
+        }
+        return ret;
     }
 
     @Override
