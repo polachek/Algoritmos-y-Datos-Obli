@@ -476,13 +476,21 @@ public class SistemaTest {
      */
     @Test
     public void testListarCrucerosRanking() {
-        System.out.println("listarCrucerosRanking");
-        Sistema instance = new Sistema();
-        Retorno expResult = null;
-        Retorno result = instance.listarCrucerosRanking();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Sistema sis = new Sistema();
+        sis.crearSistemaReservas(20);
+        sis.registrarCiudad("Montevideo");
+        sis.registrarCrucero("Montevideo","Love Crucer",1,50);
+        sis.registrarCrucero("Montevideo","Passion Crucer",1,50);        
+        sis.registrarCrucero("Montevideo","Island Crucer",1,50); 
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Muy lindo el crucero", 5);
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Horrible el crucero", 2);    
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Excelente crucero", 5);
+        sis.ingresarComentario("Montevideo", "Love Crucer", "No me lavaron la ropa", 3); 
+        sis.ingresarComentario("Montevideo", "Passion Crucer", "Pasamos muy lindo con mi señora y los chicos", 5); 
+        sis.ingresarComentario("Montevideo", "Passion Crucer", "No tenían toalla", 1);    
+        sis.ingresarComentario("Montevideo", "Island Crucer", "Buen whisky", 4);
+        sis.ingresarComentario("Montevideo", "Island Crucer", "Buen whisky y buen vino", 5);        
+        assertEquals(Retorno.Resultado.OK, sis.listarCrucerosRanking().resultado); 
     }
 
     /**
@@ -490,16 +498,48 @@ public class SistemaTest {
      */
     @Test
     public void testListarComentarios() {
-        System.out.println("listarComentarios");
-        String ciudad = "";
-        String crucero = "";
-        Sistema instance = new Sistema();
-        Retorno expResult = null;
-        Retorno result = instance.listarComentarios(ciudad, crucero);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Sistema sis = new Sistema();
+        sis.crearSistemaReservas(20);
+        sis.registrarCiudad("Montevideo");
+        sis.registrarCrucero("Montevideo","Love Crucer",1,50);
+        sis.registrarCrucero("Montevideo","Passion Crucer",1,50);        
+        sis.registrarCrucero("Montevideo","Island Crucer",1,50); 
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Muy lindo el crucero", 5);
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Horrible el crucero", 2);    
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Excelente crucero", 5);
+        sis.ingresarComentario("Montevideo", "Love Crucer", "No me lavaron la ropa", 3);
+        assertEquals(Retorno.Resultado.OK, sis.listarComentarios("Montevideo", "Island Crucer").resultado);     
     }
+
+    @Test
+    public void testListarComentariosNoCrucero() {
+        Sistema sis = new Sistema();
+        sis.crearSistemaReservas(20);
+        sis.registrarCiudad("Montevideo");
+        sis.registrarCrucero("Montevideo","Love Crucer",1,50);
+        sis.registrarCrucero("Montevideo","Passion Crucer",1,50);        
+        sis.registrarCrucero("Montevideo","Island Crucer",1,50); 
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Muy lindo el crucero", 5);
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Horrible el crucero", 2);    
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Excelente crucero", 5);
+        sis.ingresarComentario("Montevideo", "Love Crucer", "No me lavaron la ropa", 3);
+        assertEquals(Retorno.Resultado.ERROR_1, sis.listarComentarios("Montevideo", "No Crucero").resultado);     
+    }      
+    
+    @Test
+    public void testListarComentariosNoCiudad() {
+        Sistema sis = new Sistema();
+        sis.crearSistemaReservas(20);
+        sis.registrarCiudad("Montevideo");
+        sis.registrarCrucero("Montevideo","Love Crucer",1,50);
+        sis.registrarCrucero("Montevideo","Passion Crucer",1,50);        
+        sis.registrarCrucero("Montevideo","Island Crucer",1,50); 
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Muy lindo el crucero", 5);
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Horrible el crucero", 2);    
+        sis.ingresarComentario("Montevideo", "Love Crucer", "Excelente crucero", 5);
+        sis.ingresarComentario("Montevideo", "Love Crucer", "No me lavaron la ropa", 3);
+        assertEquals(Retorno.Resultado.ERROR_2, sis.listarComentarios("No Ciudad", "Island Crucer").resultado);     
+    }    
 
     /**
      * Test of cargarDistancias method, of class Sistema.

@@ -129,10 +129,15 @@ public class ListaReservas implements IListaReservas {
         while (aux != null){
             if (aux.getReserva().getCliente().getId() == id){
                 if(aux == this.getInicio()){
-                    this.setInicio(aux.getSig());
-                    aux = aux.getSig();
-                    aux.setAnterior(null);
-                    this.cantElementos=this.cantElementos-1;                     
+                    if(aux.getSig() == null)
+                        this.vaciar();
+                    else
+                    {
+                        this.setInicio(aux.getSig());
+                        aux = aux.getSig();
+                        aux.setAnterior(null);
+                        this.cantElementos=this.cantElementos-1;                     
+                    }  
                 }
                 else if(aux == this.getFin())
                 {
