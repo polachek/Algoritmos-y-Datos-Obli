@@ -74,9 +74,11 @@ public class ListaServicios implements IListaServicio{
     
      //PRE:
     //POS: Borra el primer nodo
-     public void borrarInicio(){
-         if (!this.esVacia()){
-            if (inicio==fin){
+    public void borrarInicio(){
+        if (!this.esVacia())
+        {
+            if (inicio==fin)
+            {
                 this.inicio=null;
                 this.fin=null;
                 this.cantelementos = 0;
@@ -85,14 +87,13 @@ public class ListaServicios implements IListaServicio{
                 this.setInicio(this.inicio.getSig());
                 this.inicio.setAnt(null);
                 this.cantelementos=this.cantelementos-1;
-            }
-            
+            }    
         }
     }
      
     @Override
     public void borrarFin() {
-          this.fin=this.fin.getAnt();
+          this.fin = this.fin.getAnt();
           this.fin.setSig(null);
     }
  //PRE:
@@ -123,15 +124,14 @@ public class ListaServicios implements IListaServicio{
     public void borrarElemento(String Servicio){
         NodoListaServicio aux = this.obtenerElemento(Servicio);
         
-        if (aux== inicio)
+        if (aux == inicio)
             this.borrarInicio();
-        if (aux==fin)
+        if (aux == fin)
             this.borrarFin();
-        
-        if (aux!=null){
+        if (aux != null){
             aux.getAnt().setSig(aux.getSig());
             aux.getSig().setAnt(aux.getAnt());
-            this.cantelementos=this.cantelementos-1;
+            this.cantelementos = (this.cantelementos)-1;
         }
     }
     
@@ -144,10 +144,10 @@ public class ListaServicios implements IListaServicio{
     //PRE: //POS:
    //PRE: //POS:
     public NodoListaServicio obtenerElemento(String servicio){
-        NodoListaServicio aux=this.inicio;
-        while (aux!=null && aux.getServicio()!=servicio)
-            aux=aux.getSig();
-        //encontrÃ© dato o lleguÃ© al final
+        NodoListaServicio aux = this.inicio;
+        while (aux != null && aux.getServicio().equals(servicio))
+            aux = aux.getSig();
+        //encontró dato o lleguó al final
         return aux;
     }
     

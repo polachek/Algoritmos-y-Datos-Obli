@@ -104,7 +104,7 @@ public class ListaReservas implements IListaReservas {
     @Override
     public NodoListaReserva obtenerElemento(Reserva dato) {
         NodoListaReserva aux = this.inicio;
-        while (aux != null && aux.getReserva() != dato)
+        while (aux != null && aux.getReserva().equals(dato))
             aux=aux.getSig();
         //encontró dato o llegó al final
         return aux;
@@ -127,7 +127,6 @@ public class ListaReservas implements IListaReservas {
     {
         NodoListaReserva aux = this.inicio;
         while (aux != null){
-            
             if (aux.getReserva().getCliente().getId() == id){
                 if(aux == this.getInicio()){
                     this.setInicio(aux.getSig());

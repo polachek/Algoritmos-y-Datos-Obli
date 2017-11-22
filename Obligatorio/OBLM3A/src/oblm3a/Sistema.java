@@ -140,12 +140,9 @@ public class Sistema implements ISistema {
     @Override
     public Retorno realizarReserva(int cliente, String ciudad, String crucero) {
         Retorno ret = new Retorno();
-        boolean existeCiudad = AC.existe(ciudad);
-        boolean existeCrucero = AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero);
-        
-        if(!existeCiudad)
+        if(!AC.existe(ciudad))
             ret.resultado = Resultado.ERROR_2;
-        else if(!existeCrucero)
+        else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero))
             ret.resultado = Resultado.ERROR_1;
         else
         {
@@ -197,10 +194,8 @@ public class Sistema implements ISistema {
             {
                 Crucero cru = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero);
                 ListaReservas reservas = cru.getLReservas();
-                ColaEspera esperas = cru.getCEspera();
-                boolean existeEnReservas = reservas.existeReserva(cliente);
-                boolean existeEnEspera = esperas.existeEspera(cliente);                
-                if(existeEnReservas)
+                ColaEspera esperas = cru.getCEspera();              
+                if(reservas.existeReserva(cliente))
                 {
                     reservas.borrarReserva(cliente);
                     if(reservas.getCantelementos() <= cru.getCapacidad() && !esperas.estaVacia())
@@ -211,7 +206,7 @@ public class Sistema implements ISistema {
                     }
                     ret.resultado = Resultado.OK;
                 }
-                else if(existeEnEspera){
+                else if(esperas.existeEspera(cliente)){
                     esperas.borrarEspera(cliente);                    
                     ret.resultado = Resultado.OK;
                 }
