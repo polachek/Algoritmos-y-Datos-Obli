@@ -11,66 +11,118 @@ public class OBLM3A {
     }
     
     static void prueba(Sistema s, prueba p){
-        System.out.println("###################################");
-        System.out.println("####### SISTEMA DE RESERVAS #######");
-        System.out.println("###################################");
+        System.out.println("########################################");
+        System.out.println("####### TEST SISTEMA DE RESERVAS #######");
+        System.out.println("########################################");
+        
+        System.out.println();        
+        System.out.println("PRUEBA: cantidad de ciudades igual a 0");                
+        p.ver(s.crearSistemaReservas(4).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+        System.out.println(); 
+        
+        System.out.println();        
+        System.out.println("PRUEBA: cantidad de ciudades menor a 0");                
+        p.ver(s.crearSistemaReservas(-1).resultado, Retorno.Resultado.ERROR_1, "No se crea el sistema de reservas");
+        System.out.println(); 
         
         System.out.println();        
         System.out.println("PRUEBA: cantidad de ciudades mayor a 0");                
         p.ver(s.crearSistemaReservas(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
         System.out.println();
         
-        System.out.println();        
-        System.out.println("PRUEBA: cantidad de ciudades igual a 0");                
-        p.ver(s.crearSistemaReservas(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
-        System.out.println();        
-        
-        System.out.println();        
-        System.out.println("PRUEBA: cantidad de ciudades menor a 0");                
-        p.ver(s.crearSistemaReservas(-1).resultado, Retorno.Resultado.ERROR_1, "Se crea el sistema de reservas");
-        System.out.println();        
-        
         System.out.println("#######################################");
         System.out.println("###### TEST REGISTRO DE CIUDADES ######");
         System.out.println("#######################################");
+        
+        System.out.println();        
+        System.out.println("PRUEBA: ciudad ingresada correctamente.");         
         p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se ingresa Montevideo");
         p.ver(s.registrarCiudad("Rocha").resultado, Retorno.Resultado.OK, "Se ingresa Rocha");
         p.ver(s.registrarCiudad("Santiago").resultado, Retorno.Resultado.OK, "Se ingresa Santiago");
-        p.ver(s.registrarCiudad("San Pablo").resultado, Retorno.Resultado.OK, "Se ingresa San Pablo");
+        p.ver(s.registrarCiudad("San Pablo").resultado, Retorno.Resultado.OK, "Se ingresa San Pablo");        
+        p.ver(s.registrarCiudad("New York").resultado, Retorno.Resultado.OK, "Se ingresa New York");        
+        System.out.println();
+        
+        System.out.println();        
+        System.out.println("PRUEBA: la ciudad a ingresar ya existe en el sistema.");                 
         p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Montevideo ya existe");
-        p.ver(s.registrarCiudad("New York").resultado, Retorno.Resultado.OK, "Se ingresa New York");
-        p.ver(s.registrarCiudad("Buenos Aires").resultado, Retorno.Resultado.ERROR_2, "Se sobrepasa el límite de ciudades gestionados por el sistema");
+        
+        System.out.println();        
+        System.out.println("PRUEBA: el sistema ya tiene todas las ciudades ingresadas.");          
+        p.ver(s.registrarCiudad("Buenos Aires").resultado, Retorno.Resultado.ERROR_1, "Se sobrepasa el límite de ciudades gestionados por el sistema");
         System.out.println();
         
         System.out.println("#######################################");
         System.out.println("###### TEST REGISTRO DE CRUCEROS ######");
         System.out.println("#######################################");
-        p.ver(s.registrarCrucero("New York", "Royal Caribbean Int.", 5, 3000).resultado, Retorno.Resultado.OK, "Se agrego curcero Royal Caribbean a nueva york");
+        System.out.println();        
+        System.out.println("PRUEBA: el crucero se ingresó correctamente.");                  
+        p.ver(s.registrarCrucero("New York", "Royal Caribbean Int.", 5, 3000).resultado, Retorno.Resultado.OK, "Se agregó crucero Royal Caribbean a nueva york");
+        p.ver(s.registrarCrucero("Montevideo", "Crucer", 3, 2800).resultado, Retorno.Resultado.OK, "Se agregó crucero Crucer a Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Carnival", 2, 2800).resultado, Retorno.Resultado.OK, "Se agregó crucero Carnival a Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Papa Mobil", 4, 500).resultado, Retorno.Resultado.OK, "Se agregó crucero Papa Mobil a Montevideo");
+        System.out.println(); 
+        
+        System.out.println();        
+        System.out.println("PRUEBA: se ingresa crucero con cantidad de estrellas menor a uno o mayor a 5");         
         p.ver(s.registrarCrucero("Santiago", "Carnival Cruise Lines", 6, 2800).resultado, Retorno.Resultado.ERROR_1, "La cantidad de estrellas no está entre 1 y 5");
-        p.ver(s.registrarCrucero("Santiago", "Royal Caribbean Int.", 5, -1).resultado, Retorno.Resultado.ERROR_2, "La capacidad es menor a 0");
-        p.ver(s.registrarCrucero("New York", "Royal Caribbean Int.", 4, 3100).resultado, Retorno.Resultado.ERROR_3, "Ya existe un crucero con ese nombre para Montevideo");
-        p.ver(s.registrarCrucero("Lima", "Disney Cruise Line", 5, 2200).resultado, Retorno.Resultado.ERROR_4, "La ciudad no existe");
-        p.ver(s.registrarCrucero("Montevideo", "Crucer", 3, 2800).resultado, Retorno.Resultado.OK, "Se agrego curcero Crucer a Montevideo");
-        p.ver(s.registrarCrucero("Montevideo", "Carnival", 2, 2800).resultado, Retorno.Resultado.OK, "Se agrego curcero Carnival a Montevideo");
-        p.ver(s.registrarCrucero("Montevideo", "Papa Mobil", 4, 500).resultado, Retorno.Resultado.OK, "Se agrego curcero Papa Mobil a Montevideo");
         System.out.println();
+        
+        System.out.println();        
+        System.out.println("PRUEBA: se ingresa crucero con capacidad menor a 0");                 
+        p.ver(s.registrarCrucero("Santiago", "Royal Caribbean Int.", 5, -1).resultado, Retorno.Resultado.ERROR_2, "La capacidad es menor a 0");
+        System.out.println(); 
+        
+        System.out.println();        
+        System.out.println("PRUEBA: en la ciudad ingresada ya existe un crucero con el nombre ingresado.");                         
+        p.ver(s.registrarCrucero("New York", "Royal Caribbean Int.", 4, 3100).resultado, Retorno.Resultado.ERROR_3, "Ya existe un crucero con ese nombre para Montevideo");
+        System.out.println();        
+
+        System.out.println();        
+        System.out.println("PRUEBA: No existe la ciudad donde se intenta ingresar el crucero.");                                 
+        p.ver(s.registrarCrucero("Lima", "Disney Cruise Line", 5, 2200).resultado, Retorno.Resultado.ERROR_4, "La ciudad no existe");
+        
+        System.out.println();
+
         
         System.out.println("#######################################");
         System.out.println("###### TEST INGRESO DE SERVICIOS ######");
         System.out.println("#######################################");
+        System.out.println();        
+        System.out.println("PRUEBA: se ingresó servicio exitosamente.");          
         p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi").resultado, Retorno.Resultado.OK, "Servicio wifi");
         p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Spa").resultado, Retorno.Resultado.OK, "Servicio Spa");
         p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Discoteca").resultado, Retorno.Resultado.OK, "Servicio de Discoteca");
-        p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi").resultado, Retorno.Resultado.ERROR_1, "Servicio repetido");
+        System.out.println();
+        
+        System.out.println();
+        System.out.println("PRUEBA: ya existe un servicio con el nombre ingresado.");
+        p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi").resultado, Retorno.Resultado.ERROR_3, "Servicio repetido");
+        System.out.println();
+        
+        System.out.println();
+        System.out.println("PRUEBA: en la ciudad ingresada no existe un crucero con el nombre ingresado.");        
         p.ver(s.ingresarServicio("New York", "No Crucero", "Discoteca").resultado, Retorno.Resultado.ERROR_1, "No existe el Crucero para la Ciudad");
+        System.out.println();
+
+        System.out.println();        
+        System.out.println("PRUEBA: no existe una ciudad con el nombre ingresado.");                
         p.ver(s.ingresarServicio("No Ciudad", "Royal Caribbean Int.", "Servicio de cuarto").resultado, Retorno.Resultado.ERROR_2, "No existe la Ciudad");
         System.out.println();
         
         System.out.println("#######################################");
         System.out.println("###### TEST BORRAR SERVICIO ######");
         System.out.println("#######################################");
+        System.out.println();        
+        System.out.println("PRUEBA: el servicio se borró exitosamente."); 
         p.ver(s.borrarServicio("New York", "Royal Caribbean Int.", "Spa").resultado, Retorno.Resultado.OK, "Borramos Servicio Spa");
+        System.out.println(); 
+        
+        System.out.println();        
+        System.out.println("PRUEBA: no existe un crucero con la ciudad ingresada.");
         p.ver(s.borrarServicio("New York", "No Crucero", "Discoteca").resultado, Retorno.Resultado.ERROR_1, "No existe el Crucero para la Ciudad");
+        System.out.println();                
+        
         p.ver(s.borrarServicio("No Ciudad", "Royal Caribbean Int.", "Discoteca").resultado, Retorno.Resultado.ERROR_3, "No existe la Ciudad");
         p.ver(s.borrarServicio("New York", "Royal Caribbean Int.", "Choripan").resultado, Retorno.Resultado.ERROR_2, "No existe el Servicio");
         System.out.println();

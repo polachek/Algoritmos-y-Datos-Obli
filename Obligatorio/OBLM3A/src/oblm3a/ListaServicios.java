@@ -126,9 +126,9 @@ public class ListaServicios implements IListaServicio{
         
         if (aux == inicio)
             this.borrarInicio();
-        if (aux == fin)
+        else if (aux == fin)
             this.borrarFin();
-        if (aux != null){
+        else if (aux != null){
             aux.getAnt().setSig(aux.getSig());
             aux.getSig().setAnt(aux.getAnt());
             this.cantelementos = (this.cantelementos)-1;
@@ -145,10 +145,14 @@ public class ListaServicios implements IListaServicio{
    //PRE: //POS:
     public NodoListaServicio obtenerElemento(String servicio){
         NodoListaServicio aux = this.inicio;
-        while (aux != null && aux.getServicio().equals(servicio))
+        NodoListaServicio ret = null;
+        while (aux != null){
+            if(aux.getServicio().equals(servicio))
+                ret = aux;
             aux = aux.getSig();
+        }
         //encontró dato o lleguó al final
-        return aux;
+        return ret;
     }
     
     @Override

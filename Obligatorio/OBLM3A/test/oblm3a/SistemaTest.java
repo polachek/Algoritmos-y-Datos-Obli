@@ -65,7 +65,7 @@ public class SistemaTest {
     }
 
     /* #################################################### */
-    /**         Test para REGISTRAR CIUDAD                  **/
+    /**         Test para REGISTRAR CIUDAD                 **/
     /* #################################################### */     
     @Test
     public void testRegistrarCiudadOK() {
