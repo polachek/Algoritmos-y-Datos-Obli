@@ -15,6 +15,7 @@ public class NodoArbolCiudad {
     private ListaCruceros LCrucero;
     private NodoArbolCiudad izq;
     private NodoArbolCiudad der;
+    private int codigoCiudad;
 
     public NodoArbolCiudad() {
         this.ciudad = null;
@@ -30,6 +31,14 @@ public class NodoArbolCiudad {
     public void setCiudad(Ciudad c) {
         this.ciudad = c;
     }    
+    
+    public int getCodCiudad() {
+        return this.codigoCiudad;
+    }
+    
+    public void setCodCiudad(int codigoCiudad){
+        this.codigoCiudad = codigoCiudad;
+    }
     
     public NodoArbolCiudad getIzq() {
         return this.izq;
@@ -54,5 +63,4 @@ public class NodoArbolCiudad {
     public void setLcrucero(ListaCruceros Lcrucero) {
         this.LCrucero = Lcrucero;
     }
-    
 }

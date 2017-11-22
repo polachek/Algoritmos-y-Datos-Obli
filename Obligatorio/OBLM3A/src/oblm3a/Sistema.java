@@ -51,20 +51,20 @@ public class Sistema implements ISistema {
            if(maxCiudades != null)
            {
                 if (!existeCiudad && cantCiudades < maxCiudades) {
-                     AC.insertar(ciudad);
-                     ret.resultado = Resultado.OK;                
+                    AC.insertar(ciudad);
+                    ret.resultado = Resultado.OK;                
                 }
                 else 
-                     ret.resultado=Retorno.Resultado.ERROR_1;               
+                    ret.resultado = Retorno.Resultado.ERROR_1;               
            }
            else
            {
                 if (!existeCiudad) {
-                     AC.insertar(ciudad);
-                     ret.resultado = Resultado.OK;                
+                    AC.insertar(ciudad);
+                    ret.resultado = Resultado.OK;                
                 }
                 else 
-                     ret.resultado=Retorno.Resultado.ERROR_1;                
+                    ret.resultado=Retorno.Resultado.ERROR_1;                
            }
            return ret;
     }
@@ -76,23 +76,19 @@ public class Sistema implements ISistema {
             miCrucero.setCapacidad(capacidad);
             miCrucero.setEstrellas(estrellas);
 
-            if(!AC.existe(ciudad)){
+            if(!AC.existe(ciudad))
                 ret.resultado = Resultado.ERROR_4;
-            } else if(estrellas <= 0 || estrellas > 5){
+            else if(estrellas <= 0 || estrellas > 5)
                 ret.resultado = Resultado.ERROR_1;
-            }
-            else if(capacidad < 0){
+            else if(capacidad < 0)
                 ret.resultado = Resultado.ERROR_2;
-            }
-            else if(AC.buscar(ciudad).getLcrucero().buscarCrucero(nombre)){
+            else if(AC.buscar(ciudad).getLcrucero().buscarCrucero(nombre))
                 ret.resultado = Resultado.ERROR_3;
-            }
             else{
                 LGralCru.agregarInicio(miCrucero);
                 AC.buscar(ciudad).getLcrucero().agregarInicio(miCrucero);                 
                 ret.resultado = Resultado.OK;
             }
-
             return ret;
     }
 
@@ -100,18 +96,17 @@ public class Sistema implements ISistema {
     public Retorno ingresarServicio(String ciudad, String crucero, String servicio) {
             Retorno ret = new Retorno();
 
-            if(!AC.existe(ciudad)){
+            if(!AC.existe(ciudad))
                 ret.resultado = Resultado.ERROR_2;
-            } 
-            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
+            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero))
                 ret.resultado = Resultado.ERROR_1;
-            }
-            else{
+            else
+            {
                 Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero); 
-                if(miCrucero.getLservicio().existeServicio(servicio)){
-                    ret.resultado = Resultado.ERROR_1;
-                }
-                else{
+                if(miCrucero.getLservicio().existeServicio(servicio))
+                    ret.resultado = Resultado.ERROR_3;
+                else
+                {
                     miCrucero.getLservicio().agregarInicio(servicio);
                     ret.resultado = Resultado.OK;
                 }
@@ -122,24 +117,24 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno borrarServicio(String ciudad, String crucero, String servicio) {
-            Retorno ret = new Retorno();
+        Retorno ret = new Retorno();
 
-            if(!AC.existe(ciudad)){
-                ret.resultado = Resultado.ERROR_3;
-            } 
-            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
-                ret.resultado = Resultado.ERROR_1;
-            }
-            else if(!AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero).getLservicio().existeServicio(servicio)){
-                ret.resultado = Resultado.ERROR_2;
-            }
-            else{
-                Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero); 
-                miCrucero.getLservicio().borrarElemento(servicio);
-                ret.resultado = Resultado.OK;
-            }
+        if(!AC.existe(ciudad)){
+            ret.resultado = Resultado.ERROR_3;
+        } 
+        else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
+            ret.resultado = Resultado.ERROR_1;
+        }
+        else if(!AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero).getLservicio().existeServicio(servicio)){
+            ret.resultado = Resultado.ERROR_2;
+        }
+        else{
+            Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero); 
+            miCrucero.getLservicio().borrarElemento(servicio);
+            ret.resultado = Resultado.OK;
+        }
 
-            return ret;
+        return ret;
     }
 
     @Override
@@ -193,14 +188,11 @@ public class Sistema implements ISistema {
             Retorno ret = new Retorno();
             Cliente cli = new Cliente();
             cli.setId(cliente);
-            
-            
-            if(!AC.existe(ciudad)){
+                        
+            if(!AC.existe(ciudad))
                 ret.resultado = Resultado.ERROR_3;
-            } 
-            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
+            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero))
                 ret.resultado = Resultado.ERROR_1;
-            }
             else
             {
                 Crucero cru = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero);

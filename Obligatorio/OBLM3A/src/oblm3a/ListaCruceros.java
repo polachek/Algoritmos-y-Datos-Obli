@@ -121,14 +121,13 @@ public class ListaCruceros implements IListaCrucero {
 
     @Override
     public boolean buscarCrucero(String Nombre) {
-       NodoListaCrucero aux = this.inicio;
-       boolean retorno= false;
-         while (aux!=null){
-             if (aux.getNombre().equals(Nombre))
-                  retorno =true;
-             
-             aux=aux.getSig();
-         }
+        NodoListaCrucero aux = this.inicio;
+        boolean retorno= false;
+        while (aux!=null){
+            if (aux.getNombre().equals(Nombre))
+                retorno =true; 
+            aux=aux.getSig();
+        }
         return retorno;        
     }
 

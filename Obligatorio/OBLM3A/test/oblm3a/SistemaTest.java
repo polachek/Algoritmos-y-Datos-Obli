@@ -51,8 +51,6 @@ public class SistemaTest {
         Sistema s = new Sistema();
         assertEquals(Retorno.Resultado.ERROR_1, s.crearSistemaReservas(-4).resultado);
     }
-    
-    
 
     /**
      * Test of destruirSistemaReservas method, of class Sistema.
@@ -67,7 +65,7 @@ public class SistemaTest {
      * Test of registrarCiudad method, of class Sistema.
      */
     @Test
-    public void testRegistrarCiudad() {
+    public void testRegistrarCiudadOK() {
         Sistema s = new Sistema();
         s.crearSistemaReservas(20);
         assertEquals(Retorno.Resultado.OK, s.registrarCiudad("Montevideoerer").resultado);
@@ -87,7 +85,7 @@ public class SistemaTest {
         s.crearSistemaReservas(2);
         s.registrarCiudad("Montevideo");
         s.registrarCiudad("Maldonado");
-        assertEquals(Retorno.Resultado.ERROR_2, s.registrarCiudad("Rocha").resultado);
+        assertEquals(Retorno.Resultado.ERROR_1, s.registrarCiudad("Rocha").resultado);
     }
     
 
@@ -180,16 +178,12 @@ public class SistemaTest {
      */
     @Test
     public void testBorrarServicio() {
-        System.out.println("borrarServicio");
-        String ciudad = "";
-        String crucero = "";
-        String servicio = "";
-        Sistema instance = new Sistema();
-        Retorno expResult = null;
-        Retorno result = instance.borrarServicio(ciudad, crucero, servicio);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Sistema sis = new Sistema();
+        sis.crearSistemaReservas(20);
+        sis.registrarCiudad("Montevideo");
+        sis.registrarCrucero("Montevideo","Love Crucer",1,50);
+        sis.ingresarServicio("Montevideo","Love Crucer", "Spa");
+        assertEquals(Retorno.Resultado.OK, sis.borrarServicio("Montevideo","Love Crucer", "Spa").resultado);
     }
 
     /**

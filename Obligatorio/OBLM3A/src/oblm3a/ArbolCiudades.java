@@ -64,13 +64,15 @@ public class ArbolCiudades implements IArbolCiudades{
             NodoArbolCiudad derecha = this.raiz.getDer();
 
             ArbolCiudades aux = new ArbolCiudades();
-            if (unaCiudad.compareTo(c) < 0){
+            if (unaCiudad.compareTo(c) < 0)
+            {
                 aux.raiz = izquierda;
                 aux.insertar(unaCiudad);
                 this.raiz.setIzq(aux.raiz);
                 ret = true;
             }
-            else if (unaCiudad.compareTo(c) > 0){
+            else if (unaCiudad.compareTo(c) > 0)
+            {
                 aux.raiz = derecha;
                 aux.insertar(unaCiudad);
                 this.raiz.setDer(aux.raiz);
@@ -87,7 +89,8 @@ public class ArbolCiudades implements IArbolCiudades{
         NodoArbolCiudad izquierda = this.raiz.getIzq();
         NodoArbolCiudad derecha = this.raiz.getDer();         
         
-        if(!this.esVacio()){
+        if(!this.esVacio())
+        {
             ArbolCiudades aux = new ArbolCiudades();
             if (ciudad.compareTo(c) == 0) 
                 ret = this.raiz;
@@ -119,11 +122,12 @@ public class ArbolCiudades implements IArbolCiudades{
     @Override    
     public boolean existe(String ciudad){
        
-        if(!this.esVacio()){
-        String c = this.raiz.getCiudad().getNombre();
-        NodoArbolCiudad izquierda = this.raiz.getIzq();
-        NodoArbolCiudad derecha = this.raiz.getDer();        
-        ArbolCiudades aux = new ArbolCiudades();        
+        if(!this.esVacio())
+        {
+            String c = this.raiz.getCiudad().getNombre();
+            NodoArbolCiudad izquierda = this.raiz.getIzq();
+            NodoArbolCiudad derecha = this.raiz.getDer();        
+            ArbolCiudades aux = new ArbolCiudades();        
             
             if (ciudad.compareTo(c) == 0)
                 return true;

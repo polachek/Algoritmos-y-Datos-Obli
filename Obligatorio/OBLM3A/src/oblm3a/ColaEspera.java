@@ -48,11 +48,13 @@ public class ColaEspera implements IColaEspera {
     public void encolar(Reserva dato) {
         NodoColaEspera nuevo = new NodoColaEspera(dato);
         
-        if (!this.estaVacia()){
+        if (!this.estaVacia())
+        {
             this.ultimo.siguiente=nuevo;
             this.ultimo=nuevo;                
         }
-        else{
+        else
+        {
             this.primero=nuevo;
             this.ultimo=nuevo;
         }
@@ -61,11 +63,13 @@ public class ColaEspera implements IColaEspera {
 
     @Override
     public void desencolar() {
-        if (!this.estaVacia()&& this.cantElementos>=1){
+        if (!this.estaVacia() && this.cantElementos >= 1)
+        {
            this.primero=this.primero.siguiente;
            this.cantElementos=this.cantElementos-1;
         }
-        else{
+        else
+        {
            this.primero=null;
            this.ultimo=null;
            this.cantElementos=0;
@@ -76,7 +80,6 @@ public class ColaEspera implements IColaEspera {
     public Reserva frente() {
         if (!this.estaVacia())
             return this.primero.reserva;
-     
         return null;
     }
 
@@ -93,14 +96,14 @@ public class ColaEspera implements IColaEspera {
     @Override
     public boolean existeEspera(int id) {
         boolean retorno = false;        
-        if(!this.estaVacia()){
+        if(!this.estaVacia())
+        {
             NodoColaEspera aux = this.primero;
             while (aux != null){
                 if (aux.getReservaEnEspera().getCliente().getId() == id)
                     retorno = true;
                 aux = aux.getSiguiente();
-             }
-            
+             }    
         }
         return retorno;        
     }   
@@ -111,8 +114,10 @@ public class ColaEspera implements IColaEspera {
         NodoColaEspera aux = this.primero;
         int clienteId = aux.getReservaEnEspera().getCliente().getId();
         while (aux != null){
-            if (clienteId == id){
-                if(aux == this.getPrimero()){
+            if (clienteId == id)
+            {
+                if(aux == this.getPrimero())
+                {
                     this.setPrimero(aux.getSiguiente()); 
                     aux = aux.getSiguiente();
                     aux.setAnterior(null);
@@ -133,7 +138,7 @@ public class ColaEspera implements IColaEspera {
                 }
             }
             aux = aux.getSiguiente();
-         }        
+        }        
     }
     
 }
