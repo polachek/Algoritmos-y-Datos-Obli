@@ -21,6 +21,7 @@ public class SistemaTest {
     public SistemaTest() {
     }
     
+    /*
     @BeforeClass
     public static void setUpClass() {
     }
@@ -37,9 +38,11 @@ public class SistemaTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of crearSistemaReservas method, of class Sistema.
-     */
+    */
+    
+    /* #################################################### */
+    /**         Test para CREAR SISTEMA DE RESERVAS         **/
+    /* #################################################### */     
     @Test
     public void testCrearSistemaReservasOK() {
         Sistema s = new Sistema();
@@ -52,18 +55,18 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.ERROR_1, s.crearSistemaReservas(-4).resultado);
     }
 
-    /**
-     * Test of destruirSistemaReservas method, of class Sistema.
-     */
+    /* #################################################### */
+    /**     Test para DESTRUIR SISTEMA DE RESERVAS         **/
+    /* #################################################### */     
     @Test
     public void testDestruirSistemaReservas() {
         Sistema s = new Sistema();
         assertEquals(Retorno.Resultado.OK, s.destruirSistemaReservas().resultado);
     }
 
-    /**
-     * Test of registrarCiudad method, of class Sistema.
-     */
+    /* #################################################### */
+    /**         Test para REGISTRAR CIUDAD                  **/
+    /* #################################################### */     
     @Test
     public void testRegistrarCiudadOK() {
         Sistema s = new Sistema();
@@ -89,9 +92,9 @@ public class SistemaTest {
     }
     
 
-    /**
-     * Test of registrarCrucero method, of class Sistema.
-     */
+    /* #################################################### */
+    /**         Test para REGISTRAR CRUCERO                **/
+    /* #################################################### */     
     @Test
     public void testRegistrarCruceroOK() {
         Sistema s = new Sistema();
@@ -132,9 +135,9 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.ERROR_4, s.registrarCrucero("Montevideo","Love Crucer",1,5).resultado);
     }
 
-    /**
-     * Test of ingresarServicio method, of class Sistema.
-     */
+    /* #################################################### */
+    /**         Test para INGRESAR SERVICIO                **/
+    /* #################################################### */     
     @Test
     public void testIngresarServicioOK() {
         Sistema sis = new Sistema();
@@ -173,9 +176,9 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.ERROR_3, sis.ingresarServicio("Montevideo","Love Crucer", "Spa").resultado);
     }
 
-    /**
-     * Test of borrarServicio method, of class Sistema.
-     */
+    /* #################################################### */
+    /**         Test para BORRAR SERVICIO                  **/
+    /* #################################################### */  
     @Test
     public void testBorrarServicio() {
         Sistema sis = new Sistema();
@@ -215,9 +218,10 @@ public class SistemaTest {
         sis.ingresarServicio("Montevideo","Love Crucer", "Spa");
         assertEquals(Retorno.Resultado.ERROR_3, sis.borrarServicio("No ciudad&&","Love Crucer", "Lavandería").resultado);
     }    
-    /**
-     * Test of realizarReserva method, of class Sistema.
-     */
+
+    /* #################################################### */
+    /**         Test para REALIZAR RESERVA                 **/
+    /* #################################################### */  
     @Test
     public void testRealizarReserva() {
         Sistema sis = new Sistema();
@@ -245,9 +249,9 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.ERROR_2, sis.realizarReserva(1, "No ciudad", "No Crucero").resultado);
     }       
 
-    /**
-     * Test of cancelarReserva method, of class Sistema.
-     */
+    /* #################################################### */
+    /**         Test para CANCELAR RESERVA                 **/
+    /* #################################################### */  
     @Test
     public void testCancelarReserva() {
         Sistema sis = new Sistema();
@@ -287,9 +291,9 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.ERROR_3, sis.cancelarReserva(1, "No ciudad", "Love Crucer").resultado);        
     }       
 
-    /**
-     * Test of ingresarComentario method, of class Sistema.
-     */
+    /* #################################################### */
+    /**         Test para INGRESAR COMENTARIO               **/
+    /* #################################################### */  
     @Test
     public void testIngresarComentario() {
         Sistema sis = new Sistema();
@@ -335,6 +339,9 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.ERROR_3, sis.ingresarComentario("No ciudad", "Love Crucer", "Muy lindo el crucero", 4).resultado);        
     }    
     
+    /* #################################################### */
+    /**         Test para LISTAR SERVICIOS                 **/
+    /* #################################################### */      
     @Test
     public void testListarServicios() {
         Sistema sis = new Sistema();
@@ -368,6 +375,9 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.ERROR_2, sis.listarServicios("No ciudad", "Love Crucer").resultado);        
     }    
     
+    /* #################################################### */
+    /**     Test para LISTAR CRUCEROS POR CIUDAD           **/
+    /* #################################################### */  
     @Test
     public void testListarCrucerosCiudad() {
         Sistema sis = new Sistema();
@@ -390,9 +400,9 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.ERROR_1, sis.listarCrucerosCiudad("No ciudad").resultado);        
     }
 
-    /**
-     * Test of listarCrucerosRankingAsc method, of class Sistema.
-     */
+    /* #################################################### */
+    /**     Test para LISTAR CRUCEROS POR RANKING ASC      **/
+    /* #################################################### */  
     @Test
     public void testListarCrucerosRankingAsc() {
         Sistema sis = new Sistema();
@@ -431,9 +441,9 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.ERROR_1, sis.listarCrucerosRankingAsc("No ciudad").resultado);        
     }    
 
-    /**
-     * Test of listarCrucerosRankingDesc method, of class Sistema.
-     */
+    /* #################################################### */
+    /**     Test para LISTAR CRUCEROS POR RANKING DSC      **/
+    /* #################################################### */  
     @Test
     public void testListarCrucerosRankingDesc() {
         Sistema sis = new Sistema();
@@ -471,9 +481,10 @@ public class SistemaTest {
         sis.ingresarComentario("Montevideo", "Island Crucer", "Buen whisky y buen vino", 5);        
         assertEquals(Retorno.Resultado.ERROR_1, sis.listarCrucerosRankingDesc("No ciudad").resultado); 
     }
-    /**
-     * Test of listarCrucerosRanking method, of class Sistema.
-     */
+
+    /* #################################################### */
+    /**     Test para LISTAR CRUCEROS POR RANKING GRAL     **/
+    /* #################################################### */  
     @Test
     public void testListarCrucerosRanking() {
         Sistema sis = new Sistema();
@@ -493,9 +504,9 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.OK, sis.listarCrucerosRanking().resultado); 
     }
 
-    /**
-     * Test of listarComentarios method, of class Sistema.
-     */
+    /* #################################################### */
+    /**     Test para LISTAR COMENTARIOS                   **/
+    /* #################################################### */  
     @Test
     public void testListarComentarios() {
         Sistema sis = new Sistema();
@@ -541,9 +552,9 @@ public class SistemaTest {
         assertEquals(Retorno.Resultado.ERROR_2, sis.listarComentarios("No Ciudad", "Island Crucer").resultado);     
     }    
 
-    /**
-     * Test of cargarDistancias method, of class Sistema.
-     */
+    /* #################################################### */
+    /**     Test para CARGAR DISTANCIAS ENTRE CIUDADES      **/
+    /* #################################################### */  
     @Test
     public void testCargarDistancias() {
         System.out.println("cargarDistancias");
@@ -556,9 +567,9 @@ public class SistemaTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of buscarCamino method, of class Sistema.
-     */
+    /* #################################################### */
+    /**     Test para BUSCAR CAMINO ENTRE CIUDADES         **/
+    /* #################################################### */  
     @Test
     public void testBuscarCamino() {
         System.out.println("buscarCamino");

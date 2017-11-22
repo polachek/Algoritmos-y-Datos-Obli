@@ -4,20 +4,31 @@ package oblm3a;
 public class OBLM3A {
 
     public static void main(String[] args) {
-        // TODO code application logic here
+
         Sistema S = new Sistema();
-        //S.crearSistemaReservas(-4);
         prueba P = new prueba();
-        //prueba1(S,P);
-        prueba2(S,P);        
+        prueba(S,P);      
     }
     
-    static void prueba1(Sistema s, prueba p){
-        System.out.println("#################################");
+    static void prueba(Sistema s, prueba p){
+        System.out.println("###################################");
         System.out.println("####### SISTEMA DE RESERVAS #######");
-        System.out.println("#################################");
+        System.out.println("###################################");
+        
+        System.out.println();        
+        System.out.println("PRUEBA: cantidad de ciudades mayor a 0");                
         p.ver(s.crearSistemaReservas(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
         System.out.println();
+        
+        System.out.println();        
+        System.out.println("PRUEBA: cantidad de ciudades igual a 0");                
+        p.ver(s.crearSistemaReservas(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+        System.out.println();        
+        
+        System.out.println();        
+        System.out.println("PRUEBA: cantidad de ciudades menor a 0");                
+        p.ver(s.crearSistemaReservas(-1).resultado, Retorno.Resultado.ERROR_1, "Se crea el sistema de reservas");
+        System.out.println();        
         
         System.out.println("#######################################");
         System.out.println("###### TEST REGISTRO DE CIUDADES ######");
