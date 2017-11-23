@@ -140,7 +140,7 @@ public class Sistema implements ISistema {
             }
             else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
                 ret.resultado = Resultado.ERROR_1;
-                ret.valorString = "No existe el crucero "+crucero+" registrado en la ciudad "+ciudad;
+                ret.valorString = "Intenta agregar un servicio al crucero "+crucero+" que no está registrado en la ciudad "+ciudad;
             }
 
             else
@@ -166,17 +166,21 @@ public class Sistema implements ISistema {
 
         if(!AC.existe(ciudad)){
             ret.resultado = Resultado.ERROR_3;
+            ret.valorString = "Intenta borrar un servicio a un crucero en una ciudad que no está registrada.";
         } 
         else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
             ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "Intenta borrar un servicio al crucero "+crucero+" que no está registrado en la ciudad "+ciudad;
         }
         else if(!AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero).getLservicio().existeServicio(servicio)){
             ret.resultado = Resultado.ERROR_2;
+            ret.valorString = "El servicio "+servicio+" que intenta borrar no está registrado en el sistema.";
         }
         else{
             Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero); 
             miCrucero.getLservicio().borrarElemento(servicio);
             ret.resultado = Resultado.OK;
+            ret.valorString = "El servicio "+servicio+" se borró exitosamente." ;
         }
 
         return ret;
@@ -185,10 +189,14 @@ public class Sistema implements ISistema {
     @Override
     public Retorno realizarReserva(int cliente, String ciudad, String crucero) {
         Retorno ret = new Retorno();
-        if(!AC.existe(ciudad))
+        if(!AC.existe(ciudad)){
             ret.resultado = Resultado.ERROR_2;
-        else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero))
+            ret.valorString = "Intenta realizar una reserva en un crucero que no está registrado en la ciudad "+ciudad+"." ;
+        }
+        else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
             ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "Intenta realizar una reserva en el crucero "+crucero+" que no está registrado en la ciudad "+ciudad+".";
+        }
         else
         {
             //Reserva
@@ -213,13 +221,16 @@ public class Sistema implements ISistema {
             {
                 unaReserva.agregarReserva(cru, cli, espera);
                 cru.getLReservas().agregarReserva(unaReserva);
-                ret.resultado = Resultado.OK;                            
+                ret.resultado = Resultado.OK;  
+                ret.valorString = "La reserva para el cliente "+cliente+" en el crucero "+crucero+" se realizó exitosamente.";
             }
             else
             {
                 unaReserva.agregarReserva(cru, cli, espera);
                 cru.getCEspera().encolar(unaReserva);
-                ret.resultado = Resultado.OK;                                        
+                ret.resultado = Resultado.OK; 
+                ret.valorString = "La reserva para el cliente "+cliente+" en el crucero "+crucero+" queda en lista de espera.";
+                
             }   
         }
         return ret;
@@ -231,10 +242,14 @@ public class Sistema implements ISistema {
             Cliente cli = new Cliente();
             cli.setId(cliente);
                         
-            if(!AC.existe(ciudad))
+            if(!AC.existe(ciudad)){
                 ret.resultado = Resultado.ERROR_3;
-            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero))
+                ret.valorString = "Intenta cancelar una reserva en un crucero que no está registrado en la ciudad "+ciudad+".";
+            }
+            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
                 ret.resultado = Resultado.ERROR_1;
+                ret.valorString = "Intenta cancelar una reserva en el crucero "+crucero+" que no está registrado en la ciudad "+ciudad+".";                
+            }
             else
             {
                 Crucero cru = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero);
@@ -250,13 +265,17 @@ public class Sistema implements ISistema {
                         esperas.desencolar();
                     }
                     ret.resultado = Resultado.OK;
+                    ret.valorString = "La reserva para el cliente "+cliente+" en el crucero "+crucero+" se canceló exitosamente.";                    
                 }
                 else if(esperas.existeEspera(cliente)){
-                    esperas.borrarEspera(cliente);                    
+                    esperas.borrarEspera(cliente);  
+                    ret.valorString = "La reserva para el cliente "+cliente+" en el crucero "+crucero+" se canceló exitosamente.";                                        
                     ret.resultado = Resultado.OK;
                 }
-                else
+                else{
                     ret.resultado = Resultado.ERROR_2;
+                    ret.valorString = "El cliente "+cliente+" no tiene reservas en el crucero "+crucero+".";
+                }
                     
             }
 

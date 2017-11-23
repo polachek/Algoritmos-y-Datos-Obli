@@ -95,7 +95,7 @@ public class OBLM3A {
         
         System.out.println();        
         System.out.println("PRUEBA: en la ciudad ingresada ya existe un crucero con el nombre ingresado.");                         
-        Retorno r17 = s.registrarCrucero("New York", "Royal Caribbean Int.", 4, 3100);
+        Retorno r17 = s.registrarCrucero("New York", "Royal Caribbean Int.", 4, 3);
         p.ver(r17.resultado, Retorno.Resultado.ERROR_3, r17.valorString);
         System.out.println();        
 
@@ -141,22 +141,26 @@ public class OBLM3A {
         System.out.println("#######################################");
         System.out.println();        
         System.out.println("PRUEBA: el servicio se borró exitosamente."); 
-        p.ver(s.borrarServicio("New York", "Royal Caribbean Int.", "Spa").resultado, Retorno.Resultado.OK, "Borramos Servicio Spa");
+        Retorno r25 = s.borrarServicio("New York", "Royal Caribbean Int.", "Spa");
+        p.ver(r25.resultado, Retorno.Resultado.OK, r25.valorString);
         System.out.println(); 
         
         System.out.println();        
         System.out.println("PRUEBA: no existe un crucero en la ciudad ingresada.");
-        p.ver(s.borrarServicio("New York", "No Crucero", "Discoteca").resultado, Retorno.Resultado.ERROR_1, "No existe el Crucero para la Ciudad");
+        Retorno r26 = s.borrarServicio("New York", "No Crucero", "Discoteca");
+        p.ver(r26.resultado, Retorno.Resultado.ERROR_1, r26.valorString);
         System.out.println();   
         
         System.out.println();        
-        System.out.println("PRUEBA: el servicio que se intenta borrar no existe.");        
-        p.ver(s.borrarServicio("New York", "Royal Caribbean Int.", "Choripan").resultado, Retorno.Resultado.ERROR_2, "No existe el Servicio");
+        System.out.println("PRUEBA: el servicio que se intenta borrar no existe.");
+        Retorno r27 = s.borrarServicio("New York", "Royal Caribbean Int.", "Choripan");
+        p.ver(r27.resultado, Retorno.Resultado.ERROR_2, r27.valorString);
         System.out.println();        
         
         System.out.println();        
-        System.out.println("PRUEBA: la ciudad ingresada no existe.");       
-        p.ver(s.borrarServicio("No Ciudad", "Royal Caribbean Int.", "Discoteca").resultado, Retorno.Resultado.ERROR_3, "No existe la Ciudad");
+        System.out.println("PRUEBA: la ciudad ingresada no existe.");
+        Retorno r28 = s.borrarServicio("No Ciudad", "Royal Caribbean Int.", "Discoteca"); 
+        p.ver(r28.resultado, Retorno.Resultado.ERROR_3, r28.valorString);
         System.out.println();
         
 
@@ -166,20 +170,26 @@ public class OBLM3A {
         
         System.out.println();        
         System.out.println("PRUEBA: la reserva se realizó exitosamente."); 
-        p.ver(s.realizarReserva(1, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realizó la reserva del cliente 1 para el Royal Caribbean Int. de New york");
-        p.ver(s.realizarReserva(2, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realizó la reserva del cliente 2 para el Royal Caribbean Int. de New York");
-        p.ver(s.realizarReserva(3, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realizó la reserva del cliente 3 para el Royal Caribbean Int. New York");
-        p.ver(s.realizarReserva(4, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realizó la reserva del cliente 4 para el Royal Caribbean Int. New York");
+        Retorno r29 = s.realizarReserva(1, "New York", "Royal Caribbean Int.");
+        p.ver(r29.resultado, Retorno.Resultado.OK, r29.valorString);
+        Retorno r30 = s.realizarReserva(2, "New York", "Royal Caribbean Int.");
+        p.ver(r30.resultado, Retorno.Resultado.OK, r30.valorString);
+        Retorno r31 = s.realizarReserva(3, "New York", "Royal Caribbean Int.");
+        p.ver(r31.resultado, Retorno.Resultado.OK, r31.valorString);
+        Retorno r32 = s.realizarReserva(4, "New York", "Royal Caribbean Int.");
+        p.ver(r32.resultado, Retorno.Resultado.OK, r32.valorString);
         System.out.println();
         
         System.out.println();
         System.out.println("PRUEBA: no existe un crucero en la ciudad ingresada.");
-        p.ver(s.realizarReserva(6, "New York", "NO CRUCERO").resultado,Retorno.Resultado.ERROR_1, "No existe el Crucero para la Ciudad");        
+        Retorno r33 = s.realizarReserva(6, "New York", "NO CRUCERO"); 
+        p.ver(r33.resultado,Retorno.Resultado.ERROR_1, r33.valorString);        
         System.out.println();
         
         System.out.println();
         System.out.println("PRUEBA: la ciudad ingresada no existe.");
-        p.ver(s.realizarReserva(5, "NO CIUDAD", "Royal Caribbean Int.").resultado, Retorno.Resultado.ERROR_2, "No existe la Ciudad");
+        Retorno r34 = s.realizarReserva(5, "NO CIUDAD", "Royal Caribbean Int."); 
+        p.ver(r34.resultado, Retorno.Resultado.ERROR_2, r34.valorString);
         System.out.println();
         
 
@@ -188,25 +198,30 @@ public class OBLM3A {
         System.out.println("####################################"); 
         
         System.out.println();
-        System.out.println("PRUEBA: la cancelación se realizó exitosamente.");
+        System.out.println("PRUEBA: la cancelación se realizó exitosamente.");        
         System.out.println("Cantidad de Reservas antes de la cancelación: " + s.AC.buscar("New York").getLcrucero().buscarCruceroXNombre("Royal Caribbean Int.").getLReservas().getCantelementos());        
-        p.ver(s.cancelarReserva(1, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se canceló la reserva del cliente 1 para el Royal Caribbean Int. New York");                
-        p.ver(s.cancelarReserva(2, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se canceló la reserva del cliente 2 para el Royal Caribbean Int. New York");                        
+        Retorno r35 = s.cancelarReserva(1, "New York", "Royal Caribbean Int."); 
+        p.ver(r35.resultado, Retorno.Resultado.OK, r35.valorString);                
+        Retorno r36 = s.cancelarReserva(2, "New York", "Royal Caribbean Int.");
+        p.ver(r36.resultado, Retorno.Resultado.OK, r36.valorString);                        
         System.out.println("Cantidad de Reservas después de la cancelación: " + s.AC.buscar("New York").getLcrucero().buscarCruceroXNombre("Royal Caribbean Int.").getLReservas().getCantelementos());
         
         System.out.println();        
         System.out.println("PRUEBA: no existe un crucero en la ciudad ingresada.");
-        p.ver(s.cancelarReserva(1, "New York", "No crucero").resultado, Retorno.Resultado.ERROR_1, "No existe un crucero en la ciudad ingresada.");                        
+        Retorno r37 = s.cancelarReserva(1, "New York", "No crucero");
+        p.ver(r37.resultado, Retorno.Resultado.ERROR_1, r37.valorString);                        
         System.out.println();
         
         System.out.println();        
         System.out.println("PRUEBA: el cliente no tiene reservas para el crucero ingresado.");
-        p.ver(s.cancelarReserva(45, "New York", "Royal Caribbean Int.").resultado, Retorno.Resultado.ERROR_2, "El cliente no tiene reservas para el crucero ingresado");                        
+        Retorno r38 = s.cancelarReserva(45, "New York", "Royal Caribbean Int.");
+        p.ver(r38.resultado, Retorno.Resultado.ERROR_2, r38.valorString);                        
         System.out.println();
              
         System.out.println();        
         System.out.println("PRUEBA: la ciudad ingresada no existe.");
-        p.ver(s.cancelarReserva(1, "No ciudad", "Royal Caribbean Int.").resultado, Retorno.Resultado.ERROR_3, "La ciudad ingresada no existe.");                        
+        Retorno r39 = s.cancelarReserva(1, "No ciudad", "Royal Caribbean Int.");
+        p.ver(r39.resultado, Retorno.Resultado.ERROR_3, r39.valorString);                        
         System.out.println();                
         
         System.out.println("######################################");
