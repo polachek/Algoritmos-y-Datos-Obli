@@ -239,7 +239,7 @@ public class ISistemaPruebas21 {
 
 	@Test
 	public void testCargarDistancias() {
-		sis.crearSistemaReservas(6);
+		sis.crearSistemaReservas(7);
 		sis.registrarCiudad("Montevideo");
 		sis.registrarCiudad("Santiago");
 		sis.registrarCiudad("Lima");

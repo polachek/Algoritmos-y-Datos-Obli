@@ -381,7 +381,8 @@ public class OBLM3A {
         
       
         p.ver(s.cargarDistancias(mapa).resultado, Retorno.Resultado.OK, s.cargarDistancias(mapa).valorString); 
-        p.ver(s.buscarCamino(mapa, "Lima", "New York").resultado, Retorno.Resultado.OK,s.buscarCamino(mapa, "Lima", "New York").valorString); 
+        Retorno r99 = s.buscarCamino(mapa, "Montevideo", "New York");
+        p.ver(r99.resultado, Retorno.Resultado.OK,r99.valorString); 
         
         
         p.imprimirResultadosPrueba();        

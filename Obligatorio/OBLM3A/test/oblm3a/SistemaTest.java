@@ -557,14 +557,20 @@ public class SistemaTest {
     /* #################################################### */  
     @Test
     public void testCargarDistancias() {
-        System.out.println("cargarDistancias");
-        int[][] ciudades = null;
-        Sistema instance = new Sistema();
-        Retorno expResult = null;
-        Retorno result = instance.cargarDistancias(ciudades);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Sistema s = new Sistema();        
+        int [][] mapa={{0,10,25,15,30,0},{10,0,20,0,0,0},{25,20,0,0,0,40},{15,0,0,0,0,45},{30,0,0,0,0,25},{0,0,40,45,25,0}};        
+        s.crearSistemaReservas(7);
+        
+        s.registrarCiudad("Montevideo");
+        s.registrarCiudad("Santiago");        
+        s.registrarCiudad("Lima");        
+        s.registrarCiudad("San Pablo");                
+        s.registrarCiudad("Panamá");                        
+        s.registrarCiudad("New York");                        
+        
+        s.cargarDistancias(mapa); 
+        
+        assertEquals(Retorno.Resultado.OK,s.cargarDistancias(mapa).resultado);             
     }
 
     /* #################################################### */
@@ -572,16 +578,20 @@ public class SistemaTest {
     /* #################################################### */  
     @Test
     public void testBuscarCamino() {
+        Sistema s = new Sistema();        
+        int [][] mapa={{0,10,25,15,30,0},{10,0,20,0,0,0},{25,20,0,0,0,40},{15,0,0,0,0,45},{30,0,0,0,0,25},{0,0,40,45,25,0}};                
+        s.crearSistemaReservas(7);
+        
+        s.registrarCiudad("Montevideo");
+        s.registrarCiudad("Santiago");        
+        s.registrarCiudad("Lima");        
+        s.registrarCiudad("San Pablo");                
+        s.registrarCiudad("Panamá");                        
+        s.registrarCiudad("New York");   
+        
         System.out.println("buscarCamino");
-        int[][] m = null;
-        String origen = "";
-        String destino = "";
-        Sistema instance = new Sistema();
-        Retorno expResult = null;
-        Retorno result = instance.buscarCamino(m, origen, destino);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        s.buscarCamino(mapa, "Montevideo", "New York");        
+        assertEquals(Retorno.Resultado.OK, s.buscarCamino(mapa, "Montevideo", "New York").resultado);
     }
     
 }
