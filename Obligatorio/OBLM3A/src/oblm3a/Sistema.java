@@ -6,13 +6,23 @@ public class Sistema implements ISistema {
     public ArbolCiudades AC;
     public ListaClientes LClientes;
     public ListaCruceros LGralCru;
+    public int contadorCiudades = 0;
 
     @Override
     public Retorno crearSistemaReservas(int cantCiudades) {
         AC = new ArbolCiudades();
         LClientes = new ListaClientes();
         LGralCru = new ListaCruceros();
-        Retorno ret = new Retorno();       
+        Retorno ret = new Retorno();   
+        
+        int[][] mat = new int[][] {
+			{0,10,25,15,30,0},
+			{10,0,20,0,0,0},
+			{25,20,0,0,0,40},
+			{15,0,0,0,0,45},
+			{30,0,0,0,0,25},
+			{0,0,40,45,25,0}
+        };
         
         if(cantCiudades < 0)
             ret.resultado = Resultado.ERROR_1;
@@ -53,6 +63,9 @@ public class Sistema implements ISistema {
            {
                 if (!existeCiudad && cantCiudades < maxCiudades) {
                     AC.insertar(ciudad);
+                    NodoArbolCiudad c = AC.buscar(ciudad);
+                    c.setCodCiudad(contadorCiudades);
+                    contadorCiudades++;
                     ret.resultado = Resultado.OK;                
                 }
                 else 
@@ -62,10 +75,13 @@ public class Sistema implements ISistema {
            {
                 if (!existeCiudad) {
                     AC.insertar(ciudad);
+                    NodoArbolCiudad c = AC.buscar(ciudad);
+                    c.setCodCiudad(contadorCiudades);
+                    contadorCiudades++;                    
                     ret.resultado = Resultado.OK;                
                 }
                 else 
-                    ret.resultado=Retorno.Resultado.ERROR_1;                
+                    ret.resultado = Retorno.Resultado.ERROR_1;                
            }
            return ret;
     }
@@ -449,19 +465,49 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno cargarDistancias(int[][] ciudades) {
-            Retorno ret = new Retorno();
+        Retorno ret = new Retorno();
+        ret.valorString = "No se cargaron las distancias";
+        
+        int filas = ciudades.length;
+        int col = ciudades[0].length;
+        int largo = filas*col;
+        int cantCiudadesEnSistema = AC.getMaximo();
+         
+        if(largo == cantCiudadesEnSistema){
+           ret.resultado = Resultado.OK;
+           ret.valorString = "Las distancias se cargaron correctamente."; 
 
-            ret.resultado = Resultado.NO_IMPLEMENTADA;
-
-            return ret;
+        }
+        return ret;
     }
 
     @Override
     public Retorno buscarCamino(int[][] m, String origen, String destino) {
-            Retorno ret = new Retorno();
-
-            ret.resultado = Resultado.NO_IMPLEMENTADA;
-
-            return ret;
+       Retorno ret = new Retorno();
+       int columnas=m[0].length;
+       int escala=0;
+       int distancia = Integer.MAX_VALUE;
+       int aux;
+       
+       NodoArbolCiudad ciudadOrigen = AC.buscar(origen);
+       int o = ciudadOrigen.getCodCiudad();
+       
+       NodoArbolCiudad ciudadDestino = AC.buscar(destino);
+       int d = ciudadOrigen.getCodCiudad();       
+       
+       for (int i = 0; i < columnas; i++) {
+            aux=m[o][i] + m[d][i];
+            if (m[o][i] != 0 && m[d][i] != 0 && aux < distancia) {
+               distancia=aux;
+               escala=i;             
+            }
+       }
+    
+        ret.valorString = "El camino mas corto desde " + ciudadOrigen + " hasta " + ciudadDestino + " es con escala en "+escala+" y la distancia es "+distancia;
+        if (m[o][d] != 0 && distancia > m[o][d]){
+            ret.valorString = "El camino es directo desde " + ciudadOrigen +" a " + ciudadDestino + " y la distancia es " + m[o][d];
+        }
+        ret.resultado = ret.resultado.OK;
+        return ret;
     }
 }

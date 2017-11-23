@@ -7,10 +7,13 @@ public class OBLM3A {
 
         Sistema S = new Sistema();
         prueba P = new prueba();
-        prueba(S,P);      
+        prueba(S,P);     
     }
     
     static void prueba(Sistema s, prueba p){
+        
+        /*
+        
         System.out.println("########################################");
         System.out.println("####### TEST SISTEMA DE RESERVAS #######");
         System.out.println("########################################");
@@ -308,9 +311,32 @@ public class OBLM3A {
         System.out.println("####### TEST DESTRUIR SISTEMA #######");
         System.out.println("#####################################");
         System.out.println();  
-       System.out.println("PRUEBA: destruir el sistema de reservas.");           
+        System.out.println("PRUEBA: destruir el sistema de reservas.");           
         p.ver(s.destruirSistemaReservas().resultado, Retorno.Resultado.OK, "Se destruye el sistema de reservas");
         System.out.println();         
+        
+        */
+        System.out.println("########################################");
+        System.out.println("####### EJERCICIO COMPLEMENTARIO #######");
+        System.out.println("########################################");
+        
+        System.out.println("####### CARGAR MATRIZ #######");
+        int [][] mapa={{0,10,25,15,30,0},{10,0,20,0,0,0},{25,20,0,0,0,40},{15,0,0,0,0, 40},{30,0,0,0,0,25},{0,0,40,45,25,0}};
+        
+        p.ver(s.crearSistemaReservas(7).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas.");
+        
+        p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se ingresa Montevideo.");
+        p.ver(s.registrarCiudad("Santiago").resultado, Retorno.Resultado.OK, "Se ingresa Santiago.");        
+        p.ver(s.registrarCiudad("Lima").resultado, Retorno.Resultado.OK, "Se ingresa Lima.");        
+        p.ver(s.registrarCiudad("San Pablo").resultado, Retorno.Resultado.OK, "Se ingresa San Pablo.");                
+        p.ver(s.registrarCiudad("Panamá").resultado, Retorno.Resultado.OK, "Se ingresa Panamá.");                        
+        p.ver(s.registrarCiudad("New York").resultado, Retorno.Resultado.OK, "Se ingresa New York.");                        
+        
+        
+        
+        p.ver(s.cargarDistancias(mapa).resultado, Retorno.Resultado.OK, "Se cargaron las distancias."); 
+        p.ver(s.buscarCamino(mapa, "Montevideo", "Nueva York").resultado, Retorno.Resultado.OK, "Se cargaron las distancias."); 
+        s.cargarDistancias(mapa);
         
         p.imprimirResultadosPrueba();
     }
