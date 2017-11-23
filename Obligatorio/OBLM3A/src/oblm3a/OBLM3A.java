@@ -335,7 +335,7 @@ public class OBLM3A {
         
         
         p.ver(s.cargarDistancias(mapa).resultado, Retorno.Resultado.OK, "Se cargaron las distancias."); 
-        p.ver(s.buscarCamino(mapa, "Montevideo", "Nueva York").resultado, Retorno.Resultado.OK, "Se cargaron las distancias."); 
+        p.ver(s.buscarCamino(mapa, "Montevideo", "Nueva York").resultado, Retorno.Resultado.OK, ""); 
         s.cargarDistancias(mapa);
         
         p.imprimirResultadosPrueba();

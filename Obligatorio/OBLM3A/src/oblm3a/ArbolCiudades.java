@@ -118,6 +118,42 @@ public class ArbolCiudades implements IArbolCiudades{
              
         return ret;
     }
+    
+    @Override    
+    public NodoArbolCiudad buscarCiudadPorCodigo(int codigoCiudad){
+        NodoArbolCiudad ret = null;
+        int c = this.raiz.getCodCiudad();
+        NodoArbolCiudad izquierda = this.raiz.getIzq();
+        NodoArbolCiudad derecha = this.raiz.getDer();         
+        
+        if(!this.esVacio())
+        {
+            ArbolCiudades aux = new ArbolCiudades();
+            if (codigoCiudad == c) 
+                ret = this.raiz;
+            else if (codigoCiudad < c){
+                if(izquierda == null) 
+                    ret = null;                    
+                else
+                {
+                    aux.raiz = izquierda;
+                    ret = aux.buscarCiudadPorCodigo(codigoCiudad);
+                } 
+            }
+            else 
+            {
+                if(derecha == null) 
+                    ret = null;                    
+                else{
+                    aux.raiz = derecha;
+                    ret = aux.buscarCiudadPorCodigo(codigoCiudad);
+                }                
+            }
+        }
+        else
+            ret =  null;             
+        return ret;
+    }    
 
     @Override    
     public boolean existe(String ciudad){

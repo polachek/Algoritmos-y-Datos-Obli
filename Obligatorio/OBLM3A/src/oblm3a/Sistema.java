@@ -473,7 +473,6 @@ public class Sistema implements ISistema {
         int largo = filas*col;
         int cantCiudadesEnSistema = AC.getMaximo()-1;
                
-        System.out.println("La cantidad de ciudades es: "+cantCiudadesEnSistema+" y la cantidad de elementos de la matriz es: " + filas);
         if(filas == cantCiudadesEnSistema){
            ret.resultado = Resultado.OK;
            ret.valorString = "Las distancias se cargaron correctamente."; 
@@ -484,29 +483,37 @@ public class Sistema implements ISistema {
 
     @Override
     public Retorno buscarCamino(int[][] m, String origen, String destino) {
-       Retorno ret = new Retorno();
-       int columnas=m[0].length;
-       int escala=0;
-       int distancia = Integer.MAX_VALUE;
-       int aux;
+        Retorno ret = new Retorno();
+        int columnas=m[0].length;
+        int escala = 0;
+        int distancia = Integer.MAX_VALUE;
+        int aux;
        
-       NodoArbolCiudad ciudadOrigen = AC.buscar(origen);
-       int o = ciudadOrigen.getCodCiudad();
+        NodoArbolCiudad ciudadOrigen = AC.buscar(origen);
+        int o = ciudadOrigen.getCodCiudad();
        
-       NodoArbolCiudad ciudadDestino = AC.buscar(destino);
-       int d = ciudadOrigen.getCodCiudad();       
+        NodoArbolCiudad ciudadDestino = AC.buscar(destino);
+        int d = ciudadOrigen.getCodCiudad();       
        
-       for (int i = 0; i < columnas; i++) {
+        for (int i = 0; i < columnas; i++) {
             aux=m[o][i] + m[d][i];
             if (m[o][i] != 0 && m[d][i] != 0 && aux < distancia) {
                distancia=aux;
                escala=i;             
             }
-       }
+        }
+        
+        NodoArbolCiudad escalaCiudad = AC.buscarCiudadPorCodigo(escala);
     
-        ret.valorString = "El camino mas corto desde " + ciudadOrigen + " hasta " + ciudadDestino + " es con escala en "+escala+" y la distancia es "+distancia;
+        /*ret.valorString = "El camino mas corto desde " + ciudadOrigen.getCiudad().getNombre() + " hasta " + ciudadDestino.getCiudad().getNombre() + " es con escala en "+ escalaCiudad +" y la distancia es " + distancia;*/
+
+        System.out.println("El valor de ciudadOrigen es: "+ciudadOrigen+" y el valor de ciudadDestino es: "+ciudadDestino);         
+        
+        System.out.println("El valor de ciudadOrigen es: "+ciudadOrigen.getCiudad().getNombre()+" y el valor de ciudadDestino es: "+ciudadDestino.getCiudad().getNombre());         
+        System.out.println("El valor de o es: "+o+" y el valor de d es: "+d);        
+        System.out.println("Este es m[o][d: ]"+m[o][d]);
         if (m[o][d] != 0 && distancia > m[o][d]){
-            ret.valorString = "El camino es directo desde " + ciudadOrigen +" a " + ciudadDestino + " y la distancia es " + m[o][d];
+            ret.valorString = "El camino es directo desde " + ciudadOrigen.getCiudad().getNombre() +" a " + ciudadDestino.getCiudad().getNombre() + " y la distancia es " + m[o][d];
         }
         ret.resultado = ret.resultado.OK;
         return ret;
