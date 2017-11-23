@@ -15,29 +15,24 @@ public class Sistema implements ISistema {
         MatrizCiudades = new ListaCiudades();
         LClientes = new ListaClientes();
         LGralCru = new ListaCruceros();
-        Retorno ret = new Retorno();   
+        Retorno ret = new Retorno();
         
-        int[][] mat = new int[][] {
-			{0,10,25,15,30,0},
-			{10,0,20,0,0,0},
-			{25,20,0,0,0,40},
-			{15,0,0,0,0,45},
-			{30,0,0,0,0,25},
-			{0,0,40,45,25,0}
-        };
-        
-        if(cantCiudades < 0)
+        if(cantCiudades < 0){
             ret.resultado = Resultado.ERROR_1;
+            ret.valorString ="No se puede crear un sistema de reservas porque la cantidad de ciudades es menor a 0.";
+        }
         else if(cantCiudades > 0)
         {
             AC.setMaximo(cantCiudades); 
             ret.resultado = Resultado.OK;
+            ret.valorString ="¡Buen trabajo! El sistema de reservas se creó exitosamente con un límite de "+cantCiudades+" ciudades.";            
         }
         else
         {
             Integer maximo = null;
             AC.setMaximo(maximo);       
-            ret.resultado = Resultado.OK;                
+            ret.resultado = Resultado.OK;
+            ret.valorString ="¡Buen trabajo! El sistema de reservas se creó exitosamente sin límite de ciudades.";                        
         }       
         return ret;
     }
@@ -49,6 +44,7 @@ public class Sistema implements ISistema {
             AC.vaciar();
         }                
         ret.resultado = Resultado.OK;
+        ret.valorString = "El sistema de reservas se destruyó exitosamente.";        
         return ret;
     }
 
@@ -63,28 +59,40 @@ public class Sistema implements ISistema {
            if(maxCiudades != null)
            {
                 if (!existeCiudad && cantCiudades < maxCiudades) {
+                    
                     AC.insertar(ciudad);
                     Ciudad laCiudad = AC.buscar(ciudad).getCiudad();
                     laCiudad.setCodCiudad(contadorCiudades);
                     MatrizCiudades.agregarInicio(laCiudad);                    
                     contadorCiudades++;
-                    ret.resultado = Resultado.OK; 
+                    ret.resultado = Resultado.OK;
+                    ret.valorString = "La ciudad "+ciudad+" se ingresó exitosamente.";
                 }
-                else 
-                    ret.resultado = Retorno.Resultado.ERROR_1;               
+                else if (!existeCiudad && cantCiudades >= maxCiudades){
+                    ret.resultado = Retorno.Resultado.ERROR_1;
+                    ret.valorString = "No se pueden registrar más ciudades en el sistema.";
+                }
+                else if (existeCiudad){
+                    ret.resultado = Retorno.Resultado.ERROR_1;  
+                    ret.valorString = "La ciudad "+ciudad+" ya está registrada en el sistema.";                                             
+                }                
            }
            else
            {
                 if (!existeCiudad) {
+                    
                     AC.insertar(ciudad);
                     Ciudad laCiudad = MatrizCiudades.buscarCiudadPorNombre(ciudad);
                     laCiudad.setCodCiudad(contadorCiudades);
                     MatrizCiudades.agregarInicio(laCiudad); 
                     contadorCiudades++;                    
-                    ret.resultado = Resultado.OK;                
+                    ret.resultado = Resultado.OK;
+                    ret.valorString = "La ciudad "+ciudad+" se ingresó exitosamente.";
                 }
-                else 
-                    ret.resultado = Retorno.Resultado.ERROR_1;                
+                else {
+                    ret.resultado = Retorno.Resultado.ERROR_1;  
+                    ret.valorString = "La ciudad "+ciudad+" ya está registrada en el sistema.";                                
+                }
            }
            return ret;
     }
@@ -96,18 +104,28 @@ public class Sistema implements ISistema {
             miCrucero.setCapacidad(capacidad);
             miCrucero.setEstrellas(estrellas);
 
-            if(!AC.existe(ciudad))
+            if(!AC.existe(ciudad)){
                 ret.resultado = Resultado.ERROR_4;
-            else if(estrellas <= 0 || estrellas > 5)
+                ret.valorString = "Intenta registrar un crucero en una ciudad que no está registrada.";
+            }
+            else if(estrellas <= 0 || estrellas > 5){
                 ret.resultado = Resultado.ERROR_1;
-            else if(capacidad < 0)
+                ret.valorString = "La cantidad de estrellas debe estar entre 1 y 5.";
+            }
+            else if(capacidad < 0){
                 ret.resultado = Resultado.ERROR_2;
-            else if(AC.buscar(ciudad).getLcrucero().buscarCrucero(nombre))
+                ret.valorString = "La capacidad del crucero debe ser superior a 0.";
+            }
+            else if(AC.buscar(ciudad).getLcrucero().buscarCrucero(nombre)){
                 ret.resultado = Resultado.ERROR_3;
+                ret.valorString = "Ya existe un crucero con nombre "+nombre+" registrado en la ciudad "+ciudad;
+            }
+
             else{
                 LGralCru.agregarInicio(miCrucero);
                 AC.buscar(ciudad).getLcrucero().agregarInicio(miCrucero);                 
                 ret.resultado = Resultado.OK;
+                ret.valorString = "El crucero "+nombre+" se registró exitosamente en la ciudad "+ciudad+".";
             }
             return ret;
     }
@@ -116,22 +134,29 @@ public class Sistema implements ISistema {
     public Retorno ingresarServicio(String ciudad, String crucero, String servicio) {
             Retorno ret = new Retorno();
 
-            if(!AC.existe(ciudad))
+            if(!AC.existe(ciudad)){
                 ret.resultado = Resultado.ERROR_2;
-            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero))
+                ret.valorString = "Intenta agregar un servicio a un crucero en una ciudad que no está registrada.";                
+            }
+            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
                 ret.resultado = Resultado.ERROR_1;
+                ret.valorString = "No existe el crucero "+crucero+" registrado en la ciudad "+ciudad;
+            }
+
             else
             {
                 Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero); 
-                if(miCrucero.getLservicio().existeServicio(servicio))
+                if(miCrucero.getLservicio().existeServicio(servicio)){
                     ret.resultado = Resultado.ERROR_3;
+                    ret.valorString = "El servicio "+servicio+" ya está registrado en el sistema.";
+                }
                 else
                 {
                     miCrucero.getLservicio().agregarInicio(servicio);
                     ret.resultado = Resultado.OK;
+                    ret.valorString = "El servicio "+ servicio +" se agregó exitosamente.";
                 }
             }
-            
             return ret;
     }
 
@@ -469,18 +494,22 @@ public class Sistema implements ISistema {
     @Override
     public Retorno cargarDistancias(int[][] ciudades) {
         Retorno ret = new Retorno();
-        ret.valorString = "No se cargaron las distancias";
         
         int filas = ciudades.length;
         int col = ciudades[0].length;
-        int largo = filas*col;
         int cantCiudadesEnSistema = AC.getMaximo()-1;
-               
-        if(filas == cantCiudadesEnSistema){
+        
+
+        if(filas == cantCiudadesEnSistema && col == cantCiudadesEnSistema){
            ret.resultado = Resultado.OK;
            ret.valorString = "Las distancias se cargaron correctamente."; 
-
+        }else{
+            ret.resultado = Resultado.ERROR_1;
+            ret.valorString = "No se cargaron las distancias.";                   
         }
+      
+
+
         return ret;
     }
 
@@ -500,31 +529,19 @@ public class Sistema implements ISistema {
         for (int i = 0; i < columnas; i++) {
             aux=m[o][i] + m[d][i];
             if (m[o][i] != 0 && m[d][i] != 0 && aux < distancia) {
-               distancia=aux;
-               escala=i;             
+               distancia = aux;
+               escala = i;         
             }
         }
-       System.out.println("escala: " + escala);
-       
-       Ciudad escalaCiudad = MatrizCiudades.buscarCiudadPorCodigo(escala);
-       
-       System.out.println("escalaCiudad: " + escalaCiudad.getNombre());
+        Ciudad escalaCiudad = MatrizCiudades.buscarCiudadPorCodigo(escala);
         
-       // System.out.println("escala: " + escalaCiudad.getCiudad().getNombre());
-       System.out.println("escala: " + escala);
-    
-        /*ret.valorString = "El camino mas corto desde " + ciudadOrigen.getCiudad().getNombre() + " hasta " + ciudadDestino.getCiudad().getNombre() + " es con escala en "+ escalaCiudad +" y la distancia es " + distancia;*/
-
-        System.out.println("El valor de ciudadOrigen es: "+ciudadOrigen.getNombre()+" y el valor de ciudadDestino es: "+ciudadDestino.getNombre());         
-  
-        System.out.println("El valor de o es: "+o+" y el valor de d es: "+d);        
-        System.out.println("Este es m[o][d]"+m[o][d]);
-        if (m[o][d] != 0 && distancia > m[o][d]){
-            System.out.println("El camino es directo desde " + ciudadOrigen.getNombre() +" a " + ciudadDestino.getNombre() + " y la distancia es " + m[o][d]);
-        }else{
-            System.out.println("No entro en el IF");
-        }
+        ret.valorString = "El camino más corto desde " + ciudadOrigen.getNombre() + " a " + ciudadDestino.getNombre() + " es con escala en "+escalaCiudad.getNombre()+" y la distancia es " + distancia+".";
         ret.resultado = ret.resultado.OK;
+        
+        if (m[o][d] != 0 && distancia > m[o][d]){
+            ret.valorString = "El camino más corto desde " + ciudadOrigen.getNombre() + " a " + ciudadDestino.getNombre() + " es directo y la distancia es " + m[o][d]+".";
+            ret.resultado = ret.resultado.OK;
+        }       
         return ret;
     }
 }

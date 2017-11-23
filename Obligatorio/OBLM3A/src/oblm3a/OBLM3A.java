@@ -4,33 +4,37 @@ package oblm3a;
 public class OBLM3A {
 
     public static void main(String[] args) {
-
         Sistema S = new Sistema();
+        Sistema SistMatriz = new Sistema();        
         prueba P = new prueba();
-        prueba(S,P);     
+        pruebaObligatorio(S,P);
+        pruebaMatriz(SistMatriz,P);
     }
     
-    static void prueba(Sistema s, prueba p){
+    static void pruebaObligatorio(Sistema s, prueba p){
         
-        /*
+
         
         System.out.println("########################################");
         System.out.println("####### TEST SISTEMA DE RESERVAS #######");
         System.out.println("########################################");
         
         System.out.println();        
-        System.out.println("PRUEBA: cantidad de ciudades igual a 0");                
-        p.ver(s.crearSistemaReservas(4).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+        System.out.println("PRUEBA: cantidad de ciudades igual a 0");
+        Retorno r1 = s.crearSistemaReservas(0);
+        p.ver(r1.resultado, Retorno.Resultado.OK, r1.valorString);
+        System.out.println();
+        
+        System.out.println();        
+        System.out.println("PRUEBA: cantidad de ciudades menor a 0"); 
+        Retorno r2 = s.crearSistemaReservas(-1);        
+        p.ver(r2.resultado, Retorno.Resultado.ERROR_1, r2.valorString);
         System.out.println(); 
         
         System.out.println();        
-        System.out.println("PRUEBA: cantidad de ciudades menor a 0");                
-        p.ver(s.crearSistemaReservas(-1).resultado, Retorno.Resultado.ERROR_1, "No se crea el sistema de reservas");
-        System.out.println(); 
-        
-        System.out.println();        
-        System.out.println("PRUEBA: cantidad de ciudades mayor a 0");                
-        p.ver(s.crearSistemaReservas(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+        System.out.println("PRUEBA: cantidad de ciudades mayor a 0");  
+        Retorno r3 = s.crearSistemaReservas(5);
+        p.ver(r3.resultado, Retorno.Resultado.OK, r3.valorString);
         System.out.println();
         
         System.out.println("#######################################");
@@ -38,79 +42,98 @@ public class OBLM3A {
         System.out.println("#######################################");
         
         System.out.println();        
-        System.out.println("PRUEBA: ciudad ingresada correctamente.");         
-        p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se ingresa Montevideo");
-        p.ver(s.registrarCiudad("Rocha").resultado, Retorno.Resultado.OK, "Se ingresa Rocha");
-        p.ver(s.registrarCiudad("Santiago").resultado, Retorno.Resultado.OK, "Se ingresa Santiago");
-        p.ver(s.registrarCiudad("San Pablo").resultado, Retorno.Resultado.OK, "Se ingresa San Pablo");        
-        p.ver(s.registrarCiudad("New York").resultado, Retorno.Resultado.OK, "Se ingresa New York");        
+        System.out.println("PRUEBA: ciudad ingresada correctamente.");
+        Retorno r4 = s.registrarCiudad("Montevideo");
+        p.ver(r4.resultado, Retorno.Resultado.OK,r4.valorString );
+        Retorno r5 = s.registrarCiudad("Rocha");
+        p.ver(r5.resultado, Retorno.Resultado.OK, r5.valorString);
+        Retorno r6 = s.registrarCiudad("Santiago");
+        p.ver(r6.resultado, Retorno.Resultado.OK, r6.valorString);
+        Retorno r7 = s.registrarCiudad("San Pablo");
+        p.ver(r7.resultado, Retorno.Resultado.OK, r7.valorString);
+        Retorno r8 = s.registrarCiudad("New York"); 
+        p.ver(r8.resultado, Retorno.Resultado.OK, r8.valorString);        
         System.out.println();
         
         System.out.println();        
         System.out.println("PRUEBA: la ciudad a ingresar ya existe en el sistema.");                 
-        p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Montevideo ya existe");
+        Retorno r9 = s.registrarCiudad("Montevideo");
+        p.ver(r9.resultado, Retorno.Resultado.ERROR_1, r9.valorString);
         
         System.out.println();        
         System.out.println("PRUEBA: el sistema ya tiene todas las ciudades ingresadas.");          
-        p.ver(s.registrarCiudad("Buenos Aires").resultado, Retorno.Resultado.ERROR_1, "Se sobrepasa el límite de ciudades gestionados por el sistema");
+        Retorno r10 = s.registrarCiudad("Buenos Aires"); 
+        p.ver(r10.resultado, Retorno.Resultado.ERROR_1, r10.valorString);
         System.out.println();
         
         System.out.println("#######################################");
         System.out.println("###### TEST REGISTRO DE CRUCEROS ######");
         System.out.println("#######################################");
         System.out.println();        
-        System.out.println("PRUEBA: el crucero se ingresó correctamente.");                  
-        p.ver(s.registrarCrucero("New York", "Royal Caribbean Int.", 5, 3000).resultado, Retorno.Resultado.OK, "Se agregó crucero Royal Caribbean a nueva york");
-        p.ver(s.registrarCrucero("Montevideo", "Crucer", 3, 2800).resultado, Retorno.Resultado.OK, "Se agregó crucero Crucer a Montevideo");
-        p.ver(s.registrarCrucero("Montevideo", "Carnival", 2, 2800).resultado, Retorno.Resultado.OK, "Se agregó crucero Carnival a Montevideo");
-        p.ver(s.registrarCrucero("Montevideo", "Papa Mobil", 4, 500).resultado, Retorno.Resultado.OK, "Se agregó crucero Papa Mobil a Montevideo");
+        System.out.println("PRUEBA: el crucero se ingresó correctamente."); 
+        Retorno r11 = s.registrarCrucero("New York", "Royal Caribbean Int.", 5, 3000);
+        p.ver(r11.resultado, Retorno.Resultado.OK, r11.valorString);
+        Retorno r12 = s.registrarCrucero("Montevideo", "Crucer", 3, 2800);
+        p.ver(r12.resultado, Retorno.Resultado.OK, r12.valorString);
+        Retorno r13 = s.registrarCrucero("Montevideo", "Carnival", 2, 2800);
+        p.ver(r13.resultado, Retorno.Resultado.OK, r13.valorString);
+        Retorno r14 = s.registrarCrucero("Montevideo", "Papa Mobil", 4, 500); 
+        p.ver(r14.resultado, Retorno.Resultado.OK, r14.valorString);
         System.out.println(); 
         
         System.out.println();        
         System.out.println("PRUEBA: se ingresa crucero con cantidad de estrellas menor a uno o mayor a 5");         
-        p.ver(s.registrarCrucero("Santiago", "Carnival Cruise Lines", 6, 2800).resultado, Retorno.Resultado.ERROR_1, "La cantidad de estrellas no está entre 1 y 5");
+        Retorno r15 = s.registrarCrucero("Santiago", "Carnival Cruise Lines", 6, 2800); 
+        p.ver(r15.resultado, Retorno.Resultado.ERROR_1, r15.valorString);
         System.out.println();
         
         System.out.println();        
-        System.out.println("PRUEBA: se ingresa crucero con capacidad menor a 0");                 
-        p.ver(s.registrarCrucero("Santiago", "Royal Caribbean Int.", 5, -1).resultado, Retorno.Resultado.ERROR_2, "La capacidad es menor a 0");
+        System.out.println("PRUEBA: se ingresa crucero con capacidad menor a 0");
+        Retorno r16 = s.registrarCrucero("Santiago", "Royal Caribbean Int.", 5, -1);
+        p.ver(r16.resultado, Retorno.Resultado.ERROR_2, r16.valorString);
         System.out.println(); 
         
         System.out.println();        
         System.out.println("PRUEBA: en la ciudad ingresada ya existe un crucero con el nombre ingresado.");                         
-        p.ver(s.registrarCrucero("New York", "Royal Caribbean Int.", 4, 3100).resultado, Retorno.Resultado.ERROR_3, "Ya existe un crucero con ese nombre para Montevideo");
+        Retorno r17 = s.registrarCrucero("New York", "Royal Caribbean Int.", 4, 3100);
+        p.ver(r17.resultado, Retorno.Resultado.ERROR_3, r17.valorString);
         System.out.println();        
 
         System.out.println();        
         System.out.println("PRUEBA: No existe la ciudad donde se intenta ingresar el crucero.");                                 
-        p.ver(s.registrarCrucero("Lima", "Disney Cruise Line", 5, 2200).resultado, Retorno.Resultado.ERROR_4, "La ciudad no existe");
-        
+        Retorno r18 = s.registrarCrucero("Lima", "Disney Cruise Line", 5, 2200);
+        p.ver(r18.resultado, Retorno.Resultado.ERROR_4, r18.valorString);        
         System.out.println();
-
         
         System.out.println("#######################################");
         System.out.println("###### TEST INGRESO DE SERVICIOS ######");
         System.out.println("#######################################");
         System.out.println();        
         System.out.println("PRUEBA: se ingresó servicio exitosamente.");          
-        p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi").resultado, Retorno.Resultado.OK, "Servicio wifi");
-        p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Spa").resultado, Retorno.Resultado.OK, "Servicio Spa");
-        p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Discoteca").resultado, Retorno.Resultado.OK, "Servicio de Discoteca");
+        Retorno r19 = s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi"); 
+        p.ver(r19.resultado, Retorno.Resultado.OK, r19.valorString);
+        Retorno r20 = s.ingresarServicio("New York", "Royal Caribbean Int.", "Spa");
+        p.ver(r20.resultado, Retorno.Resultado.OK, r20.valorString);
+        Retorno r21 =s.ingresarServicio("New York", "Royal Caribbean Int.", "Discoteca"); 
+        p.ver(r21.resultado, Retorno.Resultado.OK, r21.valorString);
         System.out.println();
         
         System.out.println();
         System.out.println("PRUEBA: ya existe un servicio con el nombre ingresado.");
-        p.ver(s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi").resultado, Retorno.Resultado.ERROR_3, "Servicio repetido");
+        Retorno r22 = s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi"); 
+        p.ver(r22.resultado, Retorno.Resultado.ERROR_3, r22.valorString);
         System.out.println();
         
         System.out.println();
         System.out.println("PRUEBA: en la ciudad ingresada no existe un crucero con el nombre ingresado.");        
-        p.ver(s.ingresarServicio("New York", "No Crucero", "Discoteca").resultado, Retorno.Resultado.ERROR_1, "No existe el Crucero para la Ciudad");
+        Retorno r23 = s.ingresarServicio("New York", "No Crucero", "Discoteca");
+        p.ver(r23.resultado, Retorno.Resultado.ERROR_1, r23.valorString);
         System.out.println();
 
         System.out.println();        
         System.out.println("PRUEBA: no existe una ciudad con el nombre ingresado.");                
-        p.ver(s.ingresarServicio("No Ciudad", "Royal Caribbean Int.", "Servicio de cuarto").resultado, Retorno.Resultado.ERROR_2, "No existe la Ciudad");
+        Retorno r24 = s.ingresarServicio("No Ciudad", "Royal Caribbean Int.", "Servicio de cuarto");
+        p.ver(r24.resultado, Retorno.Resultado.ERROR_2, r24.valorString);
         System.out.println();
         
         System.out.println("#######################################");
@@ -307,15 +330,20 @@ public class OBLM3A {
         p.ver(s.listarComentarios("No ciudad", "Crucer").resultado, Retorno.Resultado.ERROR_2, "La ciudad ingresada no existe.");
         System.out.println();         
 
+        
         System.out.println("#####################################");
         System.out.println("####### TEST DESTRUIR SISTEMA #######");
         System.out.println("#####################################");
         System.out.println();  
         System.out.println("PRUEBA: destruir el sistema de reservas.");           
-        p.ver(s.destruirSistemaReservas().resultado, Retorno.Resultado.OK, "Se destruye el sistema de reservas");
+        p.ver(s.destruirSistemaReservas().resultado, Retorno.Resultado.OK, s.destruirSistemaReservas().valorString);
         System.out.println();         
-        
-        */
+                
+        p.imprimirResultadosPrueba();
+    }
+    
+    static void pruebaMatriz(Sistema s, prueba p){
+
         System.out.println("########################################");
         System.out.println("####### EJERCICIO COMPLEMENTARIO #######");
         System.out.println("########################################");
@@ -333,10 +361,10 @@ public class OBLM3A {
         p.ver(s.registrarCiudad("New York").resultado, Retorno.Resultado.OK, "Se ingresa New York.");                        
         
       
-        p.ver(s.cargarDistancias(mapa).resultado, Retorno.Resultado.OK, "Se cargaron las distancias."); 
-        p.ver(s.buscarCamino(mapa, "Montevideo", "New York").resultado, Retorno.Resultado.OK, ""); 
-        s.cargarDistancias(mapa);
+        p.ver(s.cargarDistancias(mapa).resultado, Retorno.Resultado.OK, s.cargarDistancias(mapa).valorString); 
+        p.ver(s.buscarCamino(mapa, "Lima", "New York").resultado, Retorno.Resultado.OK,s.buscarCamino(mapa, "Lima", "New York").valorString); 
         
-        p.imprimirResultadosPrueba();
-    }
+        
+        p.imprimirResultadosPrueba();        
+    }    
 }
