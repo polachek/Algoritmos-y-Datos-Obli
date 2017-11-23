@@ -471,9 +471,10 @@ public class Sistema implements ISistema {
         int filas = ciudades.length;
         int col = ciudades[0].length;
         int largo = filas*col;
-        int cantCiudadesEnSistema = AC.getMaximo();
-         
-        if(largo == cantCiudadesEnSistema){
+        int cantCiudadesEnSistema = AC.getMaximo()-1;
+               
+        System.out.println("La cantidad de ciudades es: "+cantCiudadesEnSistema+" y la cantidad de elementos de la matriz es: " + filas);
+        if(filas == cantCiudadesEnSistema){
            ret.resultado = Resultado.OK;
            ret.valorString = "Las distancias se cargaron correctamente."; 
 
