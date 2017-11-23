@@ -227,6 +227,10 @@ public class OBLM3A {
         System.out.println("######################################");
         System.out.println("###### TEST INGRESAR COMENTARIO ######");
         System.out.println("######################################");
+                
+        s.ingresarComentario("Montevideo", "Crucer", "Ho-rri-ble", 1);
+        s.ingresarComentario("Montevideo", "Carnival", "Más o menos la calidad eh", 3);        
+        
         System.out.println();        
         System.out.println("PRUEBA: el comentario se ingresó exitosamente.");        
         p.ver(s.ingresarComentario("New York", "Royal Caribbean Int.", "Muy lindo el crucero", 5).resultado,Retorno.Resultado.OK, "Comentario OK");
