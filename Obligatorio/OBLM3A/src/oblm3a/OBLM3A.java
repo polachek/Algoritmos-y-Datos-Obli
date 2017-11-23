@@ -321,7 +321,7 @@ public class OBLM3A {
         System.out.println("########################################");
         
         System.out.println("####### CARGAR MATRIZ #######");
-        int [][] mapa={{0,10,25,15,30,0},{10,0,20,0,0,0},{25,20,0,0,0,40},{15,0,0,0,0, 40},{30,0,0,0,0,25},{0,0,40,45,25,0}};
+        int [][] mapa={{0,10,25,15,30,0},{10,0,20,0,0,0},{25,20,0,0,0,40},{15,0,0,0,0,45},{30,0,0,0,0,25},{0,0,40,45,25,0}};
         
         p.ver(s.crearSistemaReservas(7).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas.");
         

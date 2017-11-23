@@ -493,13 +493,9 @@ public class Sistema implements ISistema {
         int aux;
        
         Ciudad ciudadOrigen = MatrizCiudades.buscarCiudadPorNombre(origen);
-        int o = ciudadOrigen.getCodCiudad();
-       
         Ciudad ciudadDestino = MatrizCiudades.buscarCiudadPorNombre(destino);
+        int o = ciudadOrigen.getCodCiudad();       
         int d = ciudadDestino.getCodCiudad();
-
-        System.out.println("o es: " + o);
-        System.out.println("d es: " + d);
        
         for (int i = 0; i < columnas; i++) {
             aux=m[o][i] + m[d][i];
