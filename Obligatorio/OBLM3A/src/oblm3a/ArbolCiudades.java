@@ -81,6 +81,44 @@ public class ArbolCiudades implements IArbolCiudades{
         }        
         return ret;
     }
+    
+    @Override
+    public boolean insertarPorCodigo(NodoArbolCiudad unaCiudad){
+        Boolean ret = false; 
+
+        if(this.esVacio())
+        {
+            NodoArbolCiudad nuevo = new NodoArbolCiudad();
+            Ciudad miCiudad = new Ciudad(unaCiudad.getCiudad().getNombre());            
+            nuevo.setCiudad(miCiudad);
+            this.raiz = nuevo;            
+            ret = true;
+        }
+        else
+        {
+            int c = this.raiz.getCiudad().getCodCiudad();        
+            NodoArbolCiudad izquierda = this.raiz.getIzq();
+            NodoArbolCiudad derecha = this.raiz.getDer();
+
+            ArbolCiudades aux = new ArbolCiudades();
+            if (unaCiudad.getCiudad().getCodCiudad() < c)
+            {
+                aux.raiz = izquierda;
+                aux.insertarPorCodigo(unaCiudad);
+                this.raiz.setIzq(aux.raiz);
+                ret = true;
+            }
+            else if (unaCiudad.getCiudad().getCodCiudad() > c)
+            {
+                aux.raiz = derecha;
+                aux.insertarPorCodigo(unaCiudad);
+                this.raiz.setDer(aux.raiz);
+                ret = true;
+            }
+        }        
+        return ret;
+    }
+ 
 
     @Override    
     public NodoArbolCiudad buscar(String ciudad){
@@ -122,14 +160,14 @@ public class ArbolCiudades implements IArbolCiudades{
     @Override    
     public NodoArbolCiudad buscarCiudadPorCodigo(int codigoCiudad){
         NodoArbolCiudad ret = null;
-        int c = this.raiz.getCodCiudad();
+        int c = this.raiz.getCiudad().getCodCiudad();
         NodoArbolCiudad izquierda = this.raiz.getIzq();
         NodoArbolCiudad derecha = this.raiz.getDer();         
         
         if(!this.esVacio())
         {
             ArbolCiudades aux = new ArbolCiudades();
-            if (codigoCiudad == c) 
+            if (codigoCiudad==c) 
                 ret = this.raiz;
             else if (codigoCiudad < c){
                 if(izquierda == null) 
@@ -145,13 +183,14 @@ public class ArbolCiudades implements IArbolCiudades{
                 if(derecha == null) 
                     ret = null;                    
                 else{
-                    aux.raiz = derecha;
+                    aux.raiz = this.raiz.getDer();
                     ret = aux.buscarCiudadPorCodigo(codigoCiudad);
                 }                
             }
         }
         else
-            ret =  null;             
+            ret =  null;
+             
         return ret;
     }    
 

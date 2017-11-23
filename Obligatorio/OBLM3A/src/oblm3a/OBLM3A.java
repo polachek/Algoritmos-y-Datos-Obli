@@ -332,10 +332,9 @@ public class OBLM3A {
         p.ver(s.registrarCiudad("Panamá").resultado, Retorno.Resultado.OK, "Se ingresa Panamá.");                        
         p.ver(s.registrarCiudad("New York").resultado, Retorno.Resultado.OK, "Se ingresa New York.");                        
         
-        
-        
+      
         p.ver(s.cargarDistancias(mapa).resultado, Retorno.Resultado.OK, "Se cargaron las distancias."); 
-        p.ver(s.buscarCamino(mapa, "Montevideo", "Nueva York").resultado, Retorno.Resultado.OK, ""); 
+        p.ver(s.buscarCamino(mapa, "Montevideo", "New York").resultado, Retorno.Resultado.OK, ""); 
         s.cargarDistancias(mapa);
         
         p.imprimirResultadosPrueba();

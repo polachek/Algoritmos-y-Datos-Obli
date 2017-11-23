@@ -4,6 +4,7 @@ import oblm3a.Retorno.Resultado;
 
 public class Sistema implements ISistema {
     public ArbolCiudades AC;
+    public ArbolCiudades ACCodigo;
     public ListaClientes LClientes;
     public ListaCruceros LGralCru;
     public int contadorCiudades = 0;
@@ -11,6 +12,7 @@ public class Sistema implements ISistema {
     @Override
     public Retorno crearSistemaReservas(int cantCiudades) {
         AC = new ArbolCiudades();
+        ACCodigo = new ArbolCiudades();
         LClientes = new ListaClientes();
         LGralCru = new ListaCruceros();
         Retorno ret = new Retorno();   
@@ -28,12 +30,14 @@ public class Sistema implements ISistema {
             ret.resultado = Resultado.ERROR_1;
         else if(cantCiudades > 0)
         {
+            ACCodigo.setMaximo(cantCiudades); 
             AC.setMaximo(cantCiudades); 
             ret.resultado = Resultado.OK;
         }
         else
         {
             Integer maximo = null;
+            ACCodigo.setMaximo(maximo); 
             AC.setMaximo(maximo);       
             ret.resultado = Resultado.OK;                
         } 
@@ -56,6 +60,7 @@ public class Sistema implements ISistema {
            Retorno ret = new Retorno();
            boolean existeCiudad = AC.existe(ciudad);
            NodoArbolCiudad r = AC.getRaiz();
+           NodoArbolCiudad raux = ACCodigo.getRaiz();
            int cantCiudades = AC.cantidadNodos(r);
            Integer maxCiudades = AC.getMaximo();
            
@@ -64,7 +69,9 @@ public class Sistema implements ISistema {
                 if (!existeCiudad && cantCiudades < maxCiudades) {
                     AC.insertar(ciudad);
                     NodoArbolCiudad c = AC.buscar(ciudad);
-                    c.setCodCiudad(contadorCiudades);
+                    c.getCiudad().setCodCiudad(contadorCiudades);
+                    ACCodigo.insertarPorCodigo(c);
+                    
                     contadorCiudades++;
                     ret.resultado = Resultado.OK;                
                 }
@@ -76,8 +83,8 @@ public class Sistema implements ISistema {
                 if (!existeCiudad) {
                     AC.insertar(ciudad);
                     NodoArbolCiudad c = AC.buscar(ciudad);
-                    c.setCodCiudad(contadorCiudades);
-                    contadorCiudades++;                    
+                    c.getCiudad().setCodCiudad(contadorCiudades);
+                    this.contadorCiudades++;                    
                     ret.resultado = Resultado.OK;                
                 }
                 else 
@@ -490,10 +497,13 @@ public class Sistema implements ISistema {
         int aux;
        
         NodoArbolCiudad ciudadOrigen = AC.buscar(origen);
-        int o = ciudadOrigen.getCodCiudad();
+        int o = ciudadOrigen.getCiudad().getCodCiudad();
        
         NodoArbolCiudad ciudadDestino = AC.buscar(destino);
-        int d = ciudadOrigen.getCodCiudad();       
+        int d = ciudadDestino.getCiudad().getCodCiudad();
+
+        System.out.println("o es: " + o);
+        System.out.println("d es: " + d);
        
         for (int i = 0; i < columnas; i++) {
             aux=m[o][i] + m[d][i];
@@ -502,18 +512,27 @@ public class Sistema implements ISistema {
                escala=i;             
             }
         }
+       System.out.println("escala: " + escala);
+       
+       System.out.println("Cantidad Nodos mACCodigo: " + ACCodigo.cantidadNodos(ciudadOrigen));
+       
+       NodoArbolCiudad escalaCiudad = ACCodigo.buscarCiudadPorCodigo(escala);
+       
+       System.out.println("escalaCiudad: " + escalaCiudad);
         
-        NodoArbolCiudad escalaCiudad = AC.buscarCiudadPorCodigo(escala);
+       // System.out.println("escala: " + escalaCiudad.getCiudad().getNombre());
+       System.out.println("escala: " + escala);
     
         /*ret.valorString = "El camino mas corto desde " + ciudadOrigen.getCiudad().getNombre() + " hasta " + ciudadDestino.getCiudad().getNombre() + " es con escala en "+ escalaCiudad +" y la distancia es " + distancia;*/
 
-        System.out.println("El valor de ciudadOrigen es: "+ciudadOrigen+" y el valor de ciudadDestino es: "+ciudadDestino);         
-        
         System.out.println("El valor de ciudadOrigen es: "+ciudadOrigen.getCiudad().getNombre()+" y el valor de ciudadDestino es: "+ciudadDestino.getCiudad().getNombre());         
+  
         System.out.println("El valor de o es: "+o+" y el valor de d es: "+d);        
-        System.out.println("Este es m[o][d: ]"+m[o][d]);
+        System.out.println("Este es m[o][d]"+m[o][d]);
         if (m[o][d] != 0 && distancia > m[o][d]){
-            ret.valorString = "El camino es directo desde " + ciudadOrigen.getCiudad().getNombre() +" a " + ciudadDestino.getCiudad().getNombre() + " y la distancia es " + m[o][d];
+            System.out.println("El camino es directo desde " + ciudadOrigen.getCiudad().getNombre() +" a " + ciudadDestino.getCiudad().getNombre() + " y la distancia es " + m[o][d]);
+        }else{
+            System.out.println("No entro en el IF");
         }
         ret.resultado = ret.resultado.OK;
         return ret;

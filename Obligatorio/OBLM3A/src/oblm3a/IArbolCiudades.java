@@ -20,4 +20,5 @@ public interface IArbolCiudades {
     public Integer getMaximo();  
     public void setMaximo(Integer maximo);        
     public NodoArbolCiudad buscarCiudadPorCodigo(int codigoCiudad);    
+    public boolean insertarPorCodigo(NodoArbolCiudad unaCiudad);
 }
