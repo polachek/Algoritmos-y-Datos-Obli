@@ -7,13 +7,23 @@ public class OBLM3A {
         Sistema S = new Sistema();
         Sistema SistMatriz = new Sistema();        
         prueba P = new prueba();
-        pruebaObligatorio(S,P);
-        pruebaMatriz(SistMatriz,P);
+        
+        /*####################################################################*/
+        /*    OBLIGATORIO  */
+        /*####################################################################*/        
+        //pruebaObligatorio(S,P);
+        //pruebaMatriz(SistMatriz,P);
+        /*####################################################################*/
+        /*    DEFENSA  */ 
+        /*####################################################################*/        
+        //prueba0(S,P);
+        prueba9(S,P);
+        
     }
     
     static void pruebaObligatorio(Sistema s, prueba p){
         
-
+        Retorno r = new Retorno();
         
         System.out.println("########################################");
         System.out.println("####### TEST SISTEMA DE RESERVAS #######");
@@ -21,20 +31,20 @@ public class OBLM3A {
         
         System.out.println();        
         System.out.println("PRUEBA: cantidad de ciudades igual a 0");
-        Retorno r1 = s.crearSistemaReservas(0);
-        p.ver(r1.resultado, Retorno.Resultado.OK, r1.valorString);
+        r = s.crearSistemaReservas(0);
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
         System.out.println();
         
         System.out.println();        
         System.out.println("PRUEBA: cantidad de ciudades menor a 0"); 
-        Retorno r2 = s.crearSistemaReservas(-1);        
-        p.ver(r2.resultado, Retorno.Resultado.ERROR_1, r2.valorString);
+        r = s.crearSistemaReservas(-1);        
+        p.ver(r.resultado, Retorno.Resultado.ERROR_1, r.valorString);
         System.out.println(); 
         
         System.out.println();        
         System.out.println("PRUEBA: cantidad de ciudades mayor a 0");  
-        Retorno r3 = s.crearSistemaReservas(5);
-        p.ver(r3.resultado, Retorno.Resultado.OK, r3.valorString);
+        r = s.crearSistemaReservas(5);
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
         System.out.println();
         
         System.out.println("#######################################");
@@ -43,27 +53,27 @@ public class OBLM3A {
         
         System.out.println();        
         System.out.println("PRUEBA: ciudad ingresada correctamente.");
-        Retorno r4 = s.registrarCiudad("Montevideo");
-        p.ver(r4.resultado, Retorno.Resultado.OK,r4.valorString );
-        Retorno r5 = s.registrarCiudad("Rocha");
-        p.ver(r5.resultado, Retorno.Resultado.OK, r5.valorString);
-        Retorno r6 = s.registrarCiudad("Santiago");
-        p.ver(r6.resultado, Retorno.Resultado.OK, r6.valorString);
-        Retorno r7 = s.registrarCiudad("San Pablo");
-        p.ver(r7.resultado, Retorno.Resultado.OK, r7.valorString);
-        Retorno r8 = s.registrarCiudad("New York"); 
-        p.ver(r8.resultado, Retorno.Resultado.OK, r8.valorString);        
+        r = s.registrarCiudad("Montevideo");
+        p.ver(r.resultado, Retorno.Resultado.OK,r.valorString );
+        r = s.registrarCiudad("Rocha");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
+        r = s.registrarCiudad("Santiago");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
+        r = s.registrarCiudad("San Pablo");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
+        r = s.registrarCiudad("New York"); 
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);        
         System.out.println();
         
         System.out.println();        
         System.out.println("PRUEBA: la ciudad a ingresar ya existe en el sistema.");                 
-        Retorno r9 = s.registrarCiudad("Montevideo");
-        p.ver(r9.resultado, Retorno.Resultado.ERROR_1, r9.valorString);
+        r = s.registrarCiudad("Montevideo");
+        p.ver(r.resultado, Retorno.Resultado.ERROR_1, r.valorString);
         
         System.out.println();        
         System.out.println("PRUEBA: el sistema ya tiene todas las ciudades ingresadas.");          
-        Retorno r10 = s.registrarCiudad("Buenos Aires"); 
-        p.ver(r10.resultado, Retorno.Resultado.ERROR_1, r10.valorString);
+        r = s.registrarCiudad("Buenos Aires"); 
+        p.ver(r.resultado, Retorno.Resultado.ERROR_1, r.valorString);
         System.out.println();
         
         System.out.println("#######################################");
@@ -71,38 +81,38 @@ public class OBLM3A {
         System.out.println("#######################################");
         System.out.println();        
         System.out.println("PRUEBA: el crucero se ingresó correctamente."); 
-        Retorno r11 = s.registrarCrucero("New York", "Royal Caribbean Int.", 5, 3000);
-        p.ver(r11.resultado, Retorno.Resultado.OK, r11.valorString);
-        Retorno r12 = s.registrarCrucero("Montevideo", "Crucer", 3, 2800);
-        p.ver(r12.resultado, Retorno.Resultado.OK, r12.valorString);
-        Retorno r13 = s.registrarCrucero("Montevideo", "Carnival", 2, 2800);
-        p.ver(r13.resultado, Retorno.Resultado.OK, r13.valorString);
-        Retorno r14 = s.registrarCrucero("Montevideo", "Papa Mobil", 4, 500); 
-        p.ver(r14.resultado, Retorno.Resultado.OK, r14.valorString);
+        r = s.registrarCrucero("New York", "Royal Caribbean Int.", 5, 3000);
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
+        r = s.registrarCrucero("Montevideo", "Crucer", 3, 2800);
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
+        r = s.registrarCrucero("Montevideo", "Carnival", 2, 2800);
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
+        r = s.registrarCrucero("Montevideo", "Papa Mobil", 4, 500); 
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
         System.out.println(); 
         
         System.out.println();        
         System.out.println("PRUEBA: se ingresa crucero con cantidad de estrellas menor a uno o mayor a 5");         
-        Retorno r15 = s.registrarCrucero("Santiago", "Carnival Cruise Lines", 6, 2800); 
-        p.ver(r15.resultado, Retorno.Resultado.ERROR_1, r15.valorString);
+        r = s.registrarCrucero("Santiago", "Carnival Cruise Lines", 6, 2800); 
+        p.ver(r.resultado, Retorno.Resultado.ERROR_1, r.valorString);
         System.out.println();
         
         System.out.println();        
         System.out.println("PRUEBA: se ingresa crucero con capacidad menor a 0");
-        Retorno r16 = s.registrarCrucero("Santiago", "Royal Caribbean Int.", 5, -1);
-        p.ver(r16.resultado, Retorno.Resultado.ERROR_2, r16.valorString);
+        r = s.registrarCrucero("Santiago", "Royal Caribbean Int.", 5, -1);
+        p.ver(r.resultado, Retorno.Resultado.ERROR_2, r.valorString);
         System.out.println(); 
         
         System.out.println();        
         System.out.println("PRUEBA: en la ciudad ingresada ya existe un crucero con el nombre ingresado.");                         
-        Retorno r17 = s.registrarCrucero("New York", "Royal Caribbean Int.", 4, 3);
-        p.ver(r17.resultado, Retorno.Resultado.ERROR_3, r17.valorString);
+        r = s.registrarCrucero("New York", "Royal Caribbean Int.", 4, 3);
+        p.ver(r.resultado, Retorno.Resultado.ERROR_3, r.valorString);
         System.out.println();        
 
         System.out.println();        
         System.out.println("PRUEBA: No existe la ciudad donde se intenta ingresar el crucero.");                                 
-        Retorno r18 = s.registrarCrucero("Lima", "Disney Cruise Line", 5, 2200);
-        p.ver(r18.resultado, Retorno.Resultado.ERROR_4, r18.valorString);        
+        r = s.registrarCrucero("Lima", "Disney Cruise Line", 5, 2200);
+        p.ver(r.resultado, Retorno.Resultado.ERROR_4, r.valorString);        
         System.out.println();
         
         System.out.println("#######################################");
@@ -110,30 +120,30 @@ public class OBLM3A {
         System.out.println("#######################################");
         System.out.println();        
         System.out.println("PRUEBA: se ingresó servicio exitosamente.");          
-        Retorno r19 = s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi"); 
-        p.ver(r19.resultado, Retorno.Resultado.OK, r19.valorString);
-        Retorno r20 = s.ingresarServicio("New York", "Royal Caribbean Int.", "Spa");
-        p.ver(r20.resultado, Retorno.Resultado.OK, r20.valorString);
-        Retorno r21 =s.ingresarServicio("New York", "Royal Caribbean Int.", "Discoteca"); 
-        p.ver(r21.resultado, Retorno.Resultado.OK, r21.valorString);
+        r = s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi"); 
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
+        r = s.ingresarServicio("New York", "Royal Caribbean Int.", "Spa");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
+        r =s.ingresarServicio("New York", "Royal Caribbean Int.", "Discoteca"); 
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
         System.out.println();
         
         System.out.println();
         System.out.println("PRUEBA: ya existe un servicio con el nombre ingresado.");
-        Retorno r22 = s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi"); 
-        p.ver(r22.resultado, Retorno.Resultado.ERROR_3, r22.valorString);
+        r = s.ingresarServicio("New York", "Royal Caribbean Int.", "Wifi"); 
+        p.ver(r.resultado, Retorno.Resultado.ERROR_3, r.valorString);
         System.out.println();
         
         System.out.println();
         System.out.println("PRUEBA: en la ciudad ingresada no existe un crucero con el nombre ingresado.");        
-        Retorno r23 = s.ingresarServicio("New York", "No Crucero", "Discoteca");
-        p.ver(r23.resultado, Retorno.Resultado.ERROR_1, r23.valorString);
+        r = s.ingresarServicio("New York", "No Crucero", "Discoteca");
+        p.ver(r.resultado, Retorno.Resultado.ERROR_1, r.valorString);
         System.out.println();
 
         System.out.println();        
         System.out.println("PRUEBA: no existe una ciudad con el nombre ingresado.");                
-        Retorno r24 = s.ingresarServicio("No Ciudad", "Royal Caribbean Int.", "Servicio de cuarto");
-        p.ver(r24.resultado, Retorno.Resultado.ERROR_2, r24.valorString);
+        r = s.ingresarServicio("No Ciudad", "Royal Caribbean Int.", "Servicio de cuarto");
+        p.ver(r.resultado, Retorno.Resultado.ERROR_2, r.valorString);
         System.out.println();
         
         System.out.println("#######################################");
@@ -141,26 +151,26 @@ public class OBLM3A {
         System.out.println("#######################################");
         System.out.println();        
         System.out.println("PRUEBA: el servicio se borró exitosamente."); 
-        Retorno r25 = s.borrarServicio("New York", "Royal Caribbean Int.", "Spa");
-        p.ver(r25.resultado, Retorno.Resultado.OK, r25.valorString);
+        r = s.borrarServicio("New York", "Royal Caribbean Int.", "Spa");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
         System.out.println(); 
         
         System.out.println();        
         System.out.println("PRUEBA: no existe un crucero en la ciudad ingresada.");
-        Retorno r26 = s.borrarServicio("New York", "No Crucero", "Discoteca");
-        p.ver(r26.resultado, Retorno.Resultado.ERROR_1, r26.valorString);
+        r = s.borrarServicio("New York", "No Crucero", "Discoteca");
+        p.ver(r.resultado, Retorno.Resultado.ERROR_1, r.valorString);
         System.out.println();   
         
         System.out.println();        
         System.out.println("PRUEBA: el servicio que se intenta borrar no existe.");
-        Retorno r27 = s.borrarServicio("New York", "Royal Caribbean Int.", "Choripan");
-        p.ver(r27.resultado, Retorno.Resultado.ERROR_2, r27.valorString);
+        r = s.borrarServicio("New York", "Royal Caribbean Int.", "Choripan");
+        p.ver(r.resultado, Retorno.Resultado.ERROR_2, r.valorString);
         System.out.println();        
         
         System.out.println();        
         System.out.println("PRUEBA: la ciudad ingresada no existe.");
-        Retorno r28 = s.borrarServicio("No Ciudad", "Royal Caribbean Int.", "Discoteca"); 
-        p.ver(r28.resultado, Retorno.Resultado.ERROR_3, r28.valorString);
+        r = s.borrarServicio("No Ciudad", "Royal Caribbean Int.", "Discoteca"); 
+        p.ver(r.resultado, Retorno.Resultado.ERROR_3, r.valorString);
         System.out.println();
         
 
@@ -170,26 +180,26 @@ public class OBLM3A {
         
         System.out.println();        
         System.out.println("PRUEBA: la reserva se realizó exitosamente."); 
-        Retorno r29 = s.realizarReserva(1, "New York", "Royal Caribbean Int.");
-        p.ver(r29.resultado, Retorno.Resultado.OK, r29.valorString);
-        Retorno r30 = s.realizarReserva(2, "New York", "Royal Caribbean Int.");
-        p.ver(r30.resultado, Retorno.Resultado.OK, r30.valorString);
-        Retorno r31 = s.realizarReserva(3, "New York", "Royal Caribbean Int.");
-        p.ver(r31.resultado, Retorno.Resultado.OK, r31.valorString);
-        Retorno r32 = s.realizarReserva(4, "New York", "Royal Caribbean Int.");
-        p.ver(r32.resultado, Retorno.Resultado.OK, r32.valorString);
+        r = s.realizarReserva(1, "New York", "Royal Caribbean Int.");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
+        r = s.realizarReserva(2, "New York", "Royal Caribbean Int.");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
+        r = s.realizarReserva(3, "New York", "Royal Caribbean Int.");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
+        r = s.realizarReserva(4, "New York", "Royal Caribbean Int.");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
         System.out.println();
         
         System.out.println();
         System.out.println("PRUEBA: no existe un crucero en la ciudad ingresada.");
-        Retorno r33 = s.realizarReserva(6, "New York", "NO CRUCERO"); 
-        p.ver(r33.resultado,Retorno.Resultado.ERROR_1, r33.valorString);        
+        r = s.realizarReserva(6, "New York", "NO CRUCERO"); 
+        p.ver(r.resultado,Retorno.Resultado.ERROR_1, r.valorString);        
         System.out.println();
         
         System.out.println();
         System.out.println("PRUEBA: la ciudad ingresada no existe.");
-        Retorno r34 = s.realizarReserva(5, "NO CIUDAD", "Royal Caribbean Int."); 
-        p.ver(r34.resultado, Retorno.Resultado.ERROR_2, r34.valorString);
+        r = s.realizarReserva(5, "NO CIUDAD", "Royal Caribbean Int."); 
+        p.ver(r.resultado, Retorno.Resultado.ERROR_2, r.valorString);
         System.out.println();
         
 
@@ -200,28 +210,28 @@ public class OBLM3A {
         System.out.println();
         System.out.println("PRUEBA: la cancelación se realizó exitosamente.");        
         System.out.println("Cantidad de Reservas antes de la cancelación: " + s.AC.buscar("New York").getLcrucero().buscarCruceroXNombre("Royal Caribbean Int.").getLReservas().getCantelementos());        
-        Retorno r35 = s.cancelarReserva(1, "New York", "Royal Caribbean Int."); 
-        p.ver(r35.resultado, Retorno.Resultado.OK, r35.valorString);                
-        Retorno r36 = s.cancelarReserva(2, "New York", "Royal Caribbean Int.");
-        p.ver(r36.resultado, Retorno.Resultado.OK, r36.valorString);                        
+        r = s.cancelarReserva(1, "New York", "Royal Caribbean Int."); 
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);                
+        r = s.cancelarReserva(2, "New York", "Royal Caribbean Int.");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);                        
         System.out.println("Cantidad de Reservas después de la cancelación: " + s.AC.buscar("New York").getLcrucero().buscarCruceroXNombre("Royal Caribbean Int.").getLReservas().getCantelementos());
         
         System.out.println();        
         System.out.println("PRUEBA: no existe un crucero en la ciudad ingresada.");
-        Retorno r37 = s.cancelarReserva(1, "New York", "No crucero");
-        p.ver(r37.resultado, Retorno.Resultado.ERROR_1, r37.valorString);                        
+        r = s.cancelarReserva(1, "New York", "No crucero");
+        p.ver(r.resultado, Retorno.Resultado.ERROR_1, r.valorString);                        
         System.out.println();
         
         System.out.println();        
         System.out.println("PRUEBA: el cliente no tiene reservas para el crucero ingresado.");
-        Retorno r38 = s.cancelarReserva(45, "New York", "Royal Caribbean Int.");
-        p.ver(r38.resultado, Retorno.Resultado.ERROR_2, r38.valorString);                        
+        r = s.cancelarReserva(45, "New York", "Royal Caribbean Int.");
+        p.ver(r.resultado, Retorno.Resultado.ERROR_2, r.valorString);                        
         System.out.println();
              
         System.out.println();        
         System.out.println("PRUEBA: la ciudad ingresada no existe.");
-        Retorno r39 = s.cancelarReserva(1, "No ciudad", "Royal Caribbean Int.");
-        p.ver(r39.resultado, Retorno.Resultado.ERROR_3, r39.valorString);                        
+        r = s.cancelarReserva(1, "No ciudad", "Royal Caribbean Int.");
+        p.ver(r.resultado, Retorno.Resultado.ERROR_3, r.valorString);                        
         System.out.println();                
         
         System.out.println("######################################");
@@ -386,5 +396,141 @@ public class OBLM3A {
         
         
         p.imprimirResultadosPrueba();        
-    }    
+    }
+    
+    /*#########################################################################*/
+    //DEFENSA
+    /*#########################################################################*/    
+    public static void prueba0(Sistema s, prueba p) {
+        
+        System.out.println("------------------CREACION DEL SISTEMA------------------");
+        p.ver(s.crearSistemaReservas(-3).resultado,Retorno.Resultado.ERROR_1,"No se crea el sistema de reservas por tener tope negativo");
+        p.ver(s.crearSistemaReservas(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas con un tope de 5 ciudades");
+        
+        System.out.println("------------------INGRESO DE CIUDADES------------------");
+        p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se ingresa Montevideo");
+        p.ver(s.registrarCiudad("Santiago").resultado, Retorno.Resultado.OK, "Se ingresa Santiago");
+        p.ver(s.registrarCiudad("Lima").resultado, Retorno.Resultado.OK, "Se ingresa Lima");
+        p.ver(s.registrarCiudad("San Pablo").resultado, Retorno.Resultado.OK, "Se ingresa San Pablo");
+        p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Montevideo ya existe");
+        p.ver(s.registrarCiudad("Panamá").resultado, Retorno.Resultado.OK, "Se ingresa Panamá");
+        p.ver(s.registrarCiudad("New York").resultado, Retorno.Resultado.ERROR_2, "No se ingresa New York, por superar el tope");
+        
+        System.out.println("------------------LISTO CIUDADES------------------");
+        //s.LCiudad.mostrar();//listo ciudades ingresadas
+        
+        System.out.println("------------------REGISTRO CRUCEROS------------------");
+        p.ver(s.registrarCrucero("Montevideo", "MSC Poesia", 3, 2000).resultado, Retorno.Resultado.OK, "Se registra crucero MSC a Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Carnival Cruise Line", 4, 2500).resultado, Retorno.Resultado.OK, "Se registra crucero Carnival a Montevideo");
+        p.ver(s.registrarCrucero("Panamá", "Costa Cruise", 3, 3000).resultado, Retorno.Resultado.OK, "Se registra crucero Costa Cruise a Panamá");
+        p.ver(s.registrarCrucero("San Pablo", "Royal Caribbean Int.", 5, 4000).resultado, Retorno.Resultado.OK, "Se registra crucero Royal Caribbean Int. a San Pablo");
+        p.ver(s.registrarCrucero("Santiago", "Disney Cruise Line", 4, 3200).resultado, Retorno.Resultado.OK, "Se registra crucero Disney Cruise Line a Santiago");
+        p.ver(s.registrarCrucero("Santiago", "Holland America Line", 6, 2800).resultado, Retorno.Resultado.ERROR_1, "La cantidad de estrellas no está entre 1 y 5");  
+        p.ver(s.registrarCrucero("Santiago", "Princess Cruises", 5, -1).resultado, Retorno.Resultado.ERROR_2, "La capacidad es menor a 0");
+        p.ver(s.registrarCrucero("Montevideo", "MSC Poesia", 4, 3100).resultado, Retorno.Resultado.ERROR_3, "Ya existe un crucero con ese nombre para Montevideo");
+        p.ver(s.registrarCrucero("New York", "Norwegian Cruise Line", 5, 3000).resultado, Retorno.Resultado.ERROR_4, "La ciudad no existe");
+        
+        System.out.println("------------------LISTO CRUCEROS INGRESADOS------------------");
+        //s.LCrucero.mostrarTodos();//listo cruceros ingresados
+        
+        System.out.println("------------------REGISTRO SERVICIOS------------------");
+        p.ver(s.ingresarServicio("Montevideo", "MSC Poesia", "Wifi").resultado, Retorno.Resultado.OK, "Servicio wifi en MSC Montevideo");
+        p.ver(s.ingresarServicio("Montevideo", "MSC Poesia", "Shopping a bordo").resultado, Retorno.Resultado.OK, "Servicio Shopping a bordo en MSC Montevideo");
+        p.ver(s.ingresarServicio("Montevideo", "MSC Poesia", "Guarderia").resultado, Retorno.Resultado.OK, "Servicio guarderia en MSC Montevideo");
+        p.ver(s.ingresarServicio("San Pablo", "Royal Caribbean Int.", "Wifi").resultado, Retorno.Resultado.OK, "Servicio wifi en Royal San Pablo");
+        p.ver(s.ingresarServicio("San Pablo", "Royal Caribbean Int.", "Shopping a bordo").resultado, Retorno.Resultado.OK, "Servicio Shopping a bordo en Royal San Pablo");
+        p.ver(s.ingresarServicio("San Pablo", "Royal Caribbean Int.", "Guarderia").resultado, Retorno.Resultado.OK, "Servicio guarderia en Royal San Pablo");
+        p.ver(s.ingresarServicio("San Pablo", "Holland America Line", "Guarderia").resultado, Retorno.Resultado.ERROR_1, "No existe ese crucero en la ciudad");
+        p.ver(s.ingresarServicio("New York", "Norwegian Cruise Line", "Guarderia").resultado, Retorno.Resultado.ERROR_2, "La ciudad no existe");
+    
+        System.out.println("------------------ELIMINO SERVICIOS------------------");
+        p.ver(s.borrarServicio("Montevideo", "MSC Poesia", "Wifi").resultado, Retorno.Resultado.OK, "Borro servicio wifi en MSC Montevideo");
+        p.ver(s.borrarServicio("San Pablo", "Holland America Line", "Guarderia").resultado, Retorno.Resultado.ERROR_1, "No existe ese crucero en la ciudad");
+        p.ver(s.borrarServicio("Montevideo", "MSC Poesia", "Lavanderia").resultado, Retorno.Resultado.ERROR_2, "No existe el servicio en el crucero");
+        p.ver(s.borrarServicio("New York", "Norwegian Cruise Line", "Guarderia").resultado, Retorno.Resultado.ERROR_3, "La ciudad no existe");
+        
+        System.out.println("------------------REALIZO RESERVAS------------------");
+        p.ver(s.realizarReserva(1, "Montevideo", "MSC Poesia").resultado, Retorno.Resultado.OK, "Reserva en MSC Montevideo");
+        p.ver(s.realizarReserva(2, "Montevideo", "MSC Poesia").resultado, Retorno.Resultado.OK, "Reserva en MSC Montevideo");
+        p.ver(s.realizarReserva(3, "Montevideo", "MSC Poesia").resultado, Retorno.Resultado.OK, "Reserva en MSC Montevideo");
+        p.ver(s.realizarReserva(4, "Montevideo", "MSC Poesia").resultado, Retorno.Resultado.OK, "Reserva en MSC Montevideo");
+        p.ver(s.realizarReserva(5, "Montevideo", "MSC Poesia").resultado, Retorno.Resultado.OK, "Reserva en MSC Montevideo");
+        p.ver(s.realizarReserva(6, "San Pablo", "Holland America Line").resultado, Retorno.Resultado.ERROR_1, "No existe ese crucero en la ciudad");
+        p.ver(s.realizarReserva(7, "New York", "Norwegian Cruise Line").resultado, Retorno.Resultado.ERROR_2, "La ciudad no existe");
+
+        System.out.println("------------------CANCELO RESERVAS------------------");
+        p.ver(s.cancelarReserva(2, "Montevideo", "MSC Poesia").resultado, Retorno.Resultado.OK, "Se elimina reserva");
+        p.ver(s.cancelarReserva(8, "Montevideo", "MSC Poesia").resultado, Retorno.Resultado.ERROR_2, "El cliente no tiene reserva en el crucero");
+        p.ver(s.cancelarReserva(2, "Montevideo", "Holland America Line").resultado, Retorno.Resultado.ERROR_1, "No existe ese crucero en la ciudad");
+        p.ver(s.cancelarReserva(3, "New York", "Holland America Line").resultado, Retorno.Resultado.ERROR_3, "La ciudad no existe");
+
+        System.out.println("------------------INGRESO COMENTARIO------------------");
+        p.ver(s.ingresarComentario("Santiago", "Disney Cruise Line", "Muy lindo crucero, personal muy amable", 4).resultado, Retorno.Resultado.OK, "Se ingresa comentario a crucero Disney Cruise Line de Santiago");
+        p.ver(s.ingresarComentario("Montevideo", "MSC Poesia", "Muy lindo crucero, personal muy amable", 4).resultado, Retorno.Resultado.OK, "Se ingresa comentario a crucero MSC Poesia de Montevideo");
+        p.ver(s.ingresarComentario("Montevideo", "MSC Poesia", "Mala limpieza", 2).resultado, Retorno.Resultado.OK, "Se ingresa comentario a crucero MSC Poesia de Montevideo");
+        p.ver(s.ingresarComentario("Montevideo", "MSC Poesia", "Nos gusto mucho el crucero", 3).resultado, Retorno.Resultado.OK, "Se ingresa comentario a crucero MSC Poesia de Montevideo");
+        p.ver(s.ingresarComentario("Montevideo", "MSC Poesia", "Muy recomendable", 10).resultado, Retorno.Resultado.ERROR_1, "Ranking mayor a 5");
+        p.ver(s.ingresarComentario("Montevideo", "Royal Caribbean Int.", "Muy lindo crucero, personal muy amable", 4).resultado, Retorno.Resultado.ERROR_2, "No existe el crucero en la ciudad");
+        p.ver(s.ingresarComentario("New York", "Royal Caribbean Int.", "Muy lindo crucero, personal muy amable", 4).resultado, Retorno.Resultado.ERROR_3, "No existe la ciudad");
+        
+        System.out.println("------------------LISTO SERVICIOS------------------");
+        p.ver(s.listarServicios("Panamá", "Costa Cruise").resultado, Retorno.Resultado.OK, "Se listan servicios de crucero");
+        p.ver(s.listarServicios("Montevideo", "MSC Poesia").resultado, Retorno.Resultado.OK, "Se listan servicios de crucero");
+        p.ver(s.listarServicios("Montevideo", "Disney Cruise Line").resultado, Retorno.Resultado.ERROR_1, "No existe el crucero en la ciudad");
+        p.ver(s.listarServicios("Buenos Aires", "MSC Poesia").resultado, Retorno.Resultado.ERROR_2, "No existe la ciudad");
+       
+        System.out.println("------------------LISTO CRUCEROS POR CIUDAD------------------");
+        p.ver(s.listarCrucerosCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Lista de cruceros en Montevideo");
+        p.ver(s.listarCrucerosCiudad("Lima").resultado, Retorno.Resultado.OK, "Lista de cruceros en Lima");
+        p.ver(s.listarCrucerosCiudad("Panamá").resultado, Retorno.Resultado.OK, "Lista de cruceros en Panamá");
+        p.ver(s.listarCrucerosCiudad("Buenos Aires").resultado, Retorno.Resultado.ERROR_1, "No existe la ciudad");
+
+        System.out.println("------------------LISTO CRUCEROS POR RANKING ASCENDENTE PARA UNA CIUDAD------------------");
+        p.ver(s.listarCrucerosRankingAsc("Montevideo").resultado, Retorno.Resultado.OK, "Lista de cruceros en Montevideo");
+        p.ver(s.listarCrucerosRankingAsc("Lima").resultado, Retorno.Resultado.OK, "Lista de cruceros en Lima");
+        p.ver(s.listarCrucerosRankingAsc("Panamá").resultado, Retorno.Resultado.OK, "Lista de cruceros en Panamá");
+        p.ver(s.listarCrucerosRankingAsc("Buenos Aires").resultado, Retorno.Resultado.ERROR_1, "No existe la ciudad");
+        
+        System.out.println("------------------LISTO CRUCEROS POR RANKING DESCENDENTE PARA UNA CIUDAD------------------");
+        p.ver(s.listarCrucerosRankingDesc("Montevideo").resultado, Retorno.Resultado.OK, "Lista de cruceros en Montevideo");
+        p.ver(s.listarCrucerosRankingDesc("Lima").resultado, Retorno.Resultado.OK, "Lista de cruceros en Lima");
+        p.ver(s.listarCrucerosRankingDesc("Panamá").resultado, Retorno.Resultado.OK, "Lista de cruceros en Panamá");
+        p.ver(s.listarCrucerosRankingDesc("Buenos Aires").resultado, Retorno.Resultado.ERROR_1, "No existe la ciudad");
+        
+        System.out.println("------------------LISTO TODOS LOS CRUCEROS POR RANKING------------------");
+        p.ver(s.listarCrucerosRanking().resultado, Retorno.Resultado.OK, "Listado de cruceros por ranking");
+        
+        System.out.println("------------------LISTO COMENTARIOS------------------");
+        p.ver(s.listarComentarios("Montevideo", "MSC Poesia").resultado, Retorno.Resultado.OK, "Listado de comentarios");
+        p.ver(s.listarComentarios("Santiago", "Disney Cruise Line").resultado, Retorno.Resultado.OK, "Listado de comentarios");
+        p.ver(s.listarComentarios("Lima", "Disney Cruise Line").resultado, Retorno.Resultado.ERROR_1, "No existe el crucero en la ciudad");
+        p.ver(s.listarComentarios("San Francisco", "Disney Cruise Line").resultado, Retorno.Resultado.ERROR_2, "No existe la ciudad");
+        
+        System.out.println("------------------CAMINO MAS CORTO------------------");
+        int [][]ciudades = {{0,10,25,15,30,0},{10,0,20,0,0,0},{25,20,0,0,0,40},{15,0,0,0,0,45},{30,0,0,0,0,25},{0,0,40,45,25,0}};
+        p.ver(s.cargarDistancias(ciudades).resultado, Retorno.Resultado.OK, "Se cargan las distancias");
+        p.ver(s.buscarCamino(ciudades, "Montevideo", "Santiago").resultado, Retorno.Resultado.OK, "Buscar camino mas corto");    
+        
+        System.out.println("------------------SE DESTRUYE EL SISTEMA DE RESERVAS------------------");
+        p.ver(s.destruirSistemaReservas().resultado,Retorno.Resultado.OK,"Se elimina el sistema de reservas");
+        
+        p.imprimirResultadosPrueba();
+    } 
+
+    //_realizarRerserva
+    public static void prueba9(Sistema s, prueba p) {
+        p.ver(s.crearSistemaReservas(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
+        p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se ingresa Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3).resultado, Retorno.Resultado.OK, "Se ingresa Royal Caribbean Int. en Montevideo");
+        p.ver(s.realizarReserva(1, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realiza la reserva del cliente 1 para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.realizarReserva(2, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realiza la reserva del cliente 2 para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.realizarReserva(3, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realiza la reserva del cliente 3 para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.realizarReserva(4, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "El cliente 4 queda en lista de espera para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.realizarReserva(5, "Montevideo", "Disney Cruise Line").resultado, Retorno.Resultado.ERROR_1, "No existe un crucero de nombre Disney Cruise Line en Montevideo");
+        p.ver(s.realizarReserva(6, "San Pablo", "Royal Caribbean Int.").resultado, Retorno.Resultado.ERROR_2, "Se intenta agregar crucero a ciuedad que No existe la ciudad San Pablo");
+        System.out.println("Cantidad de Reservas antes de la cancelación: " + s.AC.buscar("Montevideo").getLcrucero().buscarCruceroXNombre("Royal Caribbean Int.").getLReservas().getCantelementos());        
+        p.ver(s.cancelarReserva(1, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se cancela la reserva del cliente 1 para el Royal Caribbean Int. de Montevideo");
+        
+        p.imprimirResultadosPrueba();
+    }        
 }

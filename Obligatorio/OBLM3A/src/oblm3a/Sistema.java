@@ -546,7 +546,7 @@ public class Sistema implements ISistema {
         int d = ciudadDestino.getCodCiudad();
        
         for (int i = 0; i < columnas; i++) {
-            aux=m[o][i] + m[d][i];
+            aux = m[o][i] + m[d][i];
             if (m[o][i] != 0 && m[d][i] != 0 && aux < distancia) {
                distancia = aux;
                escala = i;         
