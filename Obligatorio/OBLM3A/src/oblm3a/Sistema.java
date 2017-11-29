@@ -563,4 +563,37 @@ public class Sistema implements ISistema {
         }       
         return ret;
     }
+    
+    
+    @Override
+    public Retorno listarReserva(String ciudad, String crucero) {
+            Retorno ret = new Retorno();
+
+            if(!AC.existe(ciudad)){
+                ret.resultado = Resultado.ERROR_2;
+            } 
+            else if(!AC.buscar(ciudad).getLcrucero().buscarCrucero(crucero)){
+                ret.resultado = Resultado.ERROR_1;
+            }
+            else{
+                Crucero miCrucero = AC.buscar(ciudad).getLcrucero().buscarCruceroXNombre(crucero);
+                ListaReservas listaReservas = miCrucero.getLReservas();
+                if(listaReservas.esVacia()){
+                    System.out.println("No existen reservas registrados en el Crucero " + crucero + " " + ciudad);
+                }else{
+                    NodoListaReserva aux=listaReservas.getInicio();
+                    System.out.println("Reservas del Crucero " + crucero + " en la ciudad " + ciudad);
+                    int cont = 1;
+                    while (aux !=null){
+                        System.out.println(cont + " - Reserva " + aux.getReserva().getCliente().getId());
+                        cont ++;
+                        aux=aux.getSig();
+                    }
+                }
+                ret.resultado = Resultado.OK;
+                ret.valorString = "Listado de reservas para la ciudad "+ciudad+" y el crucero "+crucero+".";
+            }
+
+            return ret;
+    }    
 }

@@ -124,7 +124,7 @@ public class OBLM3A {
         p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
         r = s.ingresarServicio("New York", "Royal Caribbean Int.", "Spa");
         p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
-        r =s.ingresarServicio("New York", "Royal Caribbean Int.", "Discoteca"); 
+        r = s.ingresarServicio("New York", "Royal Caribbean Int.", "Discoteca"); 
         p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);
         System.out.println();
         
@@ -519,6 +519,9 @@ public class OBLM3A {
 
     //_realizarRerserva
     public static void prueba9(Sistema s, prueba p) {
+        Retorno r = new Retorno();
+
+        
         p.ver(s.crearSistemaReservas(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
         p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se ingresa Montevideo");
         p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3).resultado, Retorno.Resultado.OK, "Se ingresa Royal Caribbean Int. en Montevideo");
@@ -528,9 +531,18 @@ public class OBLM3A {
         p.ver(s.realizarReserva(4, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "El cliente 4 queda en lista de espera para el Royal Caribbean Int. de Montevideo");
         p.ver(s.realizarReserva(5, "Montevideo", "Disney Cruise Line").resultado, Retorno.Resultado.ERROR_1, "No existe un crucero de nombre Disney Cruise Line en Montevideo");
         p.ver(s.realizarReserva(6, "San Pablo", "Royal Caribbean Int.").resultado, Retorno.Resultado.ERROR_2, "Se intenta agregar crucero a ciuedad que No existe la ciudad San Pablo");
+
+        r = s.listarReserva("Montevideo", "Royal Caribbean Int.");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);        
+        
         System.out.println("Cantidad de Reservas antes de la cancelación: " + s.AC.buscar("Montevideo").getLcrucero().buscarCruceroXNombre("Royal Caribbean Int.").getLReservas().getCantelementos());        
-        p.ver(s.cancelarReserva(1, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se cancela la reserva del cliente 1 para el Royal Caribbean Int. de Montevideo");
+        p.ver(s.cancelarReserva(2, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se cancela la reserva del cliente 1 para el Royal Caribbean Int. de Montevideo");
+        
+        r = s.listarReserva("Montevideo", "Royal Caribbean Int.");
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);        
         
         p.imprimirResultadosPrueba();
-    }        
+    }    
+
+    
 }
