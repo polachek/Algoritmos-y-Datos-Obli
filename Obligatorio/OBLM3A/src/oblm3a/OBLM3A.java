@@ -415,7 +415,7 @@ public class OBLM3A {
         p.ver(s.registrarCiudad("San Pablo").resultado, Retorno.Resultado.OK, "Se ingresa San Pablo");
         p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.ERROR_1, "Montevideo ya existe");
         p.ver(s.registrarCiudad("Panamá").resultado, Retorno.Resultado.OK, "Se ingresa Panamá");
-        p.ver(s.registrarCiudad("New York").resultado, Retorno.Resultado.ERROR_2, "No se ingresa New York, por superar el tope");
+        p.ver(s.registrarCiudad("New York").resultado, Retorno.Resultado.ERROR_1, "No se ingresa New York, por superar el tope");
         
         System.out.println("------------------LISTO CIUDADES------------------");
         //s.LCiudad.mostrar();//listo ciudades ingresadas
@@ -506,11 +506,6 @@ public class OBLM3A {
         p.ver(s.listarComentarios("Santiago", "Disney Cruise Line").resultado, Retorno.Resultado.OK, "Listado de comentarios");
         p.ver(s.listarComentarios("Lima", "Disney Cruise Line").resultado, Retorno.Resultado.ERROR_1, "No existe el crucero en la ciudad");
         p.ver(s.listarComentarios("San Francisco", "Disney Cruise Line").resultado, Retorno.Resultado.ERROR_2, "No existe la ciudad");
-        
-        System.out.println("------------------CAMINO MAS CORTO------------------");
-        int [][]ciudades = {{0,10,25,15,30,0},{10,0,20,0,0,0},{25,20,0,0,0,40},{15,0,0,0,0,45},{30,0,0,0,0,25},{0,0,40,45,25,0}};
-        p.ver(s.cargarDistancias(ciudades).resultado, Retorno.Resultado.OK, "Se cargan las distancias");
-        p.ver(s.buscarCamino(ciudades, "Montevideo", "Santiago").resultado, Retorno.Resultado.OK, "Buscar camino mas corto");    
         
         System.out.println("------------------SE DESTRUYE EL SISTEMA DE RESERVAS------------------");
         p.ver(s.destruirSistemaReservas().resultado,Retorno.Resultado.OK,"Se elimina el sistema de reservas");
