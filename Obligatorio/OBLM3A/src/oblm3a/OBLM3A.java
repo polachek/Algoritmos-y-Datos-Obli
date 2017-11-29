@@ -524,7 +524,7 @@ public class OBLM3A {
         
         p.ver(s.crearSistemaReservas(5).resultado, Retorno.Resultado.OK, "Se crea el sistema de reservas");
         p.ver(s.registrarCiudad("Montevideo").resultado, Retorno.Resultado.OK, "Se ingresa Montevideo");
-        p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 3).resultado, Retorno.Resultado.OK, "Se ingresa Royal Caribbean Int. en Montevideo");
+        p.ver(s.registrarCrucero("Montevideo", "Royal Caribbean Int.", 5, 2).resultado, Retorno.Resultado.OK, "Se ingresa Royal Caribbean Int. en Montevideo");
         p.ver(s.realizarReserva(1, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realiza la reserva del cliente 1 para el Royal Caribbean Int. de Montevideo");
         p.ver(s.realizarReserva(2, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realiza la reserva del cliente 2 para el Royal Caribbean Int. de Montevideo");
         p.ver(s.realizarReserva(3, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se realiza la reserva del cliente 3 para el Royal Caribbean Int. de Montevideo");
@@ -535,11 +535,10 @@ public class OBLM3A {
         r = s.listarReserva("Montevideo", "Royal Caribbean Int.");
         p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);        
         
-        System.out.println("Cantidad de Reservas antes de la cancelación: " + s.AC.buscar("Montevideo").getLcrucero().buscarCruceroXNombre("Royal Caribbean Int.").getLReservas().getCantelementos());        
         p.ver(s.cancelarReserva(2, "Montevideo", "Royal Caribbean Int.").resultado, Retorno.Resultado.OK, "Se cancela la reserva del cliente 1 para el Royal Caribbean Int. de Montevideo");
         
         r = s.listarReserva("Montevideo", "Royal Caribbean Int.");
-        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);        
+        p.ver(r.resultado, Retorno.Resultado.OK, r.valorString);      
         
         p.imprimirResultadosPrueba();
     }    

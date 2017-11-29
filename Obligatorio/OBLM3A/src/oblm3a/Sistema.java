@@ -228,6 +228,7 @@ public class Sistema implements ISistema {
             {
                 unaReserva.agregarReserva(cru, cli, espera);
                 cru.getCEspera().encolar(unaReserva);
+                cru.getCEspera().primero.setReservaEnEspera(unaReserva);
                 ret.resultado = Resultado.OK; 
                 ret.valorString = "La reserva para el cliente "+cliente+" en el crucero "+crucero+" queda en lista de espera.";
                 

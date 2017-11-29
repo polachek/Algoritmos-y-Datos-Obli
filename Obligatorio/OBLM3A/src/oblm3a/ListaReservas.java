@@ -60,6 +60,7 @@ public class ListaReservas implements IListaReservas {
     
     @Override
     public void agregarReserva(Reserva dato) {
+        this.cantElementos=this.cantElementos+1;       
         NodoListaReserva nuevo = new NodoListaReserva(dato);
         if (this.esVacia()){
             this.setInicio(nuevo);
@@ -70,7 +71,6 @@ public class ListaReservas implements IListaReservas {
             this.inicio.setAnterior(nuevo);
             this.setInicio(nuevo);
         }
-        this.cantElementos=this.cantElementos+1;        
     }
 
     @Override
