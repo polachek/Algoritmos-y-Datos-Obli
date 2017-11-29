@@ -519,7 +519,6 @@ public class Sistema implements ISistema {
         int col = ciudades[0].length;
         int cantCiudadesEnSistema = AC.getMaximo()-1;
         
-
         if(filas == cantCiudadesEnSistema && col == cantCiudadesEnSistema){
            ret.resultado = Resultado.OK;
            ret.valorString = "Las distancias se cargaron correctamente."; 

@@ -17,7 +17,8 @@ public class OBLM3A {
         /*    DEFENSA  */ 
         /*####################################################################*/        
         //prueba0(S,P);
-        prueba9(S,P);
+        //prueba9(S,P);
+        pruebaMatriz(S,P);
         
     }
     
@@ -371,7 +372,7 @@ public class OBLM3A {
         p.imprimirResultadosPrueba();
     }
     
-    static void pruebaMatriz(Sistema s, prueba p){
+    /*static void pruebaMatriz(Sistema s, prueba p){
 
         System.out.println("########################################");
         System.out.println("####### EJERCICIO COMPLEMENTARIO #######");
@@ -396,7 +397,7 @@ public class OBLM3A {
         
         
         p.imprimirResultadosPrueba();        
-    }
+    }*/
     
     /*#########################################################################*/
     //DEFENSA
@@ -516,6 +517,53 @@ public class OBLM3A {
         
         p.imprimirResultadosPrueba();
     } 
+    
+    public static void pruebaMatriz(Sistema s, prueba p) {
+
+       // registro ciudades
+
+        p.ver(s.crearSistemaReservas(7).resultado, Retorno.Resultado.OK, "Se creÃ³ el sistema de reservas");
+
+        p.ver(s.registrarCiudad("Mvd").resultado, Retorno.Resultado.OK, "Se ingresa Montevideo");
+
+       	p.ver(s.registrarCiudad("BAS").resultado, Retorno.Resultado.OK, "Se ingresa Buenos Aires");
+
+	p.ver(s.registrarCiudad("POA").resultado, Retorno.Resultado.OK, "Se ingresa Porto Alegre");
+
+	p.ver(s.registrarCiudad("RIO").resultado, Retorno.Resultado.OK, "Se ingresa Rio");
+
+	p.ver(s.registrarCiudad("MIA").resultado, Retorno.Resultado.OK, "Se ingresa Miami");
+
+	p.ver(s.registrarCiudad("SP").resultado, Retorno.Resultado.OK, "Se ingresa San Pablo");
+
+
+
+        //camino mas corto
+
+        int[][] matdistancias = new int[][] {
+
+			{0,7,9,0,0,14},
+
+			{7,0,10,15,14,0},
+
+			{9,10,0,11,3,2},
+
+			{0,15,11,0,6,0},
+
+			{0,14,3,6,0,9},
+
+			{14,0,2,0,9,0}
+
+		};     
+
+        p.ver(s.cargarDistancias(matdistancias).resultado, Retorno.Resultado.OK, "Se cargo matriz de distancias"); 
+
+        System.out.println(s.buscarCamino(matdistancias,"Mvd","MIA").valorString); 
+
+        p.imprimirResultadosPrueba();
+
+
+    }
 
     //_realizarRerserva
     public static void prueba9(Sistema s, prueba p) {
